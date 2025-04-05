@@ -993,7 +993,6 @@ class CombatSimulator extends EventTarget {
                     this.processAbilityDamageEffect(source, ability, abilityEffect);
                     break;
                 case "/ability_effect_types/heal":
-                    console.log("Heal effect", ability);
                     this.processAbilityHealEffect(source, ability, abilityEffect);
                     break;
                 case "/ability_effect_types/spend_hp":
