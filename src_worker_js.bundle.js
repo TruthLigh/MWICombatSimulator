@@ -1055,20 +1055,6 @@ class CombatSimulator extends EventTarget {
                         "buffs": null
                     }
                 ],
-                "triggers": [
-                    {
-                        "dependencyHrid": "/combat_trigger_dependencies/all_enemies",
-                        "conditionHrid": "/combat_trigger_conditions/number_of_active_units",
-                        "comparatorHrid": "/combat_trigger_comparators/greater_than_equal",
-                        "value": 1
-                    },
-                    {
-                        "dependencyHrid": "/combat_trigger_dependencies/all_enemies",
-                        "conditionHrid": "/combat_trigger_conditions/current_hp",
-                        "comparatorHrid": "/combat_trigger_comparators/greater_than_equal",
-                        "value": 1
-                    }
-                ],
                 "lastUsed": 0
             }
             this.processAbilityDamageEffect(source, blazingTridentEffect, blazingTridentEffect.abilityEffects[0]);
@@ -1103,14 +1089,6 @@ class CombatSimulator extends EventTarget {
                         "stunDuration": 0,
                         "spendHpRatio": 0,
                         "buffs": null
-                    }
-                ],
-                "triggers": [
-                    {
-                        "dependencyHrid": "/combat_trigger_dependencies/all_enemies",
-                        "conditionHrid": "/combat_trigger_conditions/number_of_active_units",
-                        "comparatorHrid": "/combat_trigger_comparators/greater_than_equal",
-                        "value": 1
                     }
                 ],
                 "lastUsed": 0
