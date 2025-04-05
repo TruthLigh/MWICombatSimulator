@@ -1010,7 +1010,7 @@ class CombatSimulator extends EventTarget {
                     throw new Error("Unsupported effect type for ability: " + ability.hrid + " effectType: " + abilityEffect.effectType);
             }
         }
-        if (source.isPlayer && source.equipment["/equipment_types/main_hand"].gameItem.hrid==="/items/rippling_trident" && Math.random() < 0.2) {
+        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/rippling_trident" && Math.random() < 0.2) {
             for (const skill of source.abilities) {
                 if (skill && skill.lastUsed) {
                     const remainingCooldown = skill.lastUsed + skill.cooldownDuration - this.simulationTime;

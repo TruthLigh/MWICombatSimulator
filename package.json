@@ -3,12 +3,14 @@
     "version": "1.0.1",
     "description": "",
     "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "webpack",
-        "watch": "webpack --watch",
-        "start": "webpack serve --mode development --open"
-    },
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "webpack",
+		"watch": "webpack --watch",
+		"start": "webpack serve --mode development --open",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d Test"
+	},
     "repository": {
         "type": "git",
         "url": "git+https://github.com/AmVoidGuy/MWICombatSimulator.git"
@@ -19,9 +21,10 @@
     "bugs": {
         "url": "https://github.com/AmVoidGuy/MWICombatSimulator/issues"
     },
-    "homepage": "https://github.com/AmVoidGuy/MWICombatSimulator#readme",
+    "homepage": "https://TruthLigh.github.io/MWICombatSimulator",
     "devDependencies": {
         "copy-webpack-plugin": "^12.0.2",
+        "gh-pages": "^6.3.0",
         "webpack": "^5.93.0",
         "webpack-cli": "^5.1.4",
         "webpack-dev-server": "^5.0.4"
