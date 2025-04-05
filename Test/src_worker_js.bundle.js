@@ -1020,6 +1020,19 @@ class CombatSimulator extends EventTarget {
                 }
             }
         }
+        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/blazing_trident" && Math.random() < 0.25) {
+            for (const enemy of this.enemies.filter((enemy) => enemy.combatDetails.currentHitpoints > 0)) {
+                const fireDamage = enemy.combatDetails.maxHitpoints * 0.3; // 30% 魔法伤害
+                const damageResult = _combatUtilities__WEBPACK_IMPORTED_MODULE_0__["default"].processMagicDamage(source, enemy, fireDamage, "/damage_types/fire"); // 假设有火属性类型
+                this.simResult.addAttack(source, enemy, "magic", damageResult.damageDone);
+        
+                if (damageResult.didKill) {
+                    this.eventQueue.clearEventsForUnit(enemy);
+                    this.simResult.addDeath(enemy);
+                    this.simResult.updateTimeSpentAlive(enemy.hrid, false, this.simulationTime);
+                }
+            }
+        }
         // Could die from reflect damage
         if (source.combatDetails.currentHitpoints == 0) {
             this.eventQueue.clearEventsForUnit(source);
@@ -1028,7 +1041,19 @@ class CombatSimulator extends EventTarget {
                 this.simResult.updateTimeSpentAlive(source.hrid, false, this.simulationTime);
             }
         }
+if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/blazing_trident" && Math.random() < 0.25) {
+    for (const enemy of this.enemies.filter((enemy) => enemy.combatDetails.currentHitpoints > 0)) {
+        const fireDamage = enemy.combatDetails.maxHitpoints * 0.3; // 30% 魔法伤害
+        const damageResult = _combatUtilities__WEBPACK_IMPORTED_MODULE_0__["default"].processMagicDamage(source, enemy, fireDamage, "fire"); // 假设有火属性类型
+        this.simResult.addAttack(source, enemy, "magic", damageResult.damageDone);
 
+        if (damageResult.didKill) {
+            this.eventQueue.clearEventsForUnit(enemy);
+            this.simResult.addDeath(enemy);
+            this.simResult.updateTimeSpentAlive(enemy.hrid, false, this.simulationTime);
+        }
+    }
+}
         this.checkEncounterEnd();
 
         return true;

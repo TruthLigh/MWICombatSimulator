@@ -762,7 +762,7 @@ class CombatSimulator extends EventTarget {
             // console.log("Falseeeeeee");
             return false;
         }
-
+        
         // console.log("Casting:", ability);
 
         if (source.isPlayer) {
@@ -802,6 +802,7 @@ class CombatSimulator extends EventTarget {
                     this.processAbilityDamageEffect(source, ability, abilityEffect);
                     break;
                 case "/ability_effect_types/heal":
+                    console.log("Heal effect", ability);
                     this.processAbilityHealEffect(source, ability, abilityEffect);
                     break;
                 case "/ability_effect_types/spend_hp":
@@ -828,6 +829,103 @@ class CombatSimulator extends EventTarget {
                     }
                 }
             }
+        }
+        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/blazing_trident" && Math.random() < 0.25) {
+            const blazingTridentEffect = {
+                "hrid": "/abilities/mini_flame_blast",
+                "name": "mini_flame_blast",
+                "level": 1,
+                "description": "95火特效",
+                "isSpecialAbility": true,
+                "manaCost": 0,
+                "cooldownDuration": 0, 
+                "castDuration": 0,
+                "abilityEffects": [
+                    {
+                        "targetType": "allEnemies",
+                        "effectType": "/ability_effect_types/damage",
+                        "combatStyleHrid": "/combat_styles/magic",
+                        "damageType": "/damage_types/fire",
+                        "damageFlat": 0,
+                        "damageRatio": 0.3,
+                        "bonusAccuracyRatio": 0,
+                        "damageOverTimeRatio": 0,
+                        "damageOverTimeDuration": 0,
+                        "armorDamageRatio": 0,
+                        "hpDrainRatio": 0,
+                        "pierceChance": 0,
+                        "blindChance": 0,
+                        "blindDuration": 0,
+                        "silenceChance": 0,
+                        "silenceDuration": 0,
+                        "stunChance": 0,
+                        "stunDuration": 0,
+                        "spendHpRatio": 0,
+                        "buffs": null
+                    }
+                ],
+                "triggers": [
+                    {
+                        "dependencyHrid": "/combat_trigger_dependencies/all_enemies",
+                        "conditionHrid": "/combat_trigger_conditions/number_of_active_units",
+                        "comparatorHrid": "/combat_trigger_comparators/greater_than_equal",
+                        "value": 1
+                    },
+                    {
+                        "dependencyHrid": "/combat_trigger_dependencies/all_enemies",
+                        "conditionHrid": "/combat_trigger_conditions/current_hp",
+                        "comparatorHrid": "/combat_trigger_comparators/greater_than_equal",
+                        "value": 1
+                    }
+                ],
+                "lastUsed": 0
+            }
+            this.processAbilityDamageEffect(source, blazingTridentEffect, blazingTridentEffect.abilityEffects[0]);
+        }
+        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/blooming_trident" && Math.random() < 0.4) {
+            const bloomingTridentEffect = {
+                "hrid": "/abilities/mini_quick_aid",
+                "level": 1,
+                "manaCost": 0,
+                "cooldownDuration": 0,
+                "castDuration": 0,
+                "isSpecialAbility": false,
+                "abilityEffects": [
+                    {
+                        "targetType": "lowestHpAlly",
+                        "effectType": "/ability_effect_types/heal",
+                        "combatStyleHrid": "/combat_styles/magic",
+                        "damageType": "",
+                        "damageFlat": 10,
+                        "damageRatio": 0.2,
+                        "bonusAccuracyRatio": 0,
+                        "damageOverTimeRatio": 0,
+                        "damageOverTimeDuration": 0,
+                        "armorDamageRatio": 0,
+                        "hpDrainRatio": 0,
+                        "pierceChance": 0,
+                        "blindChance": 0,
+                        "blindDuration": 0,
+                        "silenceChance": 0,
+                        "silenceDuration": 0,
+                        "stunChance": 0,
+                        "stunDuration": 0,
+                        "spendHpRatio": 0,
+                        "buffs": null
+                    }
+                ],
+                "triggers": [
+                    {
+                        "dependencyHrid": "/combat_trigger_dependencies/all_enemies",
+                        "conditionHrid": "/combat_trigger_conditions/number_of_active_units",
+                        "comparatorHrid": "/combat_trigger_comparators/greater_than_equal",
+                        "value": 1
+                    }
+                ],
+                "lastUsed": 0
+            }
+        
+            this.processAbilityHealEffect(source, bloomingTridentEffect, bloomingTridentEffect.abilityEffects[0]);
         }
         // Could die from reflect damage
         if (source.combatDetails.currentHitpoints == 0) {
