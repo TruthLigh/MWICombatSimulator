@@ -1614,7 +1614,9 @@ const Oa = {
                     "/abilities/flame_aura": "Flame Aura",
                     "/abilities/speed_aura": "Speed Aura",
                     "/abilities/critical_aura": "Critical Aura",
-                    "/abilities/promote": "Promote"
+                    "/abilities/promote": "Promote",
+                    "/abilities/mini_flame_blast": "95 Fire Special Effects",
+                    "/abilities/mini_quick_aid": "95 nature Special Effects"
                 },
                 abilityDescriptions: {
                     "/abilities/poke": "Pokes the targeted enemy",
@@ -1674,7 +1676,9 @@ const Oa = {
                     "/abilities/flame_aura": "Increases fire amplify and resistance for all allies",
                     "/abilities/speed_aura": "Increases attack speed and cast speed for all allies",
                     "/abilities/critical_aura": "Increases critical rate for all allies",
-                    "/abilities/promote": "Promotes a pawn"
+                    "/abilities/promote": "Promotes a pawn",
+                    "/abilities/mini_flame_blast": "95 Fire Special Effects",
+                    "/abilities/mini_quick_aid": "95 nature Special Effects"
                 },
                 itemNames: {
                     "/items/coin": "Coin",
@@ -6195,7 +6199,9 @@ const Oa = {
                     "/abilities/flame_aura": "\u706b\u7130\u5149\u73af",
                     "/abilities/speed_aura": "\u901f\u5ea6\u5149\u73af",
                     "/abilities/critical_aura": "\u66b4\u51fb\u5149\u73af",
-                    "/abilities/promote": "\u664b\u5347"
+                    "/abilities/promote": "\u664b\u5347",
+                    "/abilities/mini_flame_blast": "\u706b\u6756\u7279\u6548",
+                    "/abilities/mini_quick_aid": "\u5976\u6756\u7279\u6548",
                 },
                 abilityDescriptions: {
                     "/abilities/poke": "\u6233\u5411\u76ee\u6807\u654c\u4eba",
@@ -6255,7 +6261,9 @@ const Oa = {
                     "/abilities/flame_aura": "\u589e\u52a0\u6240\u6709\u961f\u53cb\u7684\u706b\u7cfb\u589e\u5e45\u548c\u6297\u6027",
                     "/abilities/speed_aura": "\u589e\u52a0\u6240\u6709\u961f\u53cb\u7684\u653b\u51fb\u901f\u5ea6\u548c\u65bd\u6cd5\u901f\u5ea6",
                     "/abilities/critical_aura": "\u589e\u52a0\u6240\u6709\u961f\u53cb\u7684\u66b4\u51fb\u7387",
-                    "/abilities/promote": "\u664b\u5347\u4e00\u4e2a\u5c0f\u5175"
+                    "/abilities/promote": "\u664b\u5347\u4e00\u4e2a\u5c0f\u5175",
+                    "/abilities/mini_flame_blast": "\u706b\u6756\u7279\u6548",
+                    "/abilities/mini_quick_aid": "\u5976\u6756\u7279\u6548"
                 },
                 itemNames: {
                     "/items/coin": "\u91d1\u5e01",
