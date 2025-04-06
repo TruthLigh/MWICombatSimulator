@@ -1015,7 +1015,7 @@ class CombatSimulator extends EventTarget {
                 if (skill && skill.lastUsed) {
                     const remainingCooldown = skill.lastUsed + skill.cooldownDuration - this.simulationTime;
                     if (remainingCooldown > 0) {
-                        skill.lastUsed = Math.max(skill.lastUsed - 1e9, this.simulationTime - skill.cooldownDuration);
+                        skill.lastUsed = Math.max(skill.lastUsed - 2e9, this.simulationTime - skill.cooldownDuration);
                     }
                 }
             }
