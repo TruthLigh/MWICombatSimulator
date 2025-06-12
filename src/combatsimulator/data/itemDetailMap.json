@@ -787,9 +787,41 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/holy_plate_body",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/griffin_tunic",
+                    "count": 1
+                },
+                {
+                    "itemHrid": "/items/colossus_plate_body",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/anchorbound_plate_body",
+                    "dropRate": 0.9,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/body",
@@ -801,9 +833,9 @@
             ],
             "combatStats": {
                 "autoAttackDamage": 0.08,
-                "stabAccuracy": 0.15,
-                "slashAccuracy": 0.15,
-                "smashAccuracy": 0.15,
+                "stabAccuracy": 0.18,
+                "slashAccuracy": 0.18,
+                "smashAccuracy": 0.18,
                 "magicAccuracy": -0.3,
                 "maxHitpoints": 250,
                 "stabEvasion": 0.6,
@@ -815,14 +847,15 @@
                 "waterResistance": 36,
                 "natureResistance": 18,
                 "fireResistance": 36,
-                "tenacity": 48
+                "tenacity": 48,
+                "threat": 25
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
                 "autoAttackDamage": 0.0016,
-                "stabAccuracy": 0.003,
-                "slashAccuracy": 0.003,
-                "smashAccuracy": 0.003,
+                "stabAccuracy": 0.0036,
+                "slashAccuracy": 0.0036,
+                "smashAccuracy": 0.0036,
                 "maxHitpoints": 5,
                 "stabEvasion": 0.012,
                 "slashEvasion": 0.012,
@@ -833,7 +866,8 @@
                 "waterResistance": 0.72,
                 "natureResistance": 0.36,
                 "fireResistance": 0.72,
-                "tenacity": 0.96
+                "tenacity": 0.96,
+                "threat": 0.5
             },
             "noncombatEnhancementBonuses": {}
         },
@@ -867,9 +901,41 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "count": 8
+                },
+                {
+                    "itemHrid": "/items/holy_plate_legs",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/griffin_chaps",
+                    "count": 1
+                },
+                {
+                    "itemHrid": "/items/colossus_plate_legs",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/anchorbound_plate_legs",
+                    "dropRate": 0.92,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.08,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/legs",
@@ -881,9 +947,9 @@
             ],
             "combatStats": {
                 "autoAttackDamage": 0.08,
-                "stabAccuracy": 0.12,
-                "slashAccuracy": 0.12,
-                "smashAccuracy": 0.12,
+                "stabAccuracy": 0.15,
+                "slashAccuracy": 0.15,
+                "smashAccuracy": 0.15,
                 "magicAccuracy": -0.24,
                 "maxHitpoints": 200,
                 "stabEvasion": 0.5,
@@ -895,14 +961,15 @@
                 "waterResistance": 30,
                 "natureResistance": 15,
                 "fireResistance": 30,
-                "tenacity": 36
+                "tenacity": 36,
+                "threat": 25
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
                 "autoAttackDamage": 0.0016,
-                "stabAccuracy": 0.0024,
-                "slashAccuracy": 0.0024,
-                "smashAccuracy": 0.0024,
+                "stabAccuracy": 0.003,
+                "slashAccuracy": 0.003,
+                "smashAccuracy": 0.003,
                 "maxHitpoints": 4,
                 "stabEvasion": 0.01,
                 "slashEvasion": 0.01,
@@ -913,7 +980,8 @@
                 "waterResistance": 0.6,
                 "natureResistance": 0.3,
                 "fireResistance": 0.6,
-                "tenacity": 0.72
+                "tenacity": 0.72,
+                "threat": 0.5
             },
             "noncombatEnhancementBonuses": {}
         },
@@ -1636,13 +1704,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.6,
+                "magicAccuracy": 0.72,
                 "magicDamage": 0.36,
                 "fireAmplify": 0.18
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.012,
+                "magicAccuracy": 0.0144,
                 "magicDamage": 0.0072,
                 "fireAmplify": 0.0036
             },
@@ -1830,13 +1898,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.6,
+                "magicAccuracy": 0.72,
                 "magicDamage": 0.36,
                 "natureAmplify": 0.18
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.012,
+                "magicAccuracy": 0.0144,
                 "magicDamage": 0.0072,
                 "natureAmplify": 0.0036
             },
@@ -1856,25 +1924,39 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0.75,
+            "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -1894,8 +1976,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -2064,13 +2153,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.6,
+                "magicAccuracy": 0.72,
                 "magicDamage": 0.36,
                 "waterAmplify": 0.18
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.012,
+                "magicAccuracy": 0.0144,
                 "magicDamage": 0.0072,
                 "waterAmplify": 0.0036
             },
@@ -3228,7 +3317,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.01,
+                "autoAttackDamage": 0.02,
                 "magicAccuracy": -0.1,
                 "stabEvasion": 0.16,
                 "slashEvasion": 0.16,
@@ -3238,7 +3327,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0002,
+                "autoAttackDamage": 0.0004,
                 "stabEvasion": 0.0032,
                 "slashEvasion": 0.0032,
                 "smashEvasion": 0.0032,
@@ -3665,6 +3754,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.012,
                 "magicAccuracy": 0.03,
                 "magicDamage": 0.06,
                 "stabEvasion": 0.12,
@@ -3678,6 +3768,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00024,
                 "magicAccuracy": 0.0006,
                 "magicDamage": 0.0012,
                 "stabEvasion": 0.0024,
@@ -3852,6 +3943,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.012,
                 "magicAccuracy": 0.03,
                 "magicDamage": 0.06,
                 "stabEvasion": 0.12,
@@ -3865,6 +3957,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00024,
                 "magicAccuracy": 0.0006,
                 "magicDamage": 0.0012,
                 "stabEvasion": 0.0024,
@@ -3923,6 +4016,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.012,
                 "magicAccuracy": 0.06,
                 "magicDamage": 0.09,
                 "stabEvasion": 0.15,
@@ -3936,6 +4030,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00024,
                 "magicAccuracy": 0.0012,
                 "magicDamage": 0.0018,
                 "stabEvasion": 0.003,
@@ -3994,6 +4089,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.024,
                 "magicAccuracy": 0.06,
                 "magicDamage": 0.12,
                 "stabEvasion": 0.21,
@@ -4007,6 +4103,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00048,
                 "magicAccuracy": 0.0012,
                 "magicDamage": 0.0024,
                 "stabEvasion": 0.0042,
@@ -4065,6 +4162,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.024,
                 "magicAccuracy": 0.09,
                 "magicDamage": 0.15,
                 "stabEvasion": 0.24,
@@ -4078,6 +4176,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00048,
                 "magicAccuracy": 0.0018,
                 "magicDamage": 0.003,
                 "stabEvasion": 0.0048,
@@ -4905,13 +5004,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.15,
+                "magicAccuracy": 0.18,
                 "magicDamage": 0.09,
                 "fireAmplify": 0.045
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.003,
+                "magicAccuracy": 0.0036,
                 "magicDamage": 0.0018,
                 "fireAmplify": 0.0009
             },
@@ -5126,13 +5225,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.15,
+                "magicAccuracy": 0.18,
                 "magicDamage": 0.09,
                 "natureAmplify": 0.045
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.003,
+                "magicAccuracy": 0.0036,
                 "magicDamage": 0.0018,
                 "natureAmplify": 0.0009
             },
@@ -5253,13 +5352,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.15,
+                "magicAccuracy": 0.18,
                 "magicDamage": 0.09,
                 "waterAmplify": 0.045
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.003,
+                "magicAccuracy": 0.0036,
                 "magicDamage": 0.0018,
                 "waterAmplify": 0.0009
             },
@@ -5305,10 +5404,6 @@
                     "count": 10
                 },
                 {
-                    "itemHrid": "/items/watchful_relic",
-                    "count": 1
-                },
-                {
                     "itemHrid": "/items/tome_of_the_elements",
                     "count": 5
                 },
@@ -5323,6 +5418,10 @@
                 {
                     "itemHrid": "/items/amethyst",
                     "count": 100
+                },
+                {
+                    "itemHrid": "/items/watchful_relic",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -5361,7 +5460,7 @@
                 "waterPenetration": 0.1,
                 "naturePenetration": 0.1,
                 "firePenetration": 0.1,
-                "maxManapoints": 100,
+                "maxManapoints": 200,
                 "magicEvasion": 0.15,
                 "waterResistance": 12,
                 "natureResistance": 12,
@@ -5379,7 +5478,7 @@
                 "waterPenetration": 0.002,
                 "naturePenetration": 0.002,
                 "firePenetration": 0.002,
-                "maxManapoints": 2,
+                "maxManapoints": 4,
                 "magicEvasion": 0.003,
                 "waterResistance": 0.24,
                 "natureResistance": 0.24,
@@ -5902,9 +6001,41 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "count": 20
+                },
+                {
+                    "itemHrid": "/items/arcane_fire_staff",
+                    "count": 60
+                },
+                {
+                    "itemHrid": "/items/amethyst",
+                    "count": 100
+                },
+                {
+                    "itemHrid": "/items/infernal_battlestaff",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/blazing_trident",
+                    "dropRate": 0.72,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.28,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/main_hand",
@@ -5921,7 +6052,7 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.85,
+                "magicAccuracy": 1.05,
                 "magicDamage": 0.5,
                 "fireAmplify": 0.3,
                 "firePenetration": 0.1,
@@ -5929,7 +6060,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.017,
+                "magicAccuracy": 0.021,
                 "magicDamage": 0.01,
                 "fireAmplify": 0.006,
                 "firePenetration": 0.002
@@ -6050,9 +6181,41 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "count": 20
+                },
+                {
+                    "itemHrid": "/items/arcane_nature_staff",
+                    "count": 60
+                },
+                {
+                    "itemHrid": "/items/amethyst",
+                    "count": 100
+                },
+                {
+                    "itemHrid": "/items/jackalope_staff",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/blooming_trident",
+                    "dropRate": 0.72,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.28,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/main_hand",
@@ -6069,16 +6232,16 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.85,
+                "magicAccuracy": 1.05,
                 "magicDamage": 0.5,
                 "natureAmplify": 0.3,
                 "healingAmplify": 0.36,
                 "naturePenetration": 0.1,
-                "bloom": 0.4
+                "bloom": 0.35
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.017,
+                "magicAccuracy": 0.021,
                 "magicDamage": 0.01,
                 "natureAmplify": 0.006,
                 "healingAmplify": 0.0072,
@@ -6093,7 +6256,7 @@
         "name": "Blue Key Fragment",
         "description": "Can be used to craft dungeon keys",
         "categoryHrid": "/item_categories/key",
-        "sellPrice": 10000,
+        "sellPrice": 30000,
         "isTradable": true,
         "itemLevel": 55,
         "alchemyDetail": {
@@ -6747,7 +6910,7 @@
         "name": "Brown Key Fragment",
         "description": "Can be used to craft dungeon keys",
         "categoryHrid": "/item_categories/key",
-        "sellPrice": 60000,
+        "sellPrice": 50000,
         "isTradable": true,
         "itemLevel": 70,
         "alchemyDetail": {
@@ -7743,7 +7906,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.015,
+                "autoAttackDamage": 0.03,
                 "magicAccuracy": -0.15,
                 "stabEvasion": 0.24,
                 "slashEvasion": 0.24,
@@ -7753,7 +7916,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0003,
+                "autoAttackDamage": 0.0006,
                 "stabEvasion": 0.0048,
                 "slashEvasion": 0.0048,
                 "smashEvasion": 0.0048,
@@ -8679,13 +8842,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.2,
+                "magicAccuracy": 0.24,
                 "magicDamage": 0.12,
                 "fireAmplify": 0.06
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.004,
+                "magicAccuracy": 0.0048,
                 "magicDamage": 0.0024,
                 "fireAmplify": 0.0012
             },
@@ -8900,13 +9063,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.2,
+                "magicAccuracy": 0.24,
                 "magicDamage": 0.12,
                 "natureAmplify": 0.06
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.004,
+                "magicAccuracy": 0.0048,
                 "magicDamage": 0.0024,
                 "natureAmplify": 0.0012
             },
@@ -9027,13 +9190,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.2,
+                "magicAccuracy": 0.24,
                 "magicDamage": 0.12,
                 "waterAmplify": 0.06
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.004,
+                "magicAccuracy": 0.0048,
                 "magicDamage": 0.0024,
                 "waterAmplify": 0.0012
             },
@@ -10365,11 +10528,15 @@
                 },
                 {
                     "itemHrid": "/items/holy_mace",
-                    "count": 100
+                    "count": 60
                 },
                 {
                     "itemHrid": "/items/garnet",
                     "count": 100
+                },
+                {
+                    "itemHrid": "/items/granite_bludgeon",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -11244,7 +11411,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.005,
+                "autoAttackDamage": 0.01,
                 "magicAccuracy": -0.05,
                 "stabEvasion": 0.08,
                 "slashEvasion": 0.08,
@@ -11254,7 +11421,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0001,
+                "autoAttackDamage": 0.0002,
                 "stabEvasion": 0.0016,
                 "slashEvasion": 0.0016,
                 "smashEvasion": 0.0016,
@@ -12211,21 +12378,28 @@
             "transmuteDropTable": [
                 {
                     "itemHrid": "/items/chimerical_essence",
-                    "dropRate": 0.5,
+                    "dropRate": 0.45,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/sinister_essence",
-                    "dropRate": 0.3,
+                    "dropRate": 0.28,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/enchanted_essence",
-                    "dropRate": 0.2,
+                    "dropRate": 0.15,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "dropRate": 0.12,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -12259,7 +12433,7 @@
                 "count": 2000
             },
             {
-                "itemHrid": "/items/bear_essence",
+                "itemHrid": "/items/eyessence",
                 "count": 2000
             },
             {
@@ -12389,6 +12563,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.02,
                 "castSpeed": 0.05,
                 "abilityHaste": 6,
                 "magicAccuracy": 0.12,
@@ -12404,6 +12579,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0004,
                 "castSpeed": 0.001,
                 "abilityHaste": 0.12,
                 "magicAccuracy": 0.0024,
@@ -13218,12 +13394,68 @@
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 40000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "count": 2000
+                }
+            ],
+            "transmuteSuccessRate": 0.64,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "dropRate": 0.088235,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crushed_philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 701
     },
@@ -13255,9 +13487,41 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/holy_helmet",
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/vision_helmet",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/fluffy_red_hat",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/corsair_helmet",
+                    "dropRate": 0.9,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/head",
@@ -13279,6 +13543,7 @@
                 "slashEvasion": 0.3,
                 "smashEvasion": 0.3,
                 "rangedEvasion": 0.3,
+                "magicEvasion": 0.1,
                 "armor": 18,
                 "waterResistance": 10,
                 "natureResistance": 10,
@@ -13297,6 +13562,7 @@
                 "slashEvasion": 0.006,
                 "smashEvasion": 0.006,
                 "rangedEvasion": 0.006,
+                "magicEvasion": 0.002,
                 "armor": 0.36,
                 "waterResistance": 0.2,
                 "natureResistance": 0.2,
@@ -13411,6 +13677,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.004,
                 "magicAccuracy": 0.01,
                 "magicDamage": 0.02,
                 "stabEvasion": 0.04,
@@ -13424,6 +13691,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00008,
                 "magicAccuracy": 0.0002,
                 "magicDamage": 0.0004,
                 "stabEvasion": 0.0008,
@@ -13543,6 +13811,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.004,
                 "magicAccuracy": 0.01,
                 "magicDamage": 0.02,
                 "stabEvasion": 0.04,
@@ -13556,6 +13825,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00008,
                 "magicAccuracy": 0.0002,
                 "magicDamage": 0.0004,
                 "stabEvasion": 0.0008,
@@ -13610,6 +13880,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.004,
                 "magicAccuracy": 0.02,
                 "magicDamage": 0.03,
                 "stabEvasion": 0.05,
@@ -13623,6 +13894,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00008,
                 "magicAccuracy": 0.0004,
                 "magicDamage": 0.0006,
                 "stabEvasion": 0.001,
@@ -13677,6 +13949,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.008,
                 "magicAccuracy": 0.02,
                 "magicDamage": 0.04,
                 "stabEvasion": 0.07,
@@ -13690,6 +13963,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00016,
                 "magicAccuracy": 0.0004,
                 "magicDamage": 0.0008,
                 "stabEvasion": 0.0014000000000000002,
@@ -13744,6 +14018,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.008,
                 "magicAccuracy": 0.03,
                 "magicDamage": 0.05,
                 "stabEvasion": 0.08,
@@ -13757,6 +14032,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00016,
                 "magicAccuracy": 0.0006,
                 "magicDamage": 0.001,
                 "stabEvasion": 0.0016,
@@ -15173,7 +15449,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.02,
+                "autoAttackDamage": 0.04,
                 "magicAccuracy": -0.2,
                 "stabEvasion": 0.32,
                 "slashEvasion": 0.32,
@@ -15183,7 +15459,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0004,
+                "autoAttackDamage": 0.0008,
                 "stabEvasion": 0.0064,
                 "slashEvasion": 0.0064,
                 "smashEvasion": 0.0064,
@@ -15569,25 +15845,39 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0.375,
+            "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -15607,8 +15897,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -16523,11 +16820,15 @@
                 },
                 {
                     "itemHrid": "/items/arcane_bow",
-                    "count": 100
+                    "count": 60
                 },
                 {
                     "itemHrid": "/items/jade",
                     "count": 100
+                },
+                {
+                    "itemHrid": "/items/vampiric_bow",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -16770,12 +17071,68 @@
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 40000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "count": 2000
+                }
+            ],
+            "transmuteSuccessRate": 0.64,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "dropRate": 0.088235,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crushed_philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 702
     },
@@ -17207,7 +17564,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.08,
+                "autoAttackDamage": 0.06,
                 "stabAccuracy": 0.08,
                 "slashAccuracy": 0.08,
                 "smashAccuracy": 0.08,
@@ -17227,7 +17584,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0016,
+                "autoAttackDamage": 0.0012,
                 "stabAccuracy": 0.0016,
                 "slashAccuracy": 0.0016,
                 "smashAccuracy": 0.0016,
@@ -18367,7 +18724,7 @@
                 "count": 8
             },
             {
-                "itemHrid": "/items/eyessence",
+                "itemHrid": "/items/bear_essence",
                 "count": 2000
             },
             {
@@ -18465,21 +18822,28 @@
             "transmuteDropTable": [
                 {
                     "itemHrid": "/items/chimerical_essence",
-                    "dropRate": 0.5,
+                    "dropRate": 0.45,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/sinister_essence",
-                    "dropRate": 0.3,
+                    "dropRate": 0.28,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/enchanted_essence",
-                    "dropRate": 0.2,
+                    "dropRate": 0.15,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "dropRate": 0.12,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -20163,6 +20527,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.024,
                 "magicAccuracy": 0.06,
                 "magicDamage": 0.12,
                 "fireAmplify": 0.08,
@@ -20177,6 +20542,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00048,
                 "magicAccuracy": 0.0012,
                 "magicDamage": 0.0024,
                 "fireAmplify": 0.0016,
@@ -20243,6 +20609,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.024,
                 "magicAccuracy": 0.09,
                 "magicDamage": 0.15,
                 "fireAmplify": 0.1,
@@ -20257,6 +20624,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00048,
                 "magicAccuracy": 0.0018,
                 "magicDamage": 0.003,
                 "fireAmplify": 0.002,
@@ -20434,7 +20802,6 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.02,
                 "criticalRate": 0.04,
                 "stabEvasion": 0.3,
                 "slashEvasion": 0.3,
@@ -20449,7 +20816,6 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0004,
                 "criticalRate": 0.0008,
                 "stabEvasion": 0.006,
                 "slashEvasion": 0.006,
@@ -20837,8 +21203,79 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/penetrating_strike",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crippling_slash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pestilent_shot",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/penetrating_shot",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/mana_spring",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/smoke_burst",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/arcane_reflection",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "abilityBookDetail": {
             "abilityHrid": "/abilities/fracturing_impact",
@@ -21051,14 +21488,14 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.7,
+                "magicAccuracy": 0.85,
                 "magicDamage": 0.42,
                 "waterAmplify": 0.25,
                 "waterPenetration": 0.15
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.013999999999999999,
+                "magicAccuracy": 0.017,
                 "magicDamage": 0.0084,
                 "waterAmplify": 0.005,
                 "waterPenetration": 0.003
@@ -21202,9 +21639,45 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/regal_jewel",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/sundering_jewel",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/holy_spear",
+                    "count": 60
+                },
+                {
+                    "itemHrid": "/items/garnet",
+                    "count": 100
+                },
+                {
+                    "itemHrid": "/items/stalactite_spear",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/furious_spear",
+                    "dropRate": 0.75,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/main_hand",
@@ -21220,15 +21693,15 @@
                 ],
                 "damageType": "/damage_types/physical",
                 "attackInterval": 2800000000,
-                "stabAccuracy": 2.2,
-                "stabDamage": 1.05,
+                "stabAccuracy": 2.1,
+                "stabDamage": 1,
                 "armorPenetration": 0.1,
                 "fury": 0.03
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "stabAccuracy": 0.044000000000000004,
-                "stabDamage": 0.021,
+                "stabAccuracy": 0.042,
+                "stabDamage": 0.02,
                 "armorPenetration": 0.002
             },
             "noncombatEnhancementBonuses": {}
@@ -21679,13 +22152,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.4,
+                "magicAccuracy": 0.48,
                 "magicDamage": 0.24,
                 "fireAmplify": 0.12
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.008,
+                "magicAccuracy": 0.0096,
                 "magicDamage": 0.0048,
                 "fireAmplify": 0.0024
             },
@@ -21900,13 +22373,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.4,
+                "magicAccuracy": 0.48,
                 "magicDamage": 0.24,
                 "natureAmplify": 0.12
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.008,
+                "magicAccuracy": 0.0096,
                 "magicDamage": 0.0048,
                 "natureAmplify": 0.0024
             },
@@ -22027,13 +22500,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.4,
+                "magicAccuracy": 0.48,
                 "magicDamage": 0.24,
                 "waterAmplify": 0.12
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.008,
+                "magicAccuracy": 0.0096,
                 "magicDamage": 0.0048,
                 "waterAmplify": 0.0024
             },
@@ -22218,13 +22691,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.24,
+                "magicAccuracy": 0.36,
                 "magicDamage": 0.18,
                 "fireAmplify": 0.2
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.0048,
+                "magicAccuracy": 0.0072,
                 "magicDamage": 0.0036,
                 "fireAmplify": 0.004
             },
@@ -23330,7 +23803,7 @@
         "name": "Green Key Fragment",
         "description": "Can be used to craft dungeon keys",
         "categoryHrid": "/item_categories/key",
-        "sellPrice": 20000,
+        "sellPrice": 30000,
         "isTradable": true,
         "itemLevel": 55,
         "alchemyDetail": {
@@ -23458,11 +23931,15 @@
                 },
                 {
                     "itemHrid": "/items/holy_bulwark",
-                    "count": 100
+                    "count": 60
                 },
                 {
                     "itemHrid": "/items/amber",
                     "count": 100
+                },
+                {
+                    "itemHrid": "/items/spiked_bulwark",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -25470,7 +25947,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.03,
+                "autoAttackDamage": 0.06,
                 "magicAccuracy": -0.3,
                 "stabEvasion": 0.48,
                 "slashEvasion": 0.48,
@@ -25480,7 +25957,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0006,
+                "autoAttackDamage": 0.0012,
                 "stabEvasion": 0.0096,
                 "slashEvasion": 0.0096,
                 "smashEvasion": 0.0096,
@@ -26150,6 +26627,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.024,
                 "magicAccuracy": 0.06,
                 "magicDamage": 0.12,
                 "waterAmplify": 0.08,
@@ -26164,6 +26642,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00048,
                 "magicAccuracy": 0.0012,
                 "magicDamage": 0.0024,
                 "waterAmplify": 0.0016,
@@ -26230,6 +26709,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.024,
                 "magicAccuracy": 0.09,
                 "magicDamage": 0.15,
                 "waterAmplify": 0.1,
@@ -26244,6 +26724,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00048,
                 "magicAccuracy": 0.0018,
                 "magicDamage": 0.003,
                 "waterAmplify": 0.002,
@@ -26429,7 +26910,7 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.45,
-                "magicAccuracy": 0.8,
+                "magicAccuracy": 0.95,
                 "magicDamage": 0.4,
                 "fireAmplify": 0.25,
                 "armor": 10,
@@ -26438,7 +26919,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.016,
+                "magicAccuracy": 0.019,
                 "magicDamage": 0.008,
                 "fireAmplify": 0.005,
                 "armor": 0.2,
@@ -26900,14 +27381,14 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.7,
+                "magicAccuracy": 0.85,
                 "magicDamage": 0.4,
                 "natureAmplify": 0.25,
                 "healingAmplify": 0.3
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.013999999999999999,
+                "magicAccuracy": 0.017,
                 "magicDamage": 0.008,
                 "natureAmplify": 0.005,
                 "healingAmplify": 0.006
@@ -27237,9 +27718,37 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "count": 8
+                },
+                {
+                    "itemHrid": "/items/umbral_chaps",
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/revenant_chaps",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/kraken_chaps",
+                    "dropRate": 0.92,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.08,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/legs",
@@ -27254,9 +27763,9 @@
                 "rangedAccuracy": 0.56,
                 "magicAccuracy": -0.2,
                 "rangedDamage": 0.12,
-                "stabEvasion": 0.52,
-                "slashEvasion": 0.52,
-                "smashEvasion": 0.52,
+                "stabEvasion": 0.5,
+                "slashEvasion": 0.5,
+                "smashEvasion": 0.5,
                 "rangedEvasion": 0.66,
                 "magicEvasion": 0.38,
                 "waterResistance": 32,
@@ -27269,9 +27778,9 @@
                 "criticalRate": 0.0006,
                 "rangedAccuracy": 0.011200000000000002,
                 "rangedDamage": 0.0024,
-                "stabEvasion": 0.010400000000000001,
-                "slashEvasion": 0.010400000000000001,
-                "smashEvasion": 0.010400000000000001,
+                "stabEvasion": 0.01,
+                "slashEvasion": 0.01,
+                "smashEvasion": 0.01,
                 "rangedEvasion": 0.013200000000000002,
                 "magicEvasion": 0.0076,
                 "waterResistance": 0.64,
@@ -27286,32 +27795,144 @@
     "/items/kraken_fang": {
         "hrid": "/items/kraken_fang",
         "name": "Kraken Fang",
-        "description": "Material used in smithing Rippling, Blooming, or Blazing Trident",
+        "description": "Material used in crafting Rippling, Blooming, or Blazing Trident",
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 100000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "count": 3000
+                }
+            ],
+            "transmuteSuccessRate": 0.96,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "dropRate": 0.088235,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crushed_philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 705
     },
     "/items/kraken_leather": {
         "hrid": "/items/kraken_leather",
         "name": "Kraken Leather",
-        "description": "Material used in smithing Kraken Tunic or Chaps",
+        "description": "Material used in tailoring Kraken Tunic or Chaps",
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 40000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "count": 2000
+                }
+            ],
+            "transmuteSuccessRate": 0.64,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "dropRate": 0.088235,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crushed_philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 704
     },
@@ -27343,9 +27964,37 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/umbral_tunic",
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/revenant_tunic",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/kraken_tunic",
+                    "dropRate": 0.9,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/body",
@@ -27360,9 +28009,9 @@
                 "rangedAccuracy": 0.7,
                 "magicAccuracy": -0.25,
                 "rangedDamage": 0.15,
-                "stabEvasion": 0.63,
-                "slashEvasion": 0.63,
-                "smashEvasion": 0.63,
+                "stabEvasion": 0.6,
+                "slashEvasion": 0.6,
+                "smashEvasion": 0.6,
                 "rangedEvasion": 0.77,
                 "magicEvasion": 0.44,
                 "waterResistance": 40,
@@ -27375,9 +28024,9 @@
                 "criticalRate": 0.0006,
                 "rangedAccuracy": 0.013999999999999999,
                 "rangedDamage": 0.003,
-                "stabEvasion": 0.0126,
-                "slashEvasion": 0.0126,
-                "smashEvasion": 0.0126,
+                "stabEvasion": 0.012,
+                "slashEvasion": 0.012,
+                "smashEvasion": 0.012,
                 "rangedEvasion": 0.0154,
                 "magicEvasion": 0.0088,
                 "waterResistance": 0.8,
@@ -27562,8 +28211,79 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/penetrating_strike",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crippling_slash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pestilent_shot",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/penetrating_shot",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/mana_spring",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/smoke_burst",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/arcane_reflection",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "abilityBookDetail": {
             "abilityHrid": "/abilities/life_drain",
@@ -27620,6 +28340,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.008,
                 "magicAccuracy": 0.02,
                 "magicDamage": 0.04,
                 "stabEvasion": 0.08,
@@ -27633,6 +28354,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00016,
                 "magicAccuracy": 0.0004,
                 "magicDamage": 0.0008,
                 "stabEvasion": 0.0016,
@@ -27763,6 +28485,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.008,
                 "magicAccuracy": 0.02,
                 "magicDamage": 0.04,
                 "stabEvasion": 0.08,
@@ -27776,6 +28499,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00016,
                 "magicAccuracy": 0.0004,
                 "magicDamage": 0.0008,
                 "stabEvasion": 0.0016,
@@ -27834,6 +28558,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.008,
                 "magicAccuracy": 0.04,
                 "magicDamage": 0.06,
                 "stabEvasion": 0.1,
@@ -27847,6 +28572,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00016,
                 "magicAccuracy": 0.0008,
                 "magicDamage": 0.0012,
                 "stabEvasion": 0.002,
@@ -27905,6 +28631,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.016,
                 "magicAccuracy": 0.04,
                 "magicDamage": 0.08,
                 "stabEvasion": 0.14,
@@ -27918,6 +28645,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00032,
                 "magicAccuracy": 0.0008,
                 "magicDamage": 0.0016,
                 "stabEvasion": 0.0028000000000000004,
@@ -27976,6 +28704,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.016,
                 "magicAccuracy": 0.06,
                 "magicDamage": 0.1,
                 "stabEvasion": 0.16,
@@ -27989,6 +28718,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00032,
                 "magicAccuracy": 0.0012,
                 "magicDamage": 0.002,
                 "stabEvasion": 0.0032,
@@ -28489,6 +29219,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.032,
                 "magicAccuracy": 0.08,
                 "magicDamage": 0.16,
                 "natureAmplify": 0.08,
@@ -28506,6 +29237,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00064,
                 "magicAccuracy": 0.0016,
                 "magicDamage": 0.0032,
                 "natureAmplify": 0.0016,
@@ -28575,6 +29307,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.032,
                 "magicAccuracy": 0.12,
                 "magicDamage": 0.2,
                 "natureAmplify": 0.1,
@@ -28592,6 +29325,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00064,
                 "magicAccuracy": 0.0024,
                 "magicDamage": 0.004,
                 "natureAmplify": 0.002,
@@ -28690,9 +29424,37 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/holy_plate_body",
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/demonic_plate_body",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/maelstrom_plate_body",
+                    "dropRate": 0.9,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/body",
@@ -28705,9 +29467,9 @@
             "combatStats": {
                 "autoAttackDamage": 0.1,
                 "magicAccuracy": -0.3,
-                "stabDamage": 0.22,
-                "slashDamage": 0.22,
-                "smashDamage": 0.25,
+                "stabDamage": 0.25,
+                "slashDamage": 0.25,
+                "smashDamage": 0.28,
                 "stabEvasion": 0.48,
                 "slashEvasion": 0.48,
                 "smashEvasion": 0.48,
@@ -28719,9 +29481,9 @@
             "noncombatStats": {},
             "combatEnhancementBonuses": {
                 "autoAttackDamage": 0.002,
-                "stabDamage": 0.0044,
-                "slashDamage": 0.0044,
-                "smashDamage": 0.005,
+                "stabDamage": 0.005,
+                "slashDamage": 0.005,
+                "smashDamage": 0.005600000000000001,
                 "stabEvasion": 0.0096,
                 "slashEvasion": 0.0096,
                 "smashEvasion": 0.0096,
@@ -28762,9 +29524,37 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "count": 8
+                },
+                {
+                    "itemHrid": "/items/holy_plate_legs",
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/demonic_plate_legs",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/maelstrom_plate_legs",
+                    "dropRate": 0.92,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.08,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/legs",
@@ -28777,9 +29567,9 @@
             "combatStats": {
                 "autoAttackDamage": 0.1,
                 "magicAccuracy": -0.24,
-                "stabDamage": 0.18,
-                "slashDamage": 0.18,
-                "smashDamage": 0.2,
+                "stabDamage": 0.2,
+                "slashDamage": 0.2,
+                "smashDamage": 0.22,
                 "stabEvasion": 0.42,
                 "slashEvasion": 0.42,
                 "smashEvasion": 0.42,
@@ -28791,9 +29581,9 @@
             "noncombatStats": {},
             "combatEnhancementBonuses": {
                 "autoAttackDamage": 0.002,
-                "stabDamage": 0.0036,
-                "slashDamage": 0.0036,
-                "smashDamage": 0.004,
+                "stabDamage": 0.004,
+                "slashDamage": 0.004,
+                "smashDamage": 0.0044,
                 "stabEvasion": 0.0084,
                 "slashEvasion": 0.0084,
                 "smashEvasion": 0.0084,
@@ -28813,12 +29603,68 @@
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 40000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "count": 2000
+                }
+            ],
+            "transmuteSuccessRate": 0.64,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "dropRate": 0.088235,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crushed_philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 703
     },
@@ -29025,6 +29871,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.025,
                 "abilityHaste": 6,
                 "magicAccuracy": 0.12,
                 "magicDamage": 0.18,
@@ -29039,6 +29886,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0005,
                 "abilityHaste": 0.12,
                 "magicAccuracy": 0.0024,
                 "magicDamage": 0.0036,
@@ -29347,25 +30195,39 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0.75,
+            "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -29385,8 +30247,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -29811,9 +30680,37 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "count": 10
+                },
+                {
+                    "itemHrid": "/items/umbral_bracers",
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/sighted_bracers",
+                    "count": 10
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_bracers",
+                    "dropRate": 0.9,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/hands",
@@ -29825,7 +30722,7 @@
             ],
             "combatStats": {
                 "criticalDamage": 0.12,
-                "rangedAccuracy": 0.2,
+                "rangedAccuracy": 0.24,
                 "magicAccuracy": -0.08,
                 "rangedDamage": 0.08,
                 "stabEvasion": 0.25,
@@ -29840,7 +30737,7 @@
             "noncombatStats": {},
             "combatEnhancementBonuses": {
                 "criticalDamage": 0.0024,
-                "rangedAccuracy": 0.004,
+                "rangedAccuracy": 0.0048,
                 "rangedDamage": 0.0016,
                 "stabEvasion": 0.005,
                 "slashEvasion": 0.005,
@@ -29858,16 +30755,72 @@
     "/items/marksman_brooch": {
         "hrid": "/items/marksman_brooch",
         "name": "Marksman Brooch",
-        "description": "Material used in smithing Marksman Bracers",
+        "description": "Material used in tailoring Marksman Bracers",
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 40000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "count": 2000
+                }
+            ],
+            "transmuteSuccessRate": 0.64,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/marksman_brooch",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/corsair_crest",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/damaged_anchor",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/maelstrom_plating",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_leather",
+                    "dropRate": 0.132353,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "dropRate": 0.088235,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crushed_philosophers_stone",
+                    "dropRate": 0.25,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 700
     },
@@ -31901,25 +32854,39 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0.75,
+            "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -31939,8 +32906,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -31981,22 +32955,36 @@
             "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -32016,8 +33004,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -32055,25 +33050,39 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0.375,
+            "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -32093,8 +33102,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -32559,6 +33575,7 @@
         "categoryHrid": "/item_categories/key",
         "sellPrice": 600000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
@@ -32575,6 +33592,7 @@
         "categoryHrid": "/item_categories/key",
         "sellPrice": 60000,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
@@ -32591,12 +33609,42 @@
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 600,
         "isTradable": true,
+        "itemLevel": 95,
         "alchemyDetail": {
-            "bulkMultiplier": 1,
+            "bulkMultiplier": 5,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "transmuteSuccessRate": 0.85,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/chimerical_essence",
+                    "dropRate": 0.45,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/sinister_essence",
+                    "dropRate": 0.28,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/enchanted_essence",
+                    "dropRate": 0.15,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "dropRate": 0.12,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "sortIndex": 734
     },
@@ -32606,7 +33654,6 @@
         "description": "Dungeon currency from the Pirate Cove. Spend these in the Shop",
         "categoryHrid": "/item_categories/currency",
         "sellPrice": 0,
-        "isTradable": true,
         "sortIndex": 6
     },
     "/items/plum": {
@@ -33695,13 +34742,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.3,
+                "magicAccuracy": 0.36,
                 "magicDamage": 0.18,
                 "fireAmplify": 0.09
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.006,
+                "magicAccuracy": 0.0072,
                 "magicDamage": 0.0036,
                 "fireAmplify": 0.0018
             },
@@ -33888,13 +34935,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.3,
+                "magicAccuracy": 0.36,
                 "magicDamage": 0.18,
                 "natureAmplify": 0.09
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.006,
+                "magicAccuracy": 0.0072,
                 "magicDamage": 0.0036,
                 "natureAmplify": 0.0018
             },
@@ -34015,13 +35062,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.3,
+                "magicAccuracy": 0.36,
                 "magicDamage": 0.18,
                 "waterAmplify": 0.09
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.006,
+                "magicAccuracy": 0.0072,
                 "magicDamage": 0.0036,
                 "waterAmplify": 0.0018
             },
@@ -34278,6 +35325,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.02,
                 "magicAccuracy": 0.05,
                 "magicDamage": 0.1,
                 "stabEvasion": 0.2,
@@ -34291,6 +35339,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0004,
                 "magicAccuracy": 0.001,
                 "magicDamage": 0.002,
                 "stabEvasion": 0.004,
@@ -34494,6 +35543,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.02,
                 "magicAccuracy": 0.05,
                 "magicDamage": 0.1,
                 "stabEvasion": 0.2,
@@ -34507,6 +35557,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0004,
                 "magicAccuracy": 0.001,
                 "magicDamage": 0.002,
                 "stabEvasion": 0.004,
@@ -34580,6 +35631,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.02,
                 "magicAccuracy": 0.1,
                 "magicDamage": 0.15,
                 "stabEvasion": 0.25,
@@ -34593,6 +35645,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0004,
                 "magicAccuracy": 0.002,
                 "magicDamage": 0.003,
                 "stabEvasion": 0.005,
@@ -34666,6 +35719,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.04,
                 "magicAccuracy": 0.1,
                 "magicDamage": 0.2,
                 "stabEvasion": 0.35,
@@ -34679,6 +35733,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0008,
                 "magicAccuracy": 0.002,
                 "magicDamage": 0.004,
                 "stabEvasion": 0.006999999999999999,
@@ -34752,6 +35807,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.04,
                 "magicAccuracy": 0.15,
                 "magicDamage": 0.25,
                 "stabEvasion": 0.4,
@@ -34765,6 +35821,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.0008,
                 "magicAccuracy": 0.003,
                 "magicDamage": 0.005,
                 "stabEvasion": 0.008,
@@ -35861,7 +36918,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.025,
+                "autoAttackDamage": 0.05,
                 "magicAccuracy": -0.25,
                 "stabEvasion": 0.4,
                 "slashEvasion": 0.4,
@@ -35871,7 +36928,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.0005,
+                "autoAttackDamage": 0.001,
                 "stabEvasion": 0.008,
                 "slashEvasion": 0.008,
                 "smashEvasion": 0.008,
@@ -36783,13 +37840,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.5,
+                "magicAccuracy": 0.6,
                 "magicDamage": 0.3,
                 "fireAmplify": 0.15
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.01,
+                "magicAccuracy": 0.012,
                 "magicDamage": 0.006,
                 "fireAmplify": 0.003
             },
@@ -37004,13 +38061,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.5,
+                "magicAccuracy": 0.6,
                 "magicDamage": 0.3,
                 "natureAmplify": 0.15
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.01,
+                "magicAccuracy": 0.012,
                 "magicDamage": 0.006,
                 "natureAmplify": 0.003
             },
@@ -37131,13 +38188,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.5,
+                "magicAccuracy": 0.6,
                 "magicDamage": 0.3,
                 "waterAmplify": 0.15
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.01,
+                "magicAccuracy": 0.012,
                 "magicDamage": 0.006,
                 "waterAmplify": 0.003
             },
@@ -37148,7 +38205,7 @@
     "/items/regal_jewel": {
         "hrid": "/items/regal_jewel",
         "name": "Regal Jewel",
-        "description": "Material used in smithing Regal Sword",
+        "description": "Material used in smithing Regal Sword and Furious Spear",
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 100000,
         "isTradable": true,
@@ -37253,11 +38310,15 @@
                 },
                 {
                     "itemHrid": "/items/holy_sword",
-                    "count": 100
+                    "count": 60
                 },
                 {
                     "itemHrid": "/items/garnet",
                     "count": 100
+                },
+                {
+                    "itemHrid": "/items/werewolf_slasher",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -38665,9 +39726,41 @@
         "alchemyDetail": {
             "bulkMultiplier": 1,
             "isCoinifiable": true,
-            "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "decomposeItems": [
+                {
+                    "itemHrid": "/items/kraken_fang",
+                    "count": 20
+                },
+                {
+                    "itemHrid": "/items/arcane_water_staff",
+                    "count": 60
+                },
+                {
+                    "itemHrid": "/items/amethyst",
+                    "count": 100
+                },
+                {
+                    "itemHrid": "/items/frost_staff",
+                    "count": 1
+                }
+            ],
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/rippling_trident",
+                    "dropRate": 0.72,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/philosophers_stone",
+                    "dropRate": 0.28,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "equipmentDetail": {
             "type": "/equipment_types/main_hand",
@@ -38684,15 +39777,15 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.85,
+                "magicAccuracy": 1.05,
                 "magicDamage": 0.5,
                 "waterAmplify": 0.3,
                 "waterPenetration": 0.1,
-                "ripple": 0.2
+                "ripple": 0.18
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.017,
+                "magicAccuracy": 0.021,
                 "magicDamage": 0.01,
                 "waterAmplify": 0.006,
                 "waterPenetration": 0.002
@@ -39360,6 +40453,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.05,
                 "castSpeed": 0.02,
                 "magicAccuracy": 0.15,
                 "magicDamage": 0.2,
@@ -39376,6 +40470,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.001,
                 "castSpeed": 0.0004,
                 "magicAccuracy": 0.003,
                 "magicDamage": 0.004,
@@ -39463,6 +40558,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.05,
                 "castSpeed": 0.02,
                 "magicAccuracy": 0.2,
                 "magicDamage": 0.25,
@@ -39479,6 +40575,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.001,
                 "castSpeed": 0.0004,
                 "magicAccuracy": 0.004,
                 "magicDamage": 0.005,
@@ -39532,7 +40629,11 @@
                 },
                 {
                     "itemHrid": "/items/radiant_robe_bottoms",
-                    "count": 50
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/luna_robe_bottoms",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -39562,6 +40663,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.05,
                 "castSpeed": 0.02,
                 "magicAccuracy": 0.15,
                 "magicDamage": 0.2,
@@ -39579,6 +40681,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.001,
                 "castSpeed": 0.0004,
                 "magicAccuracy": 0.003,
                 "magicDamage": 0.004,
@@ -39633,7 +40736,11 @@
                 },
                 {
                     "itemHrid": "/items/radiant_robe_top",
-                    "count": 50
+                    "count": 30
+                },
+                {
+                    "itemHrid": "/items/luna_robe_top",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -39663,6 +40770,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.05,
                 "castSpeed": 0.02,
                 "magicAccuracy": 0.2,
                 "magicDamage": 0.25,
@@ -39680,6 +40788,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.001,
                 "castSpeed": 0.0004,
                 "magicAccuracy": 0.004,
                 "magicDamage": 0.005,
@@ -39768,6 +40877,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.05,
                 "castSpeed": 0.02,
                 "magicAccuracy": 0.15,
                 "magicDamage": 0.2,
@@ -39784,6 +40894,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.001,
                 "castSpeed": 0.0004,
                 "magicAccuracy": 0.003,
                 "magicDamage": 0.004,
@@ -39871,6 +40982,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.05,
                 "castSpeed": 0.02,
                 "magicAccuracy": 0.2,
                 "magicDamage": 0.25,
@@ -39887,6 +40999,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.001,
                 "castSpeed": 0.0004,
                 "magicAccuracy": 0.004,
                 "magicDamage": 0.005,
@@ -40052,8 +41165,79 @@
             "bulkMultiplier": 1,
             "isCoinifiable": true,
             "decomposeItems": null,
-            "transmuteSuccessRate": 0,
-            "transmuteDropTable": null
+            "transmuteSuccessRate": 0.5,
+            "transmuteDropTable": [
+                {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/penetrating_strike",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/crippling_slash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pestilent_shot",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/penetrating_shot",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/mana_spring",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/smoke_burst",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/arcane_reflection",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                }
+            ]
         },
         "abilityBookDetail": {
             "abilityHrid": "/abilities/shield_bash",
@@ -40186,6 +41370,7 @@
             ],
             "combatStats": {
                 "autoAttackDamage": 0.02,
+                "abilityDamage": 0.01,
                 "stabAccuracy": 0.1,
                 "slashAccuracy": 0.1,
                 "smashAccuracy": 0.1,
@@ -40207,6 +41392,7 @@
             "noncombatStats": {},
             "combatEnhancementBonuses": {
                 "autoAttackDamage": 0.0004,
+                "abilityDamage": 0.0002,
                 "stabAccuracy": 0.002,
                 "slashAccuracy": 0.002,
                 "smashAccuracy": 0.002,
@@ -40451,6 +41637,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.016,
                 "magicAccuracy": 0.04,
                 "magicDamage": 0.08,
                 "stabEvasion": 0.16,
@@ -40464,6 +41651,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00032,
                 "magicAccuracy": 0.0008,
                 "magicDamage": 0.0016,
                 "stabEvasion": 0.0032,
@@ -40594,6 +41782,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.016,
                 "magicAccuracy": 0.04,
                 "magicDamage": 0.08,
                 "stabEvasion": 0.16,
@@ -40607,6 +41796,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00032,
                 "magicAccuracy": 0.0008,
                 "magicDamage": 0.0016,
                 "stabEvasion": 0.0032,
@@ -40665,6 +41855,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.016,
                 "magicAccuracy": 0.08,
                 "magicDamage": 0.12,
                 "stabEvasion": 0.2,
@@ -40678,6 +41869,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00032,
                 "magicAccuracy": 0.0016,
                 "magicDamage": 0.0024,
                 "stabEvasion": 0.004,
@@ -40736,6 +41928,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.032,
                 "magicAccuracy": 0.08,
                 "magicDamage": 0.16,
                 "stabEvasion": 0.28,
@@ -40749,6 +41942,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00064,
                 "magicAccuracy": 0.0016,
                 "magicDamage": 0.0032,
                 "stabEvasion": 0.005600000000000001,
@@ -40807,6 +42001,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.032,
                 "magicAccuracy": 0.12,
                 "magicDamage": 0.2,
                 "stabEvasion": 0.32,
@@ -40820,6 +42015,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00064,
                 "magicAccuracy": 0.0024,
                 "magicDamage": 0.004,
                 "stabEvasion": 0.0064,
@@ -40981,21 +42177,28 @@
             "transmuteDropTable": [
                 {
                     "itemHrid": "/items/chimerical_essence",
-                    "dropRate": 0.5,
+                    "dropRate": 0.45,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/sinister_essence",
-                    "dropRate": 0.3,
+                    "dropRate": 0.28,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/enchanted_essence",
-                    "dropRate": 0.2,
+                    "dropRate": 0.15,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/pirate_essence",
+                    "dropRate": 0.12,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -41202,22 +42405,36 @@
             "transmuteSuccessRate": 0.5,
             "transmuteDropTable": [
                 {
+                    "itemHrid": "/items/shield_bash",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/penetrating_strike",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/crippling_slash",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
+                    "itemHrid": "/items/fracturing_impact",
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
                 },
                 {
                     "itemHrid": "/items/pestilent_shot",
-                    "dropRate": 0.2,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -41237,8 +42454,15 @@
                     "minEliteTier": 0
                 },
                 {
+                    "itemHrid": "/items/life_drain",
+                    "dropRate": 0.1,
+                    "minCount": 1,
+                    "maxCount": 1,
+                    "minEliteTier": 0
+                },
+                {
                     "itemHrid": "/items/smoke_burst",
-                    "dropRate": 0.15,
+                    "dropRate": 0.1,
                     "minCount": 1,
                     "maxCount": 1,
                     "minEliteTier": 0
@@ -41558,6 +42782,7 @@
                 }
             ],
             "combatStats": {
+                "abilityDamage": 0.016,
                 "magicAccuracy": 0.14,
                 "magicDamage": 0.18,
                 "stabEvasion": 0.16,
@@ -41571,6 +42796,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
+                "abilityDamage": 0.00032,
                 "magicAccuracy": 0.0028000000000000004,
                 "magicDamage": 0.0036,
                 "stabEvasion": 0.0032,
@@ -43357,11 +44583,15 @@
                 },
                 {
                     "itemHrid": "/items/arcane_crossbow",
-                    "count": 100
+                    "count": 60
                 },
                 {
                     "itemHrid": "/items/jade",
                     "count": 100
+                },
+                {
+                    "itemHrid": "/items/soul_hunter_crossbow",
+                    "count": 1
                 }
             ],
             "transmuteSuccessRate": 0.5,
@@ -43412,7 +44642,7 @@
     "/items/sundering_jewel": {
         "hrid": "/items/sundering_jewel",
         "name": "Sundering Jewel",
-        "description": "Material used in crafting Sundering Crossbow",
+        "description": "Material used in crafting Sundering Crossbow and smithing Furious Spear",
         "categoryHrid": "/item_categories/resource",
         "sellPrice": 100000,
         "isTradable": true,
@@ -50000,7 +51230,7 @@
                 }
             ],
             "combatStats": {
-                "autoAttackDamage": 0.0075,
+                "autoAttackDamage": 0.015,
                 "magicAccuracy": -0.075,
                 "stabEvasion": 0.12,
                 "slashEvasion": 0.12,
@@ -50010,7 +51240,7 @@
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "autoAttackDamage": 0.00015,
+                "autoAttackDamage": 0.0003,
                 "stabEvasion": 0.0024,
                 "slashEvasion": 0.0024,
                 "smashEvasion": 0.0024,
@@ -50625,7 +51855,8 @@
                 "waterPenetration": 0.2,
                 "naturePenetration": 0.2,
                 "firePenetration": 0.2,
-                "armor": 8
+                "armor": 8,
+                "mpRegenPer10": 0.0025
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
@@ -50633,7 +51864,8 @@
                 "waterPenetration": 0.004,
                 "naturePenetration": 0.004,
                 "firePenetration": 0.004,
-                "armor": 0.16
+                "armor": 0.16,
+                "mpRegenPer10": 0.00005
             },
             "noncombatEnhancementBonuses": {}
         },
@@ -50909,7 +52141,7 @@
         "name": "White Key Fragment",
         "description": "Can be used to craft dungeon keys",
         "categoryHrid": "/item_categories/key",
-        "sellPrice": 40000,
+        "sellPrice": 50000,
         "isTradable": true,
         "itemLevel": 70,
         "alchemyDetail": {
@@ -51487,13 +52719,13 @@
                 "damageType": "/damage_types/fire",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.1,
+                "magicAccuracy": 0.12,
                 "magicDamage": 0.06,
                 "fireAmplify": 0.03
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.002,
+                "magicAccuracy": 0.0024,
                 "magicDamage": 0.0012,
                 "fireAmplify": 0.0006
             },
@@ -51546,13 +52778,13 @@
                 "damageType": "/damage_types/nature",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.1,
+                "magicAccuracy": 0.12,
                 "magicDamage": 0.06,
                 "natureAmplify": 0.03
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.002,
+                "magicAccuracy": 0.0024,
                 "magicDamage": 0.0012,
                 "natureAmplify": 0.0006
             },
@@ -51665,13 +52897,13 @@
                 "damageType": "/damage_types/water",
                 "attackInterval": 3500000000,
                 "autoAttackDamage": -0.5,
-                "magicAccuracy": 0.1,
+                "magicAccuracy": 0.12,
                 "magicDamage": 0.06,
                 "waterAmplify": 0.03
             },
             "noncombatStats": {},
             "combatEnhancementBonuses": {
-                "magicAccuracy": 0.002,
+                "magicAccuracy": 0.0024,
                 "magicDamage": 0.0012,
                 "waterAmplify": 0.0006
             },

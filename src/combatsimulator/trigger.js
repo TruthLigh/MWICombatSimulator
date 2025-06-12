@@ -143,10 +143,13 @@ class Trigger {
             case "/combat_trigger_conditions/mana_spring":
             case "/combat_trigger_conditions/pestilent_shot_hp_regen":
             case "/combat_trigger_conditions/pestilent_shot_mp_regen":
-            case "/combat_trigger_conditions/smoke_burst":
+            case "/combat_trigger_conditions/smoke_burst_accuracy":
+            case "/combat_trigger_conditions/smoke_burst_evasion":
             case "/combat_trigger_conditions/arcane_reflection":
             case "/combat_trigger_conditions/fracturing_impact":
             case "/combat_trigger_conditions/maim":
+            case "/combat_trigger_conditions/fury_accuracy":
+            case "/combat_trigger_conditions/fury_damage":
                 let buffHrid = "/buff_uniques";
                 buffHrid += this.conditionHrid.slice(this.conditionHrid.lastIndexOf("/"));
                 return source.combatBuffs[buffHrid];

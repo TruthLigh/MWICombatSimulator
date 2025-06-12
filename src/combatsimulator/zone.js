@@ -8,11 +8,12 @@ class Zone {
         let gameZone = actionDetailMap[this.hrid];
         this.monsterSpawnInfo = gameZone.combatZoneInfo.fightInfo;
         this.dungeonSpawnInfo = gameZone.combatZoneInfo.dungeonInfo;
-        this.encountersKilled = 0;
+        this.encountersKilled = 1;
         this.monsterSpawnInfo.battlesPerBoss = 10;
         this.buffs = gameZone.buffs;
         this.isDungeon = gameZone.combatZoneInfo.isDungeon;
         this.dungeonsCompleted = 0;
+        this.dungeonsFailed = 0;
         this.finalWave = false;
     }
 
@@ -50,11 +51,17 @@ class Zone {
         return encounterHrids.map((hrid) => new Monster(hrid.hrid, hrid.eliteTier));
     }
 
+    failWave() {
+        this.dungeonsFailed++;
+        this.encountersKilled = 1;
+    }
+
     getNextWave() {
-        if(this.encountersKilled > this.dungeonSpawnInfo.maxWaves) {
+        if (this.encountersKilled > this.dungeonSpawnInfo.maxWaves) {
             this.dungeonsCompleted++;
-            this.encountersKilled = 0;
+            this.encountersKilled = 1;
         }
+        // console.log("Wave #" + this.encountersKilled);
         if (this.dungeonSpawnInfo.fixedSpawnsMap.hasOwnProperty(this.encountersKilled.toString())) {
             let currentMonsters = this.dungeonSpawnInfo.fixedSpawnsMap[(this.encountersKilled).toString()];
             this.encountersKilled++;
@@ -76,16 +83,16 @@ class Zone {
 
             let encounterHrids = [];
             let totalStrength = 0;
-    
+
             outer: for (let i = 0; i < monsterSpawns.maxSpawnCount; i++) {
                 let randomWeight = totalWeight * Math.random();
                 let cumulativeWeight = 0;
-    
+
                 for (const spawn of monsterSpawns.spawns) {
                     cumulativeWeight += spawn.rate;
                     if (randomWeight <= cumulativeWeight) {
                         totalStrength += spawn.strength;
-    
+
                         if (totalStrength <= monsterSpawns.maxTotalStrength) {
                             encounterHrids.push({ 'hrid': spawn.combatMonsterHrid, 'eliteTier': spawn.eliteTier });
                         } else {

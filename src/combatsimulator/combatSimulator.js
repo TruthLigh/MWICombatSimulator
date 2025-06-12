@@ -14,18 +14,20 @@ import BlindExpirationEvent from "./events/blindExpirationEvent";
 import SilenceExpirationEvent from "./events/silenceExpirationEvent";
 import CurseExpirationEvent from "./events/curseExpirationEvent";
 import WeakenExpirationEvent from "./events/weakenExpirationEvent";
+import FuryExpirationEvent from "./events/furyExpirationEvent";
 import SimResult from "./simResult";
 import AbilityCastEndEvent from "./events/abilityCastEndEvent";
 import AwaitCooldownEvent from "./events/awaitCooldownEvent";
 import Monster from "./monster";
+import Ability from "./ability";
 
 const ONE_SECOND = 1e9;
 const HOT_TICK_INTERVAL = 5 * ONE_SECOND;
-const DOT_TICK_INTERVAL = 5 * ONE_SECOND;
+const DOT_TICK_INTERVAL = 3 * ONE_SECOND;
 const REGEN_TICK_INTERVAL = 10 * ONE_SECOND;
 const ENEMY_RESPAWN_INTERVAL = 3 * ONE_SECOND;
 const PLAYER_RESPAWN_INTERVAL = 150 * ONE_SECOND;
-let tempDungeonCount = 0;
+const RESTART_INTERVAL = 15 * ONE_SECOND;
 
 class CombatSimulator extends EventTarget {
     constructor(players, zone) {
@@ -53,39 +55,65 @@ class CombatSimulator extends EventTarget {
             if (ticks == 1000) {
                 ticks = 0;
                 let progressEvent = new CustomEvent("progress", {
-                    detail: Math.min(this.simulationTime / simulationTimeLimit, 1),
+                    detail: {
+                        zone: this.zone.hrid,
+                        progress: Math.min(this.simulationTime / simulationTimeLimit, 1)
+                    },
                 });
                 this.dispatchEvent(progressEvent);
             }
         }
 
-        for (let i = 0; i < this.simResult.timeSpentAlive.length; i++) {
-            if (this.simResult.timeSpentAlive[i].alive == true) {
-                this.simResult.updateTimeSpentAlive(this.simResult.timeSpentAlive[i].name, false, simulationTimeLimit);
-            }
-        }
+        // for (let i = 0; i < this.simResult.timeSpentAlive.length; i++) {
+        //     if (this.simResult.timeSpentAlive[i].alive == true) {
+        //         this.simResult.updateTimeSpentAlive(this.simResult.timeSpentAlive[i].name, false, simulationTimeLimit);
+        //     }
+        // }
+
         this.simResult.isDungeon = this.zone.isDungeon;
-        if(this.simResult.isDungeon) {
+        if (this.simResult.isDungeon) {
+            console.log("Timeout now at wave #" + (this.zone.encountersKilled - 1));
+
             this.simResult.dungeonsCompleted = this.zone.dungeonsCompleted;
-            if(this.simResult.dungeonsCompleted < 1) {
-                this.simResult.maxWaveReached = this.zone.encountersKilled - 1;
+            this.simResult.dungeonsFailed = this.zone.dungeonsFailed;
+            if (this.simResult.dungeonsCompleted < 1) {
+                this.simResult.maxWaveReached = 0;
+                for (let i = 0; i <= this.zone.dungeonSpawnInfo.maxWaves; i++) {
+                    let waveName = "#" + i.toString();
+                    const idx = this.simResult.timeSpentAlive.findIndex(e => e.name === waveName);
+                    if (idx == -1 || this.simResult.timeSpentAlive[idx].count == 0) {
+                        break;
+                    }
+                    this.simResult.maxWaveReached = i;
+                }
             } else {
                 this.simResult.maxWaveReached = this.zone.dungeonSpawnInfo.maxWaves;
             }
         }
         this.simResult.simulatedTime = this.simulationTime;
-        this.simResult.setDropRateMultipliers(this.players[0]);
-        for(let i = 0; i < this.players.length; i++) {
+        
+        for (let i = 0; i < this.players.length; i++) {
+            this.simResult.setDropRateMultipliers(this.players[i]);
             this.simResult.setManaUsed(this.players[i]);
         }
 
+        if (this.zone.isDungeon) {
+            Object.entries(this.zone.dungeonSpawnInfo.fixedSpawnsMap).forEach(([wave, monsters]) => {
+                let waveName = "#" + wave.toString();
+                monsters.forEach(monster => {
+                    waveName += ',' + monster.combatMonsterHrid;
+                });
+                this.simResult.bossSpawns.push(waveName);
+            });
+
+        }
         if (this.zone.monsterSpawnInfo.bossSpawns) {
             for (const boss of this.zone.monsterSpawnInfo.bossSpawns) {
                 this.simResult.bossSpawns.push(boss.combatMonsterHrid);
             }
         }
 
-        if(!this.zone.isDungeon) {
+        if (!this.zone.isDungeon) {
             this.simResult.eliteTier = this.zone.monsterSpawnInfo.randomSpawnInfo.spawns[0].eliteTier;
         }
 
@@ -144,6 +172,9 @@ class CombatSimulator extends EventTarget {
             case WeakenExpirationEvent.type:
                 this.processWeakenExpirationEvent(event);
                 break;
+            case FuryExpirationEvent.type:
+                this.processFuryExpirationEvent(event);
+                break;
             case AbilityCastEndEvent.type:
                 this.tryUseAbility(event.source, event.ability);
                 break;
@@ -160,8 +191,11 @@ class CombatSimulator extends EventTarget {
     }
 
     processCombatStartEvent(event) {
-        for(let i = 0; i < this.players.length; i++) {
-            this.players[i].generatePermanentBuffs();
+        // console.log("Combat Start " + (this.simulationTime / 1000000000));
+        for (let i = 0; i < this.players.length; i++) {
+            if (event.time == 0) { // First combat start event
+                this.players[i].generatePermanentBuffs();
+            }
             this.players[i].reset(this.simulationTime);
         }
         let regenTickEvent = new RegenTickEvent(this.simulationTime + REGEN_TICK_INTERVAL);
@@ -171,12 +205,13 @@ class CombatSimulator extends EventTarget {
     }
 
     processPlayerRespawnEvent(event) {
+        // console.log("Player " + event.hrid + " respawn at " + + (this.simulationTime / 1000000000));
         let respawningPlayer = this.players.find(player => player.hrid === event.hrid);
         respawningPlayer.combatDetails.currentHitpoints = respawningPlayer.combatDetails.maxHitpoints;
         respawningPlayer.combatDetails.currentManapoints = respawningPlayer.combatDetails.maxManapoints;
         respawningPlayer.clearBuffs();
         respawningPlayer.clearCCs();
-        if(this.allPlayersDead) {
+        if (this.allPlayersDead) {
             this.allPlayersDead = false;
             this.startAttacks();
         } else {
@@ -189,16 +224,24 @@ class CombatSimulator extends EventTarget {
     }
 
     startNewEncounter() {
-        if(!this.zone.isDungeon) {
+        if (this.allPlayersDead) {
+            this.allPlayersDead = false;
+            this.zone.failWave();
+        }
+
+        if (!this.zone.isDungeon) {
             this.enemies = this.zone.getRandomEncounter();
         } else {
             this.enemies = this.zone.getNextWave();
+            this.simResult.updateTimeSpentAlive("#" + (this.zone.encountersKilled - 1).toString(), true, this.simulationTime);
             let currentDungeonCount = this.zone.dungeonsCompleted;
-            if(currentDungeonCount > tempDungeonCount) {
-                tempDungeonCount = currentDungeonCount;
-                for(let i = 0; i < this.players.length; i++) {
+            // console.log('wave at #' + (this.zone.encountersKilled - 1) +' completed:' + this.zone.dungeonsCompleted + ' failed:'+ this.zone.dungeonsFailed + ' temp:'+ this.tempDungeonCount);
+            if (currentDungeonCount > this.tempDungeonCount) {
+                this.tempDungeonCount = currentDungeonCount;
+                for (let i = 0; i < this.players.length; i++) {
                     this.players[i].combatDetails.currentHitpoints = this.players[i].combatDetails.maxHitpoints;
                     this.players[i].combatDetails.currentManapoints = this.players[i].combatDetails.maxManapoints;
+                    // this.simResult.playerRanOutOfMana[this.players[i].hrid] = false;
                 }
             }
         }
@@ -244,7 +287,7 @@ class CombatSimulator extends EventTarget {
 
         for (let i = 0; i < aliveTargets.length; i++) {
             let target = aliveTargets[i];
-            if(!event.source.isPlayer && aliveTargets.length > 1)  {
+            if (!event.source.isPlayer && aliveTargets.length > 1) {
                 let cumulativeThreat = 0;
                 let cumulativeRanges = [];
                 aliveTargets.forEach(player => {
@@ -277,6 +320,52 @@ class CombatSimulator extends EventTarget {
                 this.eventQueue.clearMatching((event) => event.type == CurseExpirationEvent.type && event.source == target)
                 let curseExpirationEvent = new CurseExpirationEvent(curseExpireTime, target);
                 this.eventQueue.addEvent(curseExpirationEvent);
+            }
+
+            if (source.combatDetails.combatStats.fury > 0) {
+                this.eventQueue.clearMatching((event) => event.type == FuryExpirationEvent.type && event.source == source);
+                let oldFuryValue = source.furyValue;
+                let nowFuryValue = source.updateFury(attackResult.didHit, source.combatDetails.combatStats.fury);
+
+                const furyExpireTime = 15000000000;
+                let furryExpireTime = this.simulationTime + furyExpireTime;
+
+                if (nowFuryValue > 0) {
+                    let furyExpirationEvent = new FuryExpirationEvent(furryExpireTime, source);
+                    this.eventQueue.addEvent(furyExpirationEvent);
+                }
+
+                if (oldFuryValue != nowFuryValue) {
+                    const furyAccuracyBuf = {
+                        "uniqueHrid": "/buff_uniques/fury_accuracy",
+                        "typeHrid": "/buff_types/fury_accuracy",
+                        "ratioBoost": 0,
+                        "ratioBoostLevelBonus": 0,
+                        "flatBoost": source.combatDetails.combatStats.fury,
+                        "flatBoostLevelBonus": 0,
+                        "startTime": "0001-01-01T00:00:00Z",
+                        "duration": furyExpireTime
+                    };
+                    const furyDamageBuf = {
+                        "uniqueHrid": "/buff_uniques/fury_damage",
+                        "typeHrid": "/buff_types/fury_damage",
+                        "ratioBoost": 0,
+                        "ratioBoostLevelBonus": 0,
+                        "flatBoost": source.combatDetails.combatStats.fury,
+                        "flatBoostLevelBonus": 0,
+                        "startTime": "0001-01-01T00:00:00Z",
+                        "duration": furyExpireTime
+                    };
+
+                    if (attackResult.didHit) {
+                        source.addBuff(furyAccuracyBuf, this.simulationTime);
+                        source.addBuff(furyDamageBuf, this.simulationTime);
+                    }
+                    else if (nowFuryValue == 0) {
+                        source.removeBuff(furyAccuracyBuf);
+                        source.removeBuff(furyDamageBuf);
+                    }
+                }
             }
 
             if (target.combatDetails.combatStats.weaken > 0) {
@@ -373,6 +462,9 @@ class CombatSimulator extends EventTarget {
             this.eventQueue.addEvent(enemyRespawnEvent);
             this.enemies = null;
 
+            if (this.zone.isDungeon) {
+                this.simResult.updateTimeSpentAlive("#" + (this.zone.encountersKilled - 1).toString(), false, this.simulationTime);
+            }
             this.simResult.addEncounterEnd();
             // console.log("All enemies died");
 
@@ -380,23 +472,35 @@ class CombatSimulator extends EventTarget {
             // console.log("encounter end " + (this.simulationTime / 1000000000))
         }
 
-    this.players.forEach(player => {
-        if ((player.combatDetails.currentHitpoints <= 0) && !this.eventQueue.containsEventOfTypeAndHrid(PlayerRespawnEvent.type, player.hrid)) {
-            let playerRespawnEvent = new PlayerRespawnEvent(this.simulationTime + PLAYER_RESPAWN_INTERVAL, player.hrid);
-            this.eventQueue.addEvent(playerRespawnEvent);
-            //console.log(player.hrid + " died at " + (this.simulationTime / 1000000000));
-        }
-    });
+        this.players.forEach(player => {
+            if ((player.combatDetails.currentHitpoints <= 0) && !this.eventQueue.containsEventOfTypeAndHrid(PlayerRespawnEvent.type, player.hrid)) {
+                if (!this.zone.isDungeon) {
+                    let playerRespawnEvent = new PlayerRespawnEvent(this.simulationTime + PLAYER_RESPAWN_INTERVAL, player.hrid);
+                    this.eventQueue.addEvent(playerRespawnEvent);
+                }
+                // console.log(player.hrid + " died at " + (this.simulationTime / 1000000000) + 'in wave #' + (this.zone.encountersKilled - 1) + ' with ememies: ' + this.enemies?.map(enemy => (enemy.hrid+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
+            }
+        });
 
         if (
             !this.players.some((player) => player.combatDetails.currentHitpoints > 0)
         ) {
-            this.eventQueue.clearEventsOfType(AutoAttackEvent.type);
-            this.eventQueue.clearEventsOfType(AbilityCastEndEvent.type);
-            //console.log("All Players died");
+            if (this.zone.isDungeon) {
+                console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: " + this.enemies.map(enemy => (enemy.hrid+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
+
+                this.eventQueue.clear();
+                this.enemies = null;
+
+                let combatStartEvent = new CombatStartEvent(this.simulationTime + RESTART_INTERVAL);
+                this.eventQueue.addEvent(combatStartEvent);
+            } else {
+                this.eventQueue.clearEventsOfType(AutoAttackEvent.type);
+                this.eventQueue.clearEventsOfType(AbilityCastEndEvent.type);
+            }
+            // console.log("All Players died");
             encounterEnded = true;
             this.allPlayersDead = true;
-        } 
+        }
 
         return encounterEnded;
     }
@@ -629,6 +733,11 @@ class CombatSimulator extends EventTarget {
         event.source.weakenPercentage = 0;
     }
 
+    processFuryExpirationEvent(event) {
+        event.source.furyValue = 0;
+        console.log("Fury Timeout");
+    }
+
     checkTriggers() {
         let triggeredSomething;
 
@@ -693,9 +802,9 @@ class CombatSimulator extends EventTarget {
 
         consumable.lastUsed = this.simulationTime;
         let consumeCooldown = consumable.cooldownDuration;
-        if(source.combatDetails.combatStats.drinkConcentration > 0 && consumable.catagoryHrid.includes("drink")) {
+        if (source.combatDetails.combatStats.drinkConcentration > 0 && consumable.catagoryHrid.includes("drink")) {
             consumeCooldown = consumeCooldown / (1 + source.combatDetails.combatStats.drinkConcentration);
-        } else if(source.combatDetails.combatStats.foodHaste > 0 && consumable.catagoryHrid.includes("food")) {
+        } else if (source.combatDetails.combatStats.foodHaste > 0 && consumable.catagoryHrid.includes("food")) {
             consumeCooldown = consumeCooldown / (1 + source.combatDetails.combatStats.foodHaste);
         }
         let cooldownReadyEvent = new CooldownReadyEvent(this.simulationTime + consumeCooldown);
@@ -728,7 +837,7 @@ class CombatSimulator extends EventTarget {
 
         for (const buff of consumable.buffs) {
             let currentBuff = structuredClone(buff);
-            if(source.combatDetails.combatStats.drinkConcentration > 0 && consumable.catagoryHrid.includes("drink")) {
+            if (source.combatDetails.combatStats.drinkConcentration > 0 && consumable.catagoryHrid.includes("drink")) {
                 currentBuff.ratioBoost *= (1 + source.combatDetails.combatStats.drinkConcentration);
                 currentBuff.flatBoost *= (1 + source.combatDetails.combatStats.drinkConcentration);
                 currentBuff.duration = currentBuff.duration / (1 + source.combatDetails.combatStats.drinkConcentration);
@@ -749,9 +858,15 @@ class CombatSimulator extends EventTarget {
 
         if (source.combatDetails.currentManapoints < ability.manaCost) {
             if (source.isPlayer && oomCheck) {
-                this.simResult.playerRanOutOfMana[source.hrid] = true;
+                // if (this.simResult.playerRanOutOfMana[source.hrid] == false) {
+                //     console.log(source.hrid + " ran out of mana" + ' at wave #' + (this.zone.encountersKilled - 1) + ' at time ' + this.simulationTime / 1000000000 + 's');
+                // }
+                this.simResult.addRanOutOfManaCount(source, true);
             }
             return false;
+        }
+        if (source.isPlayer && oomCheck) {
+            this.simResult.addRanOutOfManaCount(source, false);
         }
         return true;
     }
@@ -762,7 +877,7 @@ class CombatSimulator extends EventTarget {
             // console.log("Falseeeeeee");
             return false;
         }
-        
+
         // console.log("Casting:", ability);
 
         if (source.isPlayer) {
@@ -793,118 +908,56 @@ class CombatSimulator extends EventTarget {
         }*/
         this.addNextAttackEvent(source);
 
-        for (const abilityEffect of ability.abilityEffects) {
-            switch (abilityEffect.effectType) {
-                case "/ability_effect_types/buff":
-                    this.processAbilityBuffEffect(source, ability, abilityEffect);
-                    break;
-                case "/ability_effect_types/damage":
-                    this.processAbilityDamageEffect(source, ability, abilityEffect);
-                    break;
-                case "/ability_effect_types/heal":
-                    console.log("Heal effect", ability);
-                    this.processAbilityHealEffect(source, ability, abilityEffect);
-                    break;
-                case "/ability_effect_types/spend_hp":
-                    this.processAbilitySpendHpEffect(source, ability, abilityEffect);
-                    break;
-                case "/ability_effect_types/revive":
-                    this.processAbilityReviveEffect(source, ability, abilityEffect);
-                    break;
-                case "/ability_effect_types/promote":
-                    this.eventQueue.clearEventsForUnit(source);
-                    source = this.processAbilityPromoteEffect(source, ability, abilityEffect);
-                    this.addNextAttackEvent(source);
-                    break;
-                default:
-                    throw new Error("Unsupported effect type for ability: " + ability.hrid + " effectType: " + abilityEffect.effectType);
+        let todoAbilities = [ability];
+
+        if (source.combatDetails.combatStats.blaze > 0 && Math.random() < source.combatDetails.combatStats.blaze) {
+            todoAbilities.push(new Ability("blaze"));
+        }
+
+        if (source.combatDetails.combatStats.bloom > 0 && Math.random() < source.combatDetails.combatStats.bloom) {
+            todoAbilities.push(new Ability("bloom"));
+        }
+
+        for (const todoAbility of todoAbilities) {
+            for (const abilityEffect of todoAbility.abilityEffects) {
+                switch (abilityEffect.effectType) {
+                    case "/ability_effect_types/buff":
+                        this.processAbilityBuffEffect(source, todoAbility, abilityEffect);
+                        break;
+                    case "/ability_effect_types/damage":
+                        this.processAbilityDamageEffect(source, todoAbility, abilityEffect);
+                        break;
+                    case "/ability_effect_types/heal":
+                        this.processAbilityHealEffect(source, todoAbility, abilityEffect);
+                        break;
+                    case "/ability_effect_types/spend_hp":
+                        this.processAbilitySpendHpEffect(source, todoAbility, abilityEffect);
+                        break;
+                    case "/ability_effect_types/revive":
+                        this.processAbilityReviveEffect(source, todoAbility, abilityEffect);
+                        break;
+                    case "/ability_effect_types/promote":
+                        this.eventQueue.clearEventsForUnit(source);
+                        source = this.processAbilityPromoteEffect(source, todoAbility, abilityEffect);
+                        this.addNextAttackEvent(source);
+                        break;
+                    default:
+                        throw new Error("Unsupported effect type for ability: " + todoAbility.hrid + " effectType: " + abilityEffect.effectType);
+                }
             }
         }
-        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/rippling_trident" && Math.random() < 0.2) {
+
+        if (source.combatDetails.combatStats.ripple > 0 && Math.random() < source.combatDetails.combatStats.ripple) {
             for (const skill of source.abilities) {
                 if (skill && skill.lastUsed) {
                     const remainingCooldown = skill.lastUsed + skill.cooldownDuration - this.simulationTime;
                     if (remainingCooldown > 0) {
-                        skill.lastUsed = Math.max(skill.lastUsed - 1e9, this.simulationTime - skill.cooldownDuration);
+                        skill.lastUsed = Math.max(skill.lastUsed - ONE_SECOND * 2, this.simulationTime - skill.cooldownDuration);
                     }
                 }
             }
         }
-        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/blazing_trident" && Math.random() < 0.25) {
-            const blazingTridentEffect = {
-                "hrid": "/abilities/mini_flame_blast",
-                "name": "mini_flame_blast",
-                "level": 1,
-                "description": "95火特效",
-                "isSpecialAbility": true,
-                "manaCost": 0,
-                "cooldownDuration": 0, 
-                "castDuration": 0,
-                "abilityEffects": [
-                    {
-                        "targetType": "allEnemies",
-                        "effectType": "/ability_effect_types/damage",
-                        "combatStyleHrid": "/combat_styles/magic",
-                        "damageType": "/damage_types/fire",
-                        "damageFlat": 0,
-                        "damageRatio": 0.3,
-                        "bonusAccuracyRatio": 0,
-                        "damageOverTimeRatio": 0,
-                        "damageOverTimeDuration": 0,
-                        "armorDamageRatio": 0,
-                        "hpDrainRatio": 0,
-                        "pierceChance": 0,
-                        "blindChance": 0,
-                        "blindDuration": 0,
-                        "silenceChance": 0,
-                        "silenceDuration": 0,
-                        "stunChance": 0,
-                        "stunDuration": 0,
-                        "spendHpRatio": 0,
-                        "buffs": null
-                    }
-                ],
-                "lastUsed": 0
-            }
-            this.processAbilityDamageEffect(source, blazingTridentEffect, blazingTridentEffect.abilityEffects[0]);
-        }
-        if (source.isPlayer && source.equipment["/equipment_types/main_hand"]?.gameItem?.hrid === "/items/blooming_trident" && Math.random() < 0.4) {
-            const bloomingTridentEffect = {
-                "hrid": "/abilities/mini_quick_aid",
-                "level": 1,
-                "manaCost": 0,
-                "cooldownDuration": 0,
-                "castDuration": 0,
-                "isSpecialAbility": false,
-                "abilityEffects": [
-                    {
-                        "targetType": "lowestHpAlly",
-                        "effectType": "/ability_effect_types/heal",
-                        "combatStyleHrid": "/combat_styles/magic",
-                        "damageType": "",
-                        "damageFlat": 10,
-                        "damageRatio": 0.2,
-                        "bonusAccuracyRatio": 0,
-                        "damageOverTimeRatio": 0,
-                        "damageOverTimeDuration": 0,
-                        "armorDamageRatio": 0,
-                        "hpDrainRatio": 0,
-                        "pierceChance": 0,
-                        "blindChance": 0,
-                        "blindDuration": 0,
-                        "silenceChance": 0,
-                        "silenceDuration": 0,
-                        "stunChance": 0,
-                        "stunDuration": 0,
-                        "spendHpRatio": 0,
-                        "buffs": null
-                    }
-                ],
-                "lastUsed": 0
-            }
-        
-            this.processAbilityHealEffect(source, bloomingTridentEffect, bloomingTridentEffect.abilityEffects[0]);
-        }
+
         // Could die from reflect damage
         if (source.combatDetails.currentHitpoints == 0) {
             this.eventQueue.clearEventsForUnit(source);
@@ -953,6 +1006,10 @@ class CombatSimulator extends EventTarget {
                 break;
             default:
                 throw new Error("Unsupported target type for damage ability effect: " + ability.hrid);
+        }
+
+        if (!targets) {
+            return;
         }
 
         for (let target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
@@ -1007,7 +1064,7 @@ class CombatSimulator extends EventTarget {
                 }
             } else {
                 targets = targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0);
-                if(!source.isPlayer && targets.length > 1 && abilityEffect.targetType == "enemy")  {
+                if (!source.isPlayer && targets.length > 1 && abilityEffect.targetType == "enemy") {
                     let cumulativeThreat = 0;
                     let cumulativeRanges = [];
                     targets.forEach(player => {
@@ -1021,12 +1078,12 @@ class CombatSimulator extends EventTarget {
                     });
                     let randomValueHit = Math.random() * cumulativeThreat;
                     target = cumulativeRanges.find(range => randomValueHit >= range.rangeStart && randomValueHit < range.rangeEnd).player;
-                } 
-                
+                }
+
                 let attackResult = CombatUtilities.processAttack(source, target, abilityEffect);
-                
+
                 if (attackResult.hpDrain > 0) {
-                    this.simResult.addHitpointsGained(source, ability.hrid, attackResult.hpDrain);                    
+                    this.simResult.addHitpointsGained(source, ability.hrid, attackResult.hpDrain);
                 }
 
                 if (attackResult.didHit && abilityEffect.buffs) {
@@ -1213,15 +1270,15 @@ class CombatSimulator extends EventTarget {
                 this.simResult.updateTimeSpentAlive(reviveTarget.hrid, true, this.simulationTime);
             }
 
-            // console.log(source.hrid + " revived " + reviveTarget.hrid + " with " + amountHealed + " HP.");
+            // console.log(source.hrid + " revived " + reviveTarget.hrid + " with " + amountHealed + " HP." + ' at wave #' + (this.zone.encountersKilled - 1) + ' at time ' + this.simulationTime / 1000000000 + 's');
         }
         return;
     }
 
     processAbilityPromoteEffect(source, ability, abilityEffect) {
-            const promotionHrids = ["/monsters/enchanted_rook", "/monsters/enchanted_knight", "/monsters/enchanted_bishop"];
-            let randomPromotionIndex = Math.floor(Math.random() * promotionHrids.length);
-            return new Monster(promotionHrids[randomPromotionIndex], source.eliteTier);
+        const promotionHrids = ["/monsters/enchanted_rook", "/monsters/enchanted_knight", "/monsters/enchanted_bishop"];
+        let randomPromotionIndex = Math.floor(Math.random() * promotionHrids.length);
+        return new Monster(promotionHrids[randomPromotionIndex], source.eliteTier);
     }
 
     processAbilitySpendHpEffect(source, ability, abilityEffect) {
