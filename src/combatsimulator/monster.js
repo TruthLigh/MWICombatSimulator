@@ -62,69 +62,99 @@ class Monster extends CombatUnit {
         let baseExp = gameMonster.experience ?? 0;
         let difficulty = this.difficultyTier ?? 0;
         this.experience = (1.0 + 0.2 * difficulty) * (baseExp + 10.0 * difficulty);
-        this.combatDetails = Monster.getScaledCombatDetails(gameMonster.combatDetails, this.difficultyTier);
-        this.updateCombatDetails();
-    }
-
-    static getScaledCombatDetails(combatDetails, difficultyTier = 0) {
-        let scaled = { ...combatDetails, combatStats: { ...combatDetails.combatStats } };
-        if (difficultyTier > 0) {
-            let levelMultiplier = 1.0 + 0.2 * difficultyTier;
-            let levelBonus = 20.0 * difficultyTier;
-            scaled.staminaLevel = levelMultiplier * (scaled.staminaLevel + levelBonus);
-            scaled.intelligenceLevel = levelMultiplier * (scaled.intelligenceLevel + levelBonus);
-            scaled.attackLevel = levelMultiplier * (scaled.attackLevel + levelBonus);
-            scaled.powerLevel = levelMultiplier * (scaled.powerLevel + levelBonus);
-            scaled.defenseLevel = levelMultiplier * (scaled.defenseLevel + levelBonus);
-            scaled.rangedLevel = levelMultiplier * (scaled.rangedLevel + levelBonus);
-            scaled.magicLevel = levelMultiplier * (scaled.magicLevel + levelBonus);
-            //.experience = levelMultiplier * (.experience + 10 * difficultyTier);
-        }
-        return scaled;
     }
 
     updateCombatDetails() {
-        this.staminaLevel = this.combatDetails.staminaLevel;
-        this.intelligenceLevel = this.combatDetails.intelligenceLevel;
-        this.attackLevel = this.combatDetails.attackLevel;
-        this.powerLevel = this.combatDetails.powerLevel;
-        this.defenseLevel = this.combatDetails.defenseLevel;
-        this.rangedLevel = this.combatDetails.rangedLevel;
-        this.magicLevel = this.combatDetails.magicLevel;
+        const gameMonster = combatMonsterDetailMap[this.hrid];
 
-        if (this.combatDetails.combatStats) {
-            
-            if (Array.isArray(this.combatDetails.combatStats.combatStyleHrids)) {
-                this.combatDetails.combatStats.combatStyleHrid = this.combatDetails.combatStats.combatStyleHrids[0];
-            }
+        let levelMultiplier = 1.0 + 0.2 * this.difficultyTier;
+        let levelBonus = 20.0 * this.difficultyTier;
+        this.staminaLevel = levelMultiplier * (gameMonster.combatDetails.staminaLevel + levelBonus);
+        this.intelligenceLevel = levelMultiplier * (gameMonster.combatDetails.intelligenceLevel + levelBonus);
+        this.attackLevel = levelMultiplier * (gameMonster.combatDetails.attackLevel + levelBonus);
+        this.powerLevel = levelMultiplier * (gameMonster.combatDetails.powerLevel + levelBonus);
+        this.defenseLevel = levelMultiplier * (gameMonster.combatDetails.defenseLevel + levelBonus);
+        this.rangedLevel = levelMultiplier * (gameMonster.combatDetails.rangedLevel + levelBonus);
+        this.magicLevel = levelMultiplier * (gameMonster.combatDetails.magicLevel + levelBonus);
 
-            // 补全所有常用字段
-            const defaultStats = [
-                "stabAccuracy","slashAccuracy","smashAccuracy","rangedAccuracy","magicAccuracy",
-                "stabDamage","slashDamage","smashDamage","rangedDamage","magicDamage","taskDamage",
-                "physicalAmplify","waterAmplify","natureAmplify","fireAmplify","healingAmplify",
-                "stabEvasion","slashEvasion","smashEvasion","rangedEvasion","magicEvasion",
-                "armor","waterResistance","natureResistance","fireResistance",
-                "maxHitpoints","maxManapoints","lifeSteal","hpRegenPer10","mpRegenPer10",
-                "physicalThorns","elementalThorns","combatDropRate","combatRareFind","combatDropQuantity",
-                "combatExperience","criticalRate","criticalDamage","armorPenetration","waterPenetration",
-                "naturePenetration","firePenetration","abilityHaste","abilityDamage","tenacity",
-                "manaLeech","castSpeed","threat","parry","mayhem","pierce","curse","fury","weaken",
-                "ripple","bloom","blaze","attackSpeed","foodHaste","drinkConcentration","autoAttackDamage"
-            ];
-            defaultStats.forEach(stat => {
-                if (this.combatDetails.combatStats[stat] == null) {
-                    this.combatDetails.combatStats[stat] = 0;
-                }
-            });
-            // attackInterval
-            if (this.combatDetails.attackInterval != null) {
-                this.combatDetails.combatStats.attackInterval = this.combatDetails.attackInterval;
-            }
+        this.combatDetails.combatStats.combatStyleHrid = gameMonster.combatDetails.combatStats.combatStyleHrids[0];
+
+        for (const [key, value] of Object.entries(gameMonster.combatDetails.combatStats)) {
+            this.combatDetails.combatStats[key] = value;
         }
 
-        super.updateCombatDetails();
-    }
+        [
+            "stabAccuracy",
+            "slashAccuracy",
+            "smashAccuracy",
+            "rangedAccuracy",
+            "magicAccuracy",
+            "stabDamage",
+            "slashDamage",
+            "smashDamage",
+            "rangedDamage",
+            "magicDamage",
+            "taskDamage",
+            "physicalAmplify",
+            "waterAmplify",
+            "natureAmplify",
+            "fireAmplify",
+            "healingAmplify",
+            "stabEvasion",
+            "slashEvasion",
+            "smashEvasion",
+            "rangedEvasion",
+            "magicEvasion",
+            "armor",
+            "waterResistance",
+            "natureResistance",
+            "fireResistance",
+            "maxHitpoints",
+            "maxManapoints",
+            "lifeSteal",
+            "hpRegenPer10",
+            "mpRegenPer10",
+            "physicalThorns",
+            "elementalThorns",
+            "combatDropRate",
+            "combatRareFind",
+            "combatDropQuantity",
+            "combatExperience",
+            "criticalRate",
+            "criticalDamage",
+            "armorPenetration",
+            "waterPenetration",
+            "naturePenetration",
+            "firePenetration",
+            "abilityHaste",
+            "abilityDamage",
+            "tenacity",
+            "manaLeech",
+            "castSpeed",
+            "threat",
+            "parry",
+            "mayhem",
+            "pierce",
+            "curse",
+            "fury",
+            "weaken",
+            "ripple",
+            "bloom",
+            "blaze",
+            "attackSpeed",
+            "foodHaste",
+            "drinkConcentration",
+            "autoAttackDamage"
+        ].forEach((stat) => {
+            if (gameMonster.combatDetails.combatStats[stat] == null) {
+                this.combatDetails.combatStats[stat] = 0;
+            }
+        });
+        
+    this.combatDetails.combatStats.attackInterval = gameMonster.combatDetails.attackInterval;
+
+    super.updateCombatDetails();
+}
 }
 
 export default Monster;

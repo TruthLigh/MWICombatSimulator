@@ -607,7 +607,22 @@ class CombatSimulator extends EventTarget {
             }
 
             let attackResult = _combatUtilities__WEBPACK_IMPORTED_MODULE_0__["default"].processAttack(source, target);
-
+            // if (
+            //     source.hrid === "/monsters/griffin" &&
+            //     true &&
+            //     target.isPlayer &&
+            //     attackResult.didHit &&
+            //     attackResult.damageDone > 0
+            // ) {
+            //     const beforeHp = target.combatDetails.currentHitpoints;
+            //     const afterHp = Math.max(0, beforeHp - attackResult.damageDone);
+            //     let allPlayersHp = this.players.map(
+            //         p => `${p.hrid}: ${p.combatDetails.currentHitpoints}/${p.combatDetails.maxHitpoints}`
+            //     ).join(" | ");
+            //     console.log(
+            //         `[${source.hrid}][普通攻击][${(this.simulationTime / 1e9).toFixed(2)}s] 对玩家 ${target.hrid} 造成了 ${attackResult.damageDone} 伤害，血量从 ${beforeHp} 变为 ${afterHp}。当前所有玩家血量：${allPlayersHp}`
+            //     );
+            // }
             let mayhem = source.combatDetails.combatStats.mayhem > Math.random();
 
             if (attackResult.didHit && source.combatDetails.combatStats.curse > 0) {
@@ -719,16 +734,11 @@ class CombatSimulator extends EventTarget {
                 this.simResult.addDeath(target);
                 if (!target.isPlayer) {
                     this.simResult.updateTimeSpentAlive(target.hrid, false, this.simulationTime);
-                    let baseExp = target.experience ?? 0;
-                    let difficultyTier = target.difficultyTier ?? 0;
-                    let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
 
                     this.players.forEach(player => {
-                        if (player.combatDetails.currentHitpoints > 0) {
-                            let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
-                            let finalExp = scaledExp * (1 + expBonus);
-                            this.simResult.addExperienceGain(player, "kill", finalExp);
-                        }
+                        let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                        let finalExp = target.experience * (1 + expBonus) / this.players.length;
+                        this.simResult.addExperienceGain(player, "kill", finalExp);
                     });
                 }
                 // console.log(target.hrid, "died");
@@ -990,15 +1000,11 @@ class CombatSimulator extends EventTarget {
             this.simResult.addDeath(event.target);
             if (!event.target.isPlayer) {
                 this.simResult.updateTimeSpentAlive(event.target.hrid, false, this.simulationTime);
-                let baseExp = event.target.experience ?? 0;
-                let difficultyTier = event.target.difficultyTier ?? 0;
-                let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+
                 this.players.forEach(player => {
-                    if (player.combatDetails.currentHitpoints > 0) {
-                        let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
-                        let finalExp = scaledExp * (1 + expBonus);
-                        this.simResult.addExperienceGain(player, "kill", finalExp);
-                    }
+                    let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                    let finalExp = event.target.experience * (1 + expBonus) / this.players.length;
+                    this.simResult.addExperienceGain(player, "kill", finalExp);
                 });
             }
         }
@@ -1376,15 +1382,11 @@ class CombatSimulator extends EventTarget {
                     this.simResult.addDeath(tempTarget);
                     if (!tempTarget.isPlayer) {
                         this.simResult.updateTimeSpentAlive(tempTarget.hrid, false, this.simulationTime);
-                        let baseExp = tempTarget.experience ?? 0;
-                        let difficultyTier = tempTarget.difficultyTier ?? 0;
-                        let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+
                         this.players.forEach(player => {
-                            if (player.combatDetails.currentHitpoints > 0) {
-                                let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
-                                let finalExp = scaledExp * (1 + expBonus);
-                                this.simResult.addExperienceGain(player, "kill", finalExp);
-                            }
+                            let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                            let finalExp = tempTarget.experience * (1 + expBonus) / this.players.length;
+                            this.simResult.addExperienceGain(player, "kill", finalExp);
                         });
                     }
                     // console.log(tempTarget.hrid, "died");
@@ -1417,7 +1419,22 @@ class CombatSimulator extends EventTarget {
                 }
 
                 let attackResult = _combatUtilities__WEBPACK_IMPORTED_MODULE_0__["default"].processAttack(source, target, abilityEffect);
-
+                // if (
+                //     source.hrid === "/monsters/griffin" &&
+                //     true &&
+                //     target.isPlayer &&
+                //     attackResult.didHit &&
+                //     attackResult.damageDone > 0
+                // ) {
+                //     const beforeHp = target.combatDetails.currentHitpoints;
+                //     const afterHp = Math.max(0, beforeHp - attackResult.damageDone);
+                //     let allPlayersHp = this.players.map(
+                //         p => `${p.hrid}: ${p.combatDetails.currentHitpoints}/${p.combatDetails.maxHitpoints}`
+                //     ).join(" | ");
+                //     console.log(
+                //         `[${source.hrid}][${ability.hrid}][${(this.simulationTime / 1e9).toFixed(2)}s] 对玩家 ${target.hrid} 造成了 ${attackResult.damageDone} 伤害，血量从 ${beforeHp} 变为 ${afterHp}。当前所有玩家血量：${allPlayersHp}`
+                //     );
+                // }
                 if (attackResult.hpDrain > 0) {
                     this.simResult.addHitpointsGained(source, ability.hrid, attackResult.hpDrain);
                 }
@@ -1521,15 +1538,11 @@ class CombatSimulator extends EventTarget {
                     this.simResult.addDeath(target);
                     if (!target.isPlayer) {
                         this.simResult.updateTimeSpentAlive(target.hrid, false, this.simulationTime);
-                        let baseExp = target.experience ?? 0;
-                        let difficultyTier = target.difficultyTier ?? 0;
-                        let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+
                         this.players.forEach(player => {
-                            if (player.combatDetails.currentHitpoints > 0) {
-                                let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
-                                let finalExp = scaledExp * (1 + expBonus);
-                                this.simResult.addExperienceGain(player, "kill", finalExp);
-                            }
+                            let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                            let finalExp = target.experience * (1 + expBonus) / this.players.length;
+                            this.simResult.addExperienceGain(player, "kill", finalExp);
                         });
                     }
                     // console.log(target.hrid, "died");
@@ -3465,71 +3478,103 @@ class Monster extends _combatUnit__WEBPACK_IMPORTED_MODULE_1__["default"] {
                 );
             }
         }
-
         // 属性缩放
-        this.combatDetails = Monster.getScaledCombatDetails(gameMonster.combatDetails, this.difficultyTier);
-        this.updateCombatDetails();
-    }
-
-    static getScaledCombatDetails(combatDetails, difficultyTier = 0) {
-        let scaled = { ...combatDetails, combatStats: { ...combatDetails.combatStats } };
-        if (difficultyTier > 0) {
-            let levelMultiplier = 1.0 + 0.2 * difficultyTier;
-            let levelBonus = 20.0 * difficultyTier;
-            scaled.staminaLevel = levelMultiplier * (scaled.staminaLevel + levelBonus);
-            scaled.intelligenceLevel = levelMultiplier * (scaled.intelligenceLevel + levelBonus);
-            scaled.attackLevel = levelMultiplier * (scaled.attackLevel + levelBonus);
-            scaled.powerLevel = levelMultiplier * (scaled.powerLevel + levelBonus);
-            scaled.defenseLevel = levelMultiplier * (scaled.defenseLevel + levelBonus);
-            scaled.rangedLevel = levelMultiplier * (scaled.rangedLevel + levelBonus);
-            scaled.magicLevel = levelMultiplier * (scaled.magicLevel + levelBonus);
-            //.experience = levelMultiplier * (.experience + 10 * difficultyTier);
-        }
-        return scaled;
+        let baseExp = gameMonster.experience ?? 0;
+        let difficulty = this.difficultyTier ?? 0;
+        this.experience = (1.0 + 0.2 * difficulty) * (baseExp + 10.0 * difficulty);
     }
 
     updateCombatDetails() {
-        this.staminaLevel = this.combatDetails.staminaLevel;
-        this.intelligenceLevel = this.combatDetails.intelligenceLevel;
-        this.attackLevel = this.combatDetails.attackLevel;
-        this.powerLevel = this.combatDetails.powerLevel;
-        this.defenseLevel = this.combatDetails.defenseLevel;
-        this.rangedLevel = this.combatDetails.rangedLevel;
-        this.magicLevel = this.combatDetails.magicLevel;
+        const gameMonster = _data_combatMonsterDetailMap_json__WEBPACK_IMPORTED_MODULE_2__[this.hrid];
 
-        if (this.combatDetails.combatStats) {
-            
-            if (Array.isArray(this.combatDetails.combatStats.combatStyleHrids)) {
-                this.combatDetails.combatStats.combatStyleHrid = this.combatDetails.combatStats.combatStyleHrids[0];
-            }
+        let levelMultiplier = 1.0 + 0.2 * this.difficultyTier;
+        let levelBonus = 20.0 * this.difficultyTier;
+        this.staminaLevel = levelMultiplier * (gameMonster.combatDetails.staminaLevel + levelBonus);
+        this.intelligenceLevel = levelMultiplier * (gameMonster.combatDetails.intelligenceLevel + levelBonus);
+        this.attackLevel = levelMultiplier * (gameMonster.combatDetails.attackLevel + levelBonus);
+        this.powerLevel = levelMultiplier * (gameMonster.combatDetails.powerLevel + levelBonus);
+        this.defenseLevel = levelMultiplier * (gameMonster.combatDetails.defenseLevel + levelBonus);
+        this.rangedLevel = levelMultiplier * (gameMonster.combatDetails.rangedLevel + levelBonus);
+        this.magicLevel = levelMultiplier * (gameMonster.combatDetails.magicLevel + levelBonus);
 
-            // 补全所有常用字段
-            const defaultStats = [
-                "stabAccuracy","slashAccuracy","smashAccuracy","rangedAccuracy","magicAccuracy",
-                "stabDamage","slashDamage","smashDamage","rangedDamage","magicDamage","taskDamage",
-                "physicalAmplify","waterAmplify","natureAmplify","fireAmplify","healingAmplify",
-                "stabEvasion","slashEvasion","smashEvasion","rangedEvasion","magicEvasion",
-                "armor","waterResistance","natureResistance","fireResistance",
-                "maxHitpoints","maxManapoints","lifeSteal","hpRegenPer10","mpRegenPer10",
-                "physicalThorns","elementalThorns","combatDropRate","combatRareFind","combatDropQuantity",
-                "combatExperience","criticalRate","criticalDamage","armorPenetration","waterPenetration",
-                "naturePenetration","firePenetration","abilityHaste","abilityDamage","tenacity",
-                "manaLeech","castSpeed","threat","parry","mayhem","pierce","curse","fury","weaken",
-                "ripple","bloom","blaze","attackSpeed","foodHaste","drinkConcentration","autoAttackDamage"
-            ];
-            defaultStats.forEach(stat => {
-                if (this.combatDetails.combatStats[stat] == null) {
-                    this.combatDetails.combatStats[stat] = 0;
-                }
-            });
-            // attackInterval
-            if (this.combatDetails.attackInterval != null) {
-                this.combatDetails.combatStats.attackInterval = this.combatDetails.attackInterval;
-            }
+        this.combatDetails.combatStats.combatStyleHrid = gameMonster.combatDetails.combatStats.combatStyleHrids[0];
+
+        for (const [key, value] of Object.entries(gameMonster.combatDetails.combatStats)) {
+            this.combatDetails.combatStats[key] = value;
         }
 
-        super.updateCombatDetails();
-    }
+        [
+            "stabAccuracy",
+            "slashAccuracy",
+            "smashAccuracy",
+            "rangedAccuracy",
+            "magicAccuracy",
+            "stabDamage",
+            "slashDamage",
+            "smashDamage",
+            "rangedDamage",
+            "magicDamage",
+            "taskDamage",
+            "physicalAmplify",
+            "waterAmplify",
+            "natureAmplify",
+            "fireAmplify",
+            "healingAmplify",
+            "stabEvasion",
+            "slashEvasion",
+            "smashEvasion",
+            "rangedEvasion",
+            "magicEvasion",
+            "armor",
+            "waterResistance",
+            "natureResistance",
+            "fireResistance",
+            "maxHitpoints",
+            "maxManapoints",
+            "lifeSteal",
+            "hpRegenPer10",
+            "mpRegenPer10",
+            "physicalThorns",
+            "elementalThorns",
+            "combatDropRate",
+            "combatRareFind",
+            "combatDropQuantity",
+            "combatExperience",
+            "criticalRate",
+            "criticalDamage",
+            "armorPenetration",
+            "waterPenetration",
+            "naturePenetration",
+            "firePenetration",
+            "abilityHaste",
+            "abilityDamage",
+            "tenacity",
+            "manaLeech",
+            "castSpeed",
+            "threat",
+            "parry",
+            "mayhem",
+            "pierce",
+            "curse",
+            "fury",
+            "weaken",
+            "ripple",
+            "bloom",
+            "blaze",
+            "attackSpeed",
+            "foodHaste",
+            "drinkConcentration",
+            "autoAttackDamage"
+        ].forEach((stat) => {
+            if (gameMonster.combatDetails.combatStats[stat] == null) {
+                this.combatDetails.combatStats[stat] = 0;
+            }
+        });
+        
+    this.combatDetails.combatStats.attackInterval = gameMonster.combatDetails.attackInterval;
+
+    super.updateCombatDetails();
+}
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Monster);

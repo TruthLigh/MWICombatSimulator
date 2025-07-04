@@ -311,7 +311,22 @@ class CombatSimulator extends EventTarget {
             }
 
             let attackResult = CombatUtilities.processAttack(source, target);
-
+            // if (
+            //     source.hrid === "/monsters/griffin" &&
+            //     true &&
+            //     target.isPlayer &&
+            //     attackResult.didHit &&
+            //     attackResult.damageDone > 0
+            // ) {
+            //     const beforeHp = target.combatDetails.currentHitpoints;
+            //     const afterHp = Math.max(0, beforeHp - attackResult.damageDone);
+            //     let allPlayersHp = this.players.map(
+            //         p => `${p.hrid}: ${p.combatDetails.currentHitpoints}/${p.combatDetails.maxHitpoints}`
+            //     ).join(" | ");
+            //     console.log(
+            //         `[${source.hrid}][普通攻击][${(this.simulationTime / 1e9).toFixed(2)}s] 对玩家 ${target.hrid} 造成了 ${attackResult.damageDone} 伤害，血量从 ${beforeHp} 变为 ${afterHp}。当前所有玩家血量：${allPlayersHp}`
+            //     );
+            // }
             let mayhem = source.combatDetails.combatStats.mayhem > Math.random();
 
             if (attackResult.didHit && source.combatDetails.combatStats.curse > 0) {
@@ -1108,7 +1123,22 @@ class CombatSimulator extends EventTarget {
                 }
 
                 let attackResult = CombatUtilities.processAttack(source, target, abilityEffect);
-
+                // if (
+                //     source.hrid === "/monsters/griffin" &&
+                //     true &&
+                //     target.isPlayer &&
+                //     attackResult.didHit &&
+                //     attackResult.damageDone > 0
+                // ) {
+                //     const beforeHp = target.combatDetails.currentHitpoints;
+                //     const afterHp = Math.max(0, beforeHp - attackResult.damageDone);
+                //     let allPlayersHp = this.players.map(
+                //         p => `${p.hrid}: ${p.combatDetails.currentHitpoints}/${p.combatDetails.maxHitpoints}`
+                //     ).join(" | ");
+                //     console.log(
+                //         `[${source.hrid}][${ability.hrid}][${(this.simulationTime / 1e9).toFixed(2)}s] 对玩家 ${target.hrid} 造成了 ${attackResult.damageDone} 伤害，血量从 ${beforeHp} 变为 ${afterHp}。当前所有玩家血量：${allPlayersHp}`
+                //     );
+                // }
                 if (attackResult.hpDrain > 0) {
                     this.simResult.addHitpointsGained(source, ability.hrid, attackResult.hpDrain);
                 }
