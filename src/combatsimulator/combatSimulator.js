@@ -114,7 +114,7 @@ class CombatSimulator extends EventTarget {
         }
 
         if (!this.zone.isDungeon) {
-            this.simResult.eliteTier = this.zone.monsterSpawnInfo.randomSpawnInfo.spawns[0].eliteTier;
+            this.simResult.difficultyTier = this.zone.monsterSpawnInfo.randomSpawnInfo.spawns[0].difficultyTier;
         }
 
         return this.simResult;
@@ -423,6 +423,17 @@ class CombatSimulator extends EventTarget {
                 this.simResult.addDeath(target);
                 if (!target.isPlayer) {
                     this.simResult.updateTimeSpentAlive(target.hrid, false, this.simulationTime);
+                    let baseExp = target.experience ?? 0;
+                    let difficultyTier = target.difficultyTier ?? 0;
+                    let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+
+                    this.players.forEach(player => {
+                        if (player.combatDetails.currentHitpoints > 0) {
+                            let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                            let finalExp = scaledExp * (1 + expBonus);
+                            this.simResult.addExperienceGain(player, "kill", finalExp);
+                        }
+                    });
                 }
                 // console.log(target.hrid, "died");
             }
@@ -674,6 +685,16 @@ class CombatSimulator extends EventTarget {
             this.simResult.addDeath(event.target);
             if (!event.target.isPlayer) {
                 this.simResult.updateTimeSpentAlive(event.target.hrid, false, this.simulationTime);
+                let baseExp = event.target.experience ?? 0;
+                let difficultyTier = event.target.difficultyTier ?? 0;
+                let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+                this.players.forEach(player => {
+                    if (player.combatDetails.currentHitpoints > 0) {
+                        let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                        let finalExp = scaledExp * (1 + expBonus);
+                        this.simResult.addExperienceGain(player, "kill", finalExp);
+                    }
+                });
             }
         }
 
@@ -1050,6 +1071,16 @@ class CombatSimulator extends EventTarget {
                     this.simResult.addDeath(tempTarget);
                     if (!tempTarget.isPlayer) {
                         this.simResult.updateTimeSpentAlive(tempTarget.hrid, false, this.simulationTime);
+                        let baseExp = tempTarget.experience ?? 0;
+                        let difficultyTier = tempTarget.difficultyTier ?? 0;
+                        let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+                        this.players.forEach(player => {
+                            if (player.combatDetails.currentHitpoints > 0) {
+                                let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                                let finalExp = scaledExp * (1 + expBonus);
+                                this.simResult.addExperienceGain(player, "kill", finalExp);
+                            }
+                        });
                     }
                     // console.log(tempTarget.hrid, "died");
                 }
@@ -1185,6 +1216,16 @@ class CombatSimulator extends EventTarget {
                     this.simResult.addDeath(target);
                     if (!target.isPlayer) {
                         this.simResult.updateTimeSpentAlive(target.hrid, false, this.simulationTime);
+                        let baseExp = target.experience ?? 0;
+                        let difficultyTier = target.difficultyTier ?? 0;
+                        let scaledExp = (1.0 + 0.2 * difficultyTier) * (baseExp + 10.0 * difficultyTier);
+                        this.players.forEach(player => {
+                            if (player.combatDetails.currentHitpoints > 0) {
+                                let expBonus = player.combatDetails.combatStats.combatExperience ?? 0;
+                                let finalExp = scaledExp * (1 + expBonus);
+                                this.simResult.addExperienceGain(player, "kill", finalExp);
+                            }
+                        });
                     }
                     // console.log(target.hrid, "died");
                 }
@@ -1278,7 +1319,7 @@ class CombatSimulator extends EventTarget {
     processAbilityPromoteEffect(source, ability, abilityEffect) {
         const promotionHrids = ["/monsters/enchanted_rook", "/monsters/enchanted_knight", "/monsters/enchanted_bishop"];
         let randomPromotionIndex = Math.floor(Math.random() * promotionHrids.length);
-        return new Monster(promotionHrids[randomPromotionIndex], source.eliteTier);
+        return new Monster(promotionHrids[randomPromotionIndex], source.difficultyTier);
     }
 
     processAbilitySpendHpEffect(source, ability, abilityEffect) {

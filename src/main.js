@@ -1078,14 +1078,14 @@ function getDropProfit(simResult, playerToDisplay) {
         const rareDropMap = new Map();
         if (combatMonsterDetailMap[monster].dropTable) {
             for (const drop of combatMonsterDetailMap[monster].dropTable) {
-                if (drop.minEliteTier > simResult.eliteTier) {
+                if (drop.minDifficultyTier < simResult.difficultyTier) {
                     continue;
                 }
                 dropMap.set(drop.itemHrid, { "dropRate": Math.min(1, drop.dropRate * dropRateMultiplier), "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
             }
             if (combatMonsterDetailMap[monster].rareDropTable)
                 for (const drop of combatMonsterDetailMap[monster].rareDropTable) {
-                    if (drop.minEliteTier > simResult.eliteTier) {
+                    if (drop.minDifficultyTier < simResult.difficultyTier) {
                         continue;
                     }
                     rareDropMap.set(drop.itemHrid, { "dropRate": drop.dropRate * rareFindMultiplier, "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
@@ -1387,14 +1387,14 @@ function showKills(simResult, playerToDisplay) {
         const rareDropMap = new Map();
         if (combatMonsterDetailMap[monster].dropTable)
             for (const drop of combatMonsterDetailMap[monster].dropTable) {
-                if (drop.minEliteTier > simResult.eliteTier) {
+                if (drop.minDifficultyTier < simResult.difficultyTier) {
                     continue;
                 }
                 dropMap.set(drop.itemHrid, { "dropRate": Math.min(1, drop.dropRate * dropRateMultiplier), "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
             }
         if (combatMonsterDetailMap[monster].rareDropTable)
             for (const drop of combatMonsterDetailMap[monster].rareDropTable) {
-                if (drop.minEliteTier > simResult.eliteTier) {
+                if (drop.minDifficultyTier < simResult.difficultyTier) {
                     continue;
                 }
                 rareDropMap.set(drop.itemHrid, { "dropRate": drop.dropRate * rareFindMultiplier, "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
@@ -1574,7 +1574,9 @@ function showExperienceGained(simResult, playerToDisplay) {
 
     let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
 
-    let totalExperience = Object.values(simResult.experienceGained[playerToDisplay]).reduce((prev, cur) => prev + cur, 0);
+    let totalExperience = Object.entries(simResult.experienceGained[playerToDisplay])
+        .filter(([key]) => key !== "kill")
+        .reduce((prev, [, cur]) => prev + cur, 0);
     let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
     let totalRow = createRow(["col-md-6", "col-md-6 text-end"], ["Total", totalExperiencePerHour]);
     totalRow.firstElementChild.setAttribute("data-i18n", "common:total");
@@ -1590,6 +1592,14 @@ function showExperienceGained(simResult, playerToDisplay) {
         experienceRow.firstElementChild.setAttribute("data-i18n", "leaderboardCategoryNames." + skill.toLowerCase());
         newChildren.push(experienceRow);
     });
+
+    newChildren.push(document.createElement("br"));
+
+    let killExp = simResult.experienceGained[playerToDisplay]["kill"] ?? 0;
+    let killExpPerHour = (killExp / hoursSimulated).toFixed(0);
+    let killExpRow = createRow(["col-md-6", "col-md-6 text-end"], ["Total Kill Exp Hour", killExpPerHour]);
+    killExpRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.killExpPerHour");
+    newChildren.push(killExpRow);
 
     resultDiv.replaceChildren(...newChildren);
 }
@@ -2262,6 +2272,7 @@ function startSimulation(selectedPlayers) {
     let dungeonSelect = document.getElementById("selectDungeon");
     let simulationTimeInput = document.getElementById("inputSimulationTime");
     let simulationTimeLimit = Number(simulationTimeInput.value) * ONE_HOUR;
+    let difficultyTier = Number(document.getElementById("selectDifficultyTier").value);
     if (!simAllZonesToggle.checked) {
         let zoneHrid = zoneSelect.value;
         if (simDungeonToggle.checked) {
@@ -2272,6 +2283,7 @@ function startSimulation(selectedPlayers) {
             players: playersToSim,
             zoneHrid: zoneHrid,
             simulationTimeLimit: simulationTimeLimit,
+            difficultyTier: difficultyTier,
         };
         worker.postMessage(workerMessage);
     } else {
@@ -2284,6 +2296,7 @@ function startSimulation(selectedPlayers) {
             players: playersToSim,
             zones: zoneHrids,
             simulationTimeLimit: simulationTimeLimit,
+            difficultyTier: difficultyTier,
         };
         multiWorker.postMessage(workerMessage);
     }

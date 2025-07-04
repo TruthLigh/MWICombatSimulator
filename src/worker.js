@@ -8,7 +8,8 @@ onmessage = async function (event) {
         case "start_simulation":
             let playersData = event.data.players;
             let players = [];
-            let zone = new Zone(event.data.zoneHrid);
+            let difficultyTier = event.data.difficultyTier ?? 0;
+            let zone = new Zone(event.data.zoneHrid, difficultyTier);
             for (let i = 0; i < playersData.length; i++) {
                 let currentPlayer = Player.createFromDTO(structuredClone(playersData[i]));
                 currentPlayer.zoneBuffs = zone.buffs;

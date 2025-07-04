@@ -83,6 +83,7 @@ class CombatUtilities {
                 targetEvasionRating = target.combatDetails.magicEvasionRating;
                 break;
             default:
+                console.log(source)
                 throw new Error("Unknown combat style: " + combatStyle);
         }
 

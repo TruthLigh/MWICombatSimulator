@@ -20,7 +20,7 @@ class SimResult {
         this.manaUsed = {};
         this.timeSpentAlive = [];
         this.bossSpawns = [];
-        this.eliteTier = 0;
+        this.difficultyTier = 0;
         this.hitpointsSpent = {};
         this.zoneName = zoneName;
         this.isDungeon = false;
@@ -69,6 +69,7 @@ class SimResult {
                 defense: 0,
                 ranged: 0,
                 magic: 0,
+                kill: 0,
             };
         }
 

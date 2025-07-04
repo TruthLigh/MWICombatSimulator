@@ -660,8 +660,23 @@ class CombatUnit {
         }
         if (this.zoneBuffs) {
             this.zoneBuffs.forEach(buff => {
+                if (buff.uniqueHrid == "/buff_uniques/experience_action_buff") {
+                    buff.flatBoost = (buffflatBoost * 1.295) + 0.05
+                }
                 this.addPermanentBuff(buff);
             });
+        } else {
+            const buff = {
+                "uniqueHrid": "/buff_uniques/experience_action_buff",
+                "typeHrid": "/buff_types/wisdom",
+                "ratioBoost": 0,
+                "ratioBoostLevelBonus": 0,
+                "flatBoost": 0.295+0.05,
+                "flatBoostLevelBonus": 0,
+                "startTime": "0001-01-01T00:00:00Z",
+                "duration": 0
+            }
+            this.addPermanentBuff(buff);
         }
     }
 
