@@ -497,7 +497,16 @@ class CombatSimulator extends EventTarget {
             !this.players.some((player) => player.combatDetails.currentHitpoints > 0)
         ) {
             if (this.zone.isDungeon) {
-                console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: " + this.enemies.map(enemy => (enemy.hrid+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
+                if (Array.isArray(this.enemies)) {
+                    console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: " +
+                        this.enemies.map(enemy =>
+                            (enemy.hrid + "(" + (enemy.combatDetails.currentHitpoints * 100 / enemy.combatDetails.maxHitpoints).toFixed(2) + "%)")
+                        ).join(", ")
+                    );
+                    console.log("剩余怪物:", this.enemies);
+                } else {
+                    console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: null");
+                }
 
                 this.eventQueue.clear();
                 this.enemies = null;
