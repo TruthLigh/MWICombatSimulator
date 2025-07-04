@@ -58,8 +58,10 @@ class Monster extends CombatUnit {
                 );
             }
         }
-
         // 属性缩放
+        let baseExp = gameMonster.experience ?? 0;
+        let difficulty = this.difficultyTier ?? 0;
+        this.experience = (1.0 + 0.2 * difficulty) * (baseExp + 10.0 * difficulty);
         this.combatDetails = Monster.getScaledCombatDetails(gameMonster.combatDetails, this.difficultyTier);
         this.updateCombatDetails();
     }
