@@ -48,6 +48,7 @@
         "timeSpentOnBoss": "Time Spent On Boss",
         "deathPerHour": "Deaths Per Hour",
         "xpPerHour": "XP Per Hour",
+        "killExpPerHour": "kill Exp Per Hour",
         "hpSpentPerHour": "HP Spent Per Hour",
         "consumablesUsedPerHour": "Consumables Used Per Hour",
         "manaUsedPerHour": "Mana Used Per Hour",
