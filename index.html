@@ -861,10 +861,6 @@
                     <div class="col-md-4" id="combatStat_castSpeed"></div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8" data-i18n="combatStats.abilityDamage">Ability Damage:</div>
-                    <div class="col-md-4" id="combatStat_abilityDamage"></div>
-                </div>
-                <div class="row">
                     <div class="col-md-8" data-i18n="combatStats.threat">Threat:</div>
                     <div class="col-md-4" id="combatStat_totalThreat"></div>
                 </div>
@@ -1266,19 +1262,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mb-2">
-                            <label for="selectDifficultyTier" class="col-md-6 col-form-label">难度等级</label>
-                            <div class="col-md-6">
-                                <select id="selectDifficultyTier" class="form-control">
-                                    <option value="0">T0</option>
-                                    <option value="1">T1</option>
-                                    <option value="2">T2</option>
-                                    <option value="3">T3</option>
-                                    <option value="4">T4</option>
-                                    <option value="5">T5</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-6 pt-1">
                                 <div class="outlined-box">
@@ -1455,20 +1438,12 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 mb-4">
-                                <h6>2025年7月4日</h6>
+                                <h6>2025年6月15日</h6>
                                 <ul>
-                                    <li>导入测试服最新数据</li>
-                                    <li>增加击杀经验值计算</li>
-                                    <li>增加不同难度级别的模拟</li>
-                                </ul>
-                            </div>
-                            <div class="col-12 mb-4">
-                                <h6>2025年6月12日</h6>
-                                <ul>
-                                    <li>魔法、远程依据攻击等级提供精准度</li>
-                                    <li>技能造成伤害受到技能伤害词条加成</li>
-                                    <li>将测试服目前的数据导入到模拟器</li>
-                                    <li>目前模拟并非最终结果，只是对当前测试服版本我已知的机制与数据导入的版本，不可作为最终依据</li>
+                                    <li>修复战斗属性等级未计算小数部分的问题</li>
+                                    <li>修复HP和MP错误计算小数部分的问题</li>
+                                    <li>修复掉落物品重复(如钥匙碎片)时概率异常偏低的问题</li>
+                                    <li>修复未建设房屋时组队模拟可能的异常</li>
                                 </ul>
                             </div>
                             <div class="col-12 mb-4">
