@@ -1,5 +1,5 @@
 {
-    "title": "MWI Combat Simulator",
+    "title": "MWI Combat Simulator Test",
     "priceSettings": {
         "title": "Price Settings",
         "consumablePrices": "Consumable Prices",
@@ -62,13 +62,16 @@
         "damageDone": "Damage Done",
         "damageTaken": "Damage Taken",
         "damageOverTime": "damageOverTime",
+        "parryAttack": "Parry Attack",
         "source": "Source",
         "hitChance": "Hitchance",
         "totalExperience": "Total Experience",
         "maxWaveReached" : "Max Wave Reached",
         "dungeonsCompleted": "Dungeons Completed",
         "dungeonsFailed": "Dungeons Failed",
-        "averageTime": "Average Time"
+        "averageTime": "Average Time",
+        "maxEnrageStack": "Max Stack of Enrage",
+        "debuffOnLevelGap": "Debuff on Level Gap"
     },
     "selectPlayer": "SelectPlayer",
     "simAllZones": "Sim All Zones",
@@ -83,5 +86,12 @@
     "solo": "Solo",
     "or": "OR",
     "import": "Import",
-    "exportGroupSolo": "Export Group/Solo"
+    "exportGroupSolo": "Export Group/Solo",
+    "useAttackLevelRework" : "AttackLevel bonus from 10% Ranged and 10% Magic",
+    "noWipeEvents": "无团灭事件",
+    "noWipeEventsDetected": "未检测到团灭事件",
+    "WipeEvents": "团灭日志",
+    "wipeEvents": "嗝屁日志",
+    "combatLogs": "战斗日志",
+    "selectWipeEvent": "选择团灭日志"
 }
