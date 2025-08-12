@@ -132,6 +132,7 @@ class Ability {
             throw new Error("No ability found for hrid: " + this.hrid);
         }
 
+        this.name = gameAbility.name || hrid;
         this.manaCost = gameAbility.manaCost;
         this.cooldownDuration = gameAbility.cooldownDuration;
         this.castDuration = gameAbility.castDuration;
@@ -338,6 +339,98 @@ class CombatSimulator extends EventTarget {
         this.eventQueue = new _events_eventQueue__WEBPACK_IMPORTED_MODULE_8__["default"]();
         this.simResult = new _simResult__WEBPACK_IMPORTED_MODULE_18__["default"](zone, players.length);
         this.allPlayersDead = false;
+
+        this.wipeLogs = {
+            buffer: new Array(200),
+            index: 0,
+            count: 0,
+            maxSize: 200
+        };
+    }
+
+    addToWipeLogs(logEntry) {
+        const { buffer, maxSize } = this.wipeLogs;
+
+        buffer[this.wipeLogs.index] = logEntry;
+        this.wipeLogs.index = (this.wipeLogs.index + 1) % maxSize;
+        this.wipeLogs.count = Math.min(this.wipeLogs.count + 1, maxSize);
+    }
+    
+    logAndResetWipeLogs() {
+        const logs = this.getOrderedWipeLogs();
+        
+        console.log("===== 团灭日志 =====");
+        console.log(`最后 ${logs.length} 条战斗日志：`);
+        
+        logs.forEach(log => {
+            if (log.error) {
+                console.log(log.error);
+                return;
+            }
+            
+            const time = (log.time / 1e9).toFixed(2);
+            console.log(
+                `[${time}s] [${log.source}] 用 [${log.ability}] ` +
+                `对 ${log.target} 造成 ${log.damage} 伤害，` +
+                `HP ${log.beforeHp} → ${log.afterHp}。` +
+                `队伍生命值：${log.playersHp.map(p => `${p.hrid}: ${p.current}/${p.max}`).join(" | ")}`
+            );
+        });
+
+        this.wipeLogs.index = 0;
+        this.wipeLogs.count = 0;
+        console.log("===== 团灭日志结束 =====");
+    }
+
+    generateCombatLog(source, ability, target, attackResult) {
+        try {
+            const sourceHrid = source?.hrid || "UNKNOWN_SOURCE";
+            const abilityHrid = ability === "普通攻击" ? "AutoAttack" : 
+                             (ability?.hrid || "AutoAttack");
+            const targetHrid = target?.hrid || "UNKNOWN_TARGET";
+            const damage = attackResult?.damageDone || 0;
+            
+            const beforeHp = target?.combatDetails?.currentHitpoints || 0;
+            const afterHp = Math.max(0, beforeHp - damage);
+
+            const playersHp = this.players.map(p => ({
+                hrid: p.hrid || "UNKNOWN_PLAYER",
+                current: p.combatDetails?.currentHitpoints ?? 0,
+                max: p.combatDetails?.maxHitpoints ?? 0
+            }));
+            
+            return {
+                time: this.simulationTime,
+                source: sourceHrid,
+                ability: abilityHrid,
+                target: targetHrid,
+                damage: damage,
+                beforeHp: beforeHp,
+                afterHp: afterHp,
+                playersHp: playersHp
+            };
+        } catch (e) {
+            return {
+                error: `[日志生成错误] ${e.message}`
+            };
+        }
+    }
+    
+    getOrderedWipeLogs() {
+        const { buffer, maxSize, count } = this.wipeLogs;
+        const logs = [];
+        
+        for (let i = 0; i < count; i++) {
+            const idx = (this.wipeLogs.index - count + maxSize + i) % maxSize;
+            logs.push(buffer[idx]);
+        }
+        
+        return logs;
+    }
+
+    saveWipeLogsToSimResult(wave) {
+        const logs = this.getOrderedWipeLogs();
+        this.simResult.addWipeEvent(logs, this.simulationTime, wave);
     }
 
     async simulate(simulationTimeLimit) {
@@ -726,6 +819,11 @@ class CombatSimulator extends EventTarget {
                 this.eventQueue.addEvent(weakenExpirationEvent);
             }
 
+            if (this.zone.isDungeon && target.isPlayer && attackResult.didHit && attackResult.damageDone > 0) {
+                const log = this.generateCombatLog(source, "普通攻击", target, attackResult);
+                this.addToWipeLogs(log);
+            }
+
             if (!mayhem || (mayhem && attackResult.didHit) || (mayhem && i == (aliveTargets.length - 1))) {
                 let attackType = "autoAttack";
                 if (parryTarget) attackType = "parry";
@@ -847,8 +945,14 @@ class CombatSimulator extends EventTarget {
             !this.players.some((player) => player.combatDetails.currentHitpoints > 0)
         ) {
             if (this.zone.isDungeon) {
-                console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: " + this.enemies.map(enemy => (enemy.hrid+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
-
+                console.log("团灭于 #" + (this.zone.encountersKilled - 1) + " with ememies: " + this.enemies.map(enemy => (enemy.name+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
+                // 保存日志到SimResult
+                const wave = this.zone.encountersKilled - 1;
+                this.saveWipeLogsToSimResult(wave);
+                console.log(this.simResult)
+                // 重置日志缓冲区
+                this.wipeLogs.index = 0;
+                this.wipeLogs.count = 0;
                 this.eventQueue.clear();
                 this.enemies = null;
 
@@ -1588,6 +1692,11 @@ class CombatSimulator extends EventTarget {
                     this.eventQueue.addEvent(weakenExpirationEvent);
                 }
 
+                if (this.zone.isDungeon && target.isPlayer && attackResult.didHit && attackResult.damageDone > 0) {
+                    const log = this.generateCombatLog(source, ability, target, attackResult);
+                    this.addToWipeLogs(log);
+                }
+                
                 this.simResult.addAttack(
                     source,
                     target,
@@ -3482,7 +3591,8 @@ class Monster extends _combatUnit__WEBPACK_IMPORTED_MODULE_1__["default"] {
         if (!gameMonster) {
             throw new Error("No monster found for hrid: " + this.hrid);
         }
-
+        
+        this.name = gameMonster.name || hrid;
         this.enrageTime = gameMonster.enrageTime;
 
         for (let i = 0; i < gameMonster.abilities.length; i++) {
@@ -3856,8 +3966,20 @@ class SimResult {
         this.maxWaveReached = 0;
         this.numberOfPlayers = numberOfPlayers;
         this.maxEnrageStack = 0;
+
+        this.wipeEvents = [];
     }
 
+
+    addWipeEvent(logs, simulationTime, wave) {
+        this.wipeEvents.push({
+            simulationTime: simulationTime,
+            logs: logs,
+            wave: wave,
+            timestamp: new Date().toISOString()
+        });
+    }
+    
     addDeath(unit) {
         if (!this.deaths[unit.hrid]) {
             this.deaths[unit.hrid] = 0;

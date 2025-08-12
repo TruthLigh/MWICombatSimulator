@@ -116,6 +116,7 @@ class Ability {
             throw new Error("No ability found for hrid: " + this.hrid);
         }
 
+        this.name = gameAbility.name || hrid;
         this.manaCost = gameAbility.manaCost;
         this.cooldownDuration = gameAbility.cooldownDuration;
         this.castDuration = gameAbility.castDuration;

@@ -537,6 +537,14 @@
                                 </button>
                             </div>
                         </div>
+                        <div class="row pt-3">
+                            <div class="col-md-auto">
+                                <button id="buttonWipeEvents" class="btn btn-primary" type="button"
+                                    data-bs-toggle="modal" data-bs-target="#WipeEventsModal" data-i18n="common:wipeEvents">
+                                    Wipe Events
+                                </button>
+                            </div>
+                        </div>
                         <!-- #endregion -->
                     </div>
                     <div class="col-md-7">
@@ -1519,6 +1527,54 @@
             </div>
         </div>
         <!-- endregion -->
+    </div>
+    <!-- 团灭日志模态框 -->
+    <div class="modal fade" id="WipeEventsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-i18n="common:WipeEvents">团灭日志</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <!-- 团灭事件选择器 -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="wipeEventSelector" class="form-label" data-i18n="common:selectWipeEvent">选择团灭事件</label>
+                                <select class="form-select" id="wipeEventSelector">
+                                    <option value="-1" data-i18n="common:noWipeEvents">无团灭事件</option>
+                                    <!-- 选项将通过JS动态填充 -->
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="wipe-event-info">
+                                    <span class="badge bg-danger" id="wipeWaveBadge"></span>
+                                    <span class="ms-2" id="wipeTimeInfo"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 日志显示区域 -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header" data-i18n="common:combatLogs">战斗日志</div>
+                                    <div class="card-body">
+                                        <div id="wipeLogsContainer" class="wipe-logs-container">
+                                            <!-- 日志将通过JS动态填充 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-i18n="common:controls.close">关闭</button>
+                </div>
+            </div>
+        </div>
     </div>    
     <div class="modal" id="patchNotesModal" tabindex="-1">
         <!-- #region Patch Notes Modal -->
@@ -1530,6 +1586,14 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <h6>2025年8月12日</h6>
+                                <ul>
+                                    <li>添加嗝屁日志</li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12 mb-4">
                                 <h6>2025年8月11日</h6>

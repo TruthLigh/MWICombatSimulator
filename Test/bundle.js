@@ -133,6 +133,7 @@ class Ability {
             throw new Error("No ability found for hrid: " + this.hrid);
         }
 
+        this.name = gameAbility.name || hrid;
         this.manaCost = gameAbility.manaCost;
         this.cooldownDuration = gameAbility.cooldownDuration;
         this.castDuration = gameAbility.castDuration;
@@ -3006,6 +3007,7 @@ function showSimulationResult(simResult) {
     showManapointsGained(simResult, playerToDisplay);
     showDamageDone(simResult, playerToDisplay);
     showDamageTaken(simResult, playerToDisplay);
+    renderWipeEvents(simResult);
     window.profit = window.revenue - window.expenses;
     document.getElementById('profitSpan').innerText = window.profit.toLocaleString();
     document.getElementById('profitPreview').innerText = window.profit.toLocaleString();
@@ -4318,6 +4320,201 @@ function startSimulation(selectedPlayers) {
         multiWorker.postMessage(workerMessage);
     }
 }
+
+// #endregion
+
+// #region 团灭日志
+
+// 渲染团灭日志查看器
+function renderWipeEvents(simResult) {
+    const selector = document.getElementById('wipeEventSelector');
+    const logsContainer = document.getElementById('wipeLogsContainer');
+    const waveBadge = document.getElementById('wipeWaveBadge');
+    const timeInfo = document.getElementById('wipeTimeInfo');
+    
+    selector.innerHTML = '';
+    logsContainer.innerHTML = '';
+    
+    if (!simResult.wipeEvents || simResult.wipeEvents.length === 0) {
+        // 没有团灭事件
+        selector.innerHTML = `<option value="-1" data-i18n="common:noWipeEvents">无团灭事件</option>`;
+        logsContainer.innerHTML = `<div class="text-center py-4" data-i18n="common:noWipeEventsDetected">未检测到团灭事件</div>`;
+        waveBadge.textContent = '';
+        timeInfo.textContent = '';
+        return;
+    }
+    
+    // 填充团灭事件选择器
+    simResult.wipeEvents.forEach((event, index) => {
+        const wave = event.wave || '?';
+        const time = (event.simulationTime / 1e9).toFixed(2);
+        const timestamp = new Date(event.timestamp).toLocaleTimeString();
+        
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `团灭 #${index + 1} - 波次: ${wave} - ${timestamp}`;
+        selector.appendChild(option);
+    });
+    
+    selector.value = 0;
+    renderSelectedWipeEvent(0, simResult);
+    
+    selector.addEventListener('change', () => {
+        renderSelectedWipeEvent(selector.value, simResult);
+    });
+}
+
+// 渲染选中的团灭事件
+function renderSelectedWipeEvent(index, simResult) {
+    const logsContainer = document.getElementById('wipeLogsContainer');
+    const waveBadge = document.getElementById('wipeWaveBadge');
+    const timeInfo = document.getElementById('wipeTimeInfo');
+    
+    logsContainer.innerHTML = '';
+    
+    if (index < 0 || index >= simResult.wipeEvents.length) {
+        logsContainer.innerHTML = `<div class="text-center py-4" data-i18n="common:noWipeEvents">无团灭事件</div>`;
+        waveBadge.textContent = '';
+        timeInfo.textContent = '';
+        return;
+    }
+    
+    const wipeEvent = simResult.wipeEvents[index];
+    const wave = wipeEvent.wave || '?';
+    const time = (wipeEvent.simulationTime / 1e9).toFixed(2);
+    const timestamp = new Date(wipeEvent.timestamp).toLocaleString();
+    
+    // 更新事件信息
+    waveBadge.textContent = `波次: ${wave}`;
+    timeInfo.textContent = `模拟时间: ${time}s | 记录时间: ${timestamp}`;
+    
+    // 按时间分组日志
+    const logsByTime = groupLogsByTime(wipeEvent.logs);
+    
+    const baseTime = logsByTime.length > 0 ? logsByTime[0].time : 0;
+    
+    // 渲染日志
+    logsByTime.forEach(group => {
+        const timeGroupElement = document.createElement('div');
+        timeGroupElement.className = 'log-time-group';
+
+        const relativeTime = (group.time - baseTime) / 1e9;
+        
+        // 时间标题
+        const timeHeader = document.createElement('div');
+        timeHeader.className = 'log-time-header';
+        timeHeader.textContent = `[${relativeTime.toFixed(2)}s]`;
+        timeGroupElement.appendChild(timeHeader);
+        
+        // 事件列表
+        const eventsList = document.createElement('div');
+        eventsList.className = 'log-events';
+
+        const damagedPlayers = new Set();
+        
+        group.logs.forEach(log => {
+            const eventElement = document.createElement('div');
+            eventElement.className = 'log-event';
+
+            damagedPlayers.add(log.target);
+
+            const sourceSpan = document.createElement('span');
+            sourceSpan.className = 'log-source';
+            sourceSpan.setAttribute('data-i18n', `monsterNames.${log.source}`);
+            sourceSpan.textContent = log.source;
+            
+            const abilitySpan = document.createElement('span');
+            abilitySpan.className = 'log-ability';
+            
+            if (log.ability === "AutoAttack") {
+                abilitySpan.setAttribute('data-i18n', 'combatUnit.autoAttack');
+                abilitySpan.textContent = 'Auto Attack';
+            } else {
+                abilitySpan.setAttribute('data-i18n', `abilityNames.${log.ability}`);
+                abilitySpan.textContent = log.ability;
+            }
+            
+            const targetSpan = document.createElement('span');
+            targetSpan.className = 'log-target';
+            targetSpan.textContent = log.target;
+            
+            eventElement.appendChild(sourceSpan);
+            eventElement.appendChild(document.createTextNode(' 使用 '));
+            eventElement.appendChild(abilitySpan);
+            eventElement.appendChild(document.createTextNode(' 对 '));
+            eventElement.appendChild(targetSpan);
+            eventElement.appendChild(document.createTextNode(` 造成 ${log.damage} 伤害, `));
+            eventElement.appendChild(document.createTextNode(`HP ${log.beforeHp} → ${log.afterHp}`));
+            
+            eventsList.appendChild(eventElement);
+        });
+        
+        timeGroupElement.appendChild(eventsList);
+        
+        const lastLog = group.logs[group.logs.length - 1];
+        const playersHpElement = document.createElement('div');
+        playersHpElement.className = 'log-players-hp';
+        playersHpElement.textContent = '队伍生命值: ';
+        
+        let minHp = Infinity;
+        lastLog.playersHp.forEach(player => {
+            if (player.current > 0 && player.current < minHp) {
+                minHp = player.current;
+            }
+        });
+        
+        lastLog.playersHp.forEach((player, idx) => {
+            const playerElement = document.createElement('span');
+            playerElement.className = 'log-player-hp';
+            playerElement.textContent = `${player.hrid}: ${player.current}/${player.max}`;
+            
+            if (player.current <= 0) {
+                // 已死亡 - 灰色
+                playerElement.style.color = 'gray';
+            } else if (damagedPlayers.has(player.hrid)) {
+                // 本回合受伤 - 黄色
+                playerElement.style.color = '#ffcc00';
+            } else if (player.current === minHp) {
+                // 血量最低 - 红色
+                playerElement.style.color = 'red';
+            }
+            
+            if (idx > 0) {
+                playersHpElement.appendChild(document.createTextNode(' | '));
+            }
+            playersHpElement.appendChild(playerElement);
+        });
+        const spacer = document.createElement('div');
+        spacer.style.height = '15px';
+        logsContainer.appendChild(spacer);
+        timeGroupElement.appendChild(playersHpElement);
+        logsContainer.appendChild(timeGroupElement);
+    });
+    
+    // 更新汉化
+    updateContent()
+}
+
+// 按时间分组日志
+function groupLogsByTime(logs) {
+    const groups = [];
+    let currentGroup = null;
+    
+    logs.forEach(log => {
+        if (!currentGroup || currentGroup.time !== log.time) {
+            currentGroup = {
+                time: log.time,
+                logs: [log]
+            };
+            groups.push(currentGroup);
+        } else {
+            currentGroup.logs.push(log);
+        }
+    });
+    
+    return groups;
+}
+
 
 // #endregion
 

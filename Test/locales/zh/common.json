@@ -87,5 +87,11 @@
     "or": "或",
     "import": "导入",
     "exportGroupSolo": "导出",
-    "useAttackLevelRework" : "攻击等级从10%远程和10%魔法中获得对应经验"
+    "useAttackLevelRework" : "攻击等级从10%远程和10%魔法中获得对应经验",
+    "noWipeEvents": "无团灭事件",
+    "noWipeEventsDetected": "未检测到团灭事件",
+    "WipeEvents": "团灭日志",
+    "wipeEvents": "嗝屁日志",
+    "combatLogs": "战斗日志",
+    "selectWipeEvent": "选择团灭日志"
 }
