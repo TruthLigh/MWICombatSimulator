@@ -83,7 +83,6 @@ class CombatUtilities {
                 targetEvasionRating = target.combatDetails.magicEvasionRating;
                 break;
             default:
-                console.log(source)
                 throw new Error("Unknown combat style: " + combatStyle);
         }
 
@@ -111,6 +110,7 @@ class CombatUtilities {
                 sourcePenetration = source.combatDetails.combatStats.waterPenetration;
                 targetResistance = target.combatDetails.totalWaterResistance;
                 targetThornPower = target.combatDetails.combatStats.elementalThorns;
+                targetPenetration = target.combatDetails.combatStats.waterPenetration;
                 thornType = "elementalThorns";
                 break;
             case "/damage_types/nature":
@@ -119,6 +119,7 @@ class CombatUtilities {
                 sourcePenetration = source.combatDetails.combatStats.naturePenetration;
                 targetResistance = target.combatDetails.totalNatureResistance;
                 targetThornPower = target.combatDetails.combatStats.elementalThorns;
+                targetPenetration = target.combatDetails.combatStats.naturePenetration;
                 thornType = "elementalThorns";
                 break;
             case "/damage_types/fire":
@@ -127,6 +128,7 @@ class CombatUtilities {
                 sourcePenetration = source.combatDetails.combatStats.firePenetration;
                 targetResistance = target.combatDetails.totalFireResistance;
                 targetThornPower = target.combatDetails.combatStats.elementalThorns;
+                targetPenetration = target.combatDetails.combatStats.firePenetration;
                 thornType = "elementalThorns";
                 break;
             default:
@@ -175,14 +177,11 @@ class CombatUtilities {
         if (!abilityEffect) {
             damageRoll += damageRoll * source.combatDetails.combatStats.autoAttackDamage;
         } else {
-            damageRoll += damageRoll * source.combatDetails.combatStats.abilityDamage;
+            damageRoll *= (1 + source.combatDetails.combatStats.abilityDamage);
         }
-        let maxPremitigatedDamage = Math.min(damageRoll, target.combatDetails.currentHitpoints);
 
         let damageDone = 0;
-        let reflectDamage = 0;
-        let mitigatedReflectDamage = 0;
-        let reflectDamageDone = 0;
+        let thornDamageDone = 0;
 
         let didHit = false;
         if (Math.random() < hitChance) {
@@ -203,22 +202,63 @@ class CombatUtilities {
             target.combatDetails.currentHitpoints -= damageDone;
         }
 
-        if (targetThornPower > 0 && targetResistance > 0) {
+        if (targetThornPower > 0.0 && targetResistance > -99.0) {
             let penetratedSourceResistance = sourceResistance
 
-            if (targetPenetration > 0 && sourceResistance > 0) {
+            if (sourceResistance > 0) {
                 penetratedSourceResistance = sourceResistance / (1 + targetPenetration);
             }
 
-            let sourceDamageTakenRatio = 100 / (100 + penetratedSourceResistance);
+            let sourceDamageTakenRatio = 100.0 / (100 + penetratedSourceResistance);
             if (penetratedSourceResistance < 0) {
                 sourceDamageTakenRatio = (100 - penetratedSourceResistance) / 100;
             }
 
-            reflectDamage = Math.ceil(targetThornPower * targetResistance);
-            mitigatedReflectDamage = Math.ceil(sourceDamageTakenRatio * reflectDamage);
-            reflectDamageDone = Math.min(mitigatedReflectDamage, source.combatDetails.currentHitpoints);
-            source.combatDetails.currentHitpoints -= reflectDamageDone;
+            let targetTaskDamageMultiplier = 1.0 + target.combatDetails.combatStats.taskDamage;
+            let sourceDamageTakenMultiplier = 1.0 + source.combatDetails.combatStats.damageTaken;
+            let targetDamageMultiplier = targetTaskDamageMultiplier * sourceDamageTakenMultiplier;
+
+            let thornsDamageRoll = CombatUtilities.randomInt(1,
+                targetDamageMultiplier
+                * target.combatDetails.defensiveMaxDamage
+                * (1.0 + targetResistance / 100.0)
+                * targetThornPower);
+
+            let mitigatedThornsDamage = Math.ceil(sourceDamageTakenRatio * thornsDamageRoll);
+
+            thornDamageDone = Math.min(mitigatedThornsDamage, source.combatDetails.currentHitpoints);
+            source.combatDetails.currentHitpoints -= thornDamageDone;
+        }
+
+        let retaliationDamageDone = 0;
+        if (target.combatDetails.combatStats.retaliation > 0) {
+            let retaliationHitChance = 
+                Math.pow(target.combatDetails.smashAccuracyRating, 1.4) /
+                (Math.pow(target.combatDetails.smashAccuracyRating, 1.4) + Math.pow(source.combatDetails.smashEvasionRating, 1.4));
+
+            if (retaliationHitChance > Math.random()) {
+                let sourceEffectiveArmor = source.combatDetails.totalArmor;
+                if (sourceEffectiveArmor > 0) {
+                    sourceEffectiveArmor = sourceEffectiveArmor / (1.0 + target.combatDetails.combatStats.armorPenetration);
+                }
+
+                let sourceDamageTakenRatio = 100.0 / (100.0 + sourceEffectiveArmor);
+                if (sourceEffectiveArmor < 0) {
+                    sourceDamageTakenRatio = (100.0 - sourceEffectiveArmor) / 100.0;
+                }
+
+                let targetTaskDamageMultiplier = 1.0 + target.combatDetails.combatStats.taskDamage;
+                let sourceDamageTakenMultiplier = 1.0 + source.combatDetails.combatStats.damageTaken;
+                let retaliationDamageMultiplier = targetTaskDamageMultiplier * sourceDamageTakenMultiplier;
+
+                let retaliationMinDamage = retaliationDamageMultiplier * target.combatDetails.combatStats.retaliation * damageRoll;
+                let retaliationMaxDamage = retaliationDamageMultiplier * target.combatDetails.combatStats.retaliation * (target.combatDetails.defensiveMaxDamage + damageRoll);
+
+                let retaliationDamageRoll = CombatUtilities.randomInt(retaliationMinDamage, retaliationMaxDamage);
+                let mitigatedRetaliationDamage = Math.ceil(sourceDamageTakenRatio * retaliationDamageRoll);
+                retaliationDamageDone = Math.min(mitigatedRetaliationDamage, source.combatDetails.currentHitpoints);
+                source.combatDetails.currentHitpoints -= retaliationDamageDone;
+            }
         }
 
         let lifeStealHeal = 0;
@@ -237,53 +277,7 @@ class CombatUtilities {
             manaLeechMana = source.addManapoints(Math.floor(source.combatDetails.combatStats.manaLeech * damageDone));
         }
 
-        let experienceGained = {
-            source: {
-                attack: 0,
-                power: 0,
-                ranged: 0,
-                magic: 0,
-            },
-            target: {
-                defense: 0,
-                stamina: 0,
-            },
-        };
-
-        let damagePrevented = maxPremitigatedDamage - damageDone;
-
-        if (damagePrevented < 0) {
-            damagePrevented = 0;
-        }
-
-        switch (combatStyle) {
-            case "/combat_styles/stab":
-            case "/combat_styles/slash":
-            case "/combat_styles/smash":
-                experienceGained.source.attack = this.calculateAttackExperience(damageDone, damagePrevented, combatStyle);
-                experienceGained.source.power = this.calculatePowerExperience(damageDone, damagePrevented, combatStyle);
-                break;
-            case "/combat_styles/ranged":
-                experienceGained.source.ranged = this.calculateRangedExperience(damageDone, damagePrevented);
-                break;
-            case "/combat_styles/magic":
-                experienceGained.source.magic = this.calculateMagicExperience(damageDone, damagePrevented);
-                break;
-        }
-
-        experienceGained.target.defense = this.calculateDefenseExperience(damagePrevented);
-        experienceGained.target.stamina = this.calculateStaminaExperience(damagePrevented, damageDone);
-
-        if (mitigatedReflectDamage > 0) {
-            experienceGained.target.defense += this.calculateDefenseExperience(mitigatedReflectDamage);
-
-            let reflectDamagePrevented = reflectDamage - reflectDamageDone;
-
-            experienceGained.source.defense = this.calculateDefenseExperience(reflectDamagePrevented);
-            experienceGained.source.stamina = this.calculateStaminaExperience(reflectDamagePrevented, reflectDamageDone);
-        }
-
-        return { damageDone, didHit, reflectDamageDone, thornType, lifeStealHeal, hpDrain, manaLeechMana, experienceGained };
+        return { damageDone, didHit, thornDamageDone, thornType, retaliationDamageDone, lifeStealHeal, hpDrain, manaLeechMana };
     }
 
     static processHeal(source, abilityEffect, target) {
@@ -345,56 +339,6 @@ class CombatUtilities {
         let previousSum = Math.floor(((currentTick - 1) * totalValue) / totalTicks);
 
         return currentSum - previousSum;
-    }
-
-    static calculateStaminaExperience(damagePrevented, damageTaken) {
-        return 0.03 * damagePrevented + 0.3 * damageTaken;
-    }
-
-    static calculateIntelligenceExperience(manaUsed) {
-        return 0.3 * manaUsed;
-    }
-
-    static calculateAttackExperience(damage, damagePrevented, combatStyle) {
-        switch (combatStyle) {
-            case "/combat_styles/stab":
-                return 0.54 + 0.1125 * (damage + 0.35 * damagePrevented);
-            case "/combat_styles/slash":
-                return 0.3 + 0.0625 * (damage + 0.35 * damagePrevented)
-            case "/combat_styles/smash":
-                return 0.06 + 0.0125 * (damage + 0.35 * damagePrevented)
-            default:
-                return 0;
-        }
-    }
-
-    static calculatePowerExperience(damage, damagePrevented, combatStyle) {
-        switch (combatStyle) {
-            case "/combat_styles/stab":
-                return 0.06 + 0.0125 * (damage + 0.35 * damagePrevented)
-            case "/combat_styles/slash":
-                return 0.3 + 0.0625 * (damage + 0.35 * damagePrevented)
-            case "/combat_styles/smash":
-                return 0.54 + 0.1125 * (damage + 0.35 * damagePrevented);
-            default:
-                return 0;
-        }
-    }
-
-    static calculateDefenseExperience(damagePrevented) {
-        return 0.4 + 0.1 * damagePrevented;
-    }
-
-    static calculateRangedExperience(damage, damagePrevented) {
-        return 0.4 + 0.083375 * (damage + 0.35 * damagePrevented)
-    }
-
-    static calculateMagicExperience(damage, damagePrevented) {
-        return 0.4 + 0.083375 * (damage + 0.35 * damagePrevented)
-    }
-
-    static calculateHealingExperience(healed) {
-        return CombatUtilities.calculateMagicExperience(healed, 0) * 3;
     }
 }
 

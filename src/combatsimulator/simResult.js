@@ -1,5 +1,7 @@
+import combatStyleDetailMap from "./data/combatStyleDetailMap.json"
+
 class SimResult {
-    constructor(zoneName, numberOfPlayers) {
+    constructor(zone, numberOfPlayers) {
         this.deaths = {};
         this.experienceGained = {};
         this.encounters = 0;
@@ -7,27 +9,29 @@ class SimResult {
         this.consumablesUsed = {};
         this.hitpointsGained = {};
         this.manapointsGained = {};
+        this.debuffOnLevelGap = {};
         this.dropRateMultiplier = {};
         this.rareFindMultiplier = {};
         this.playerRanOutOfMana = {
-            "player1" : false,
-            "player2" : false,
-            "player3" : false,
-            "player4" : false,
-            "player5" : false
+            "player1": false,
+            "player2": false,
+            "player3": false,
+            "player4": false,
+            "player5": false
         };
         this.playerRanOutOfManaTime = {};
         this.manaUsed = {};
         this.timeSpentAlive = [];
         this.bossSpawns = [];
-        this.difficultyTier = 0;
         this.hitpointsSpent = {};
-        this.zoneName = zoneName;
+        this.zoneName = zone.hrid;
+        this.difficultyTier = zone.difficultyTier;
         this.isDungeon = false;
         this.dungeonsCompleted = 0;
         this.dungeonsFailed = 0;
         this.maxWaveReached = 0;
         this.numberOfPlayers = numberOfPlayers;
+        this.maxEnrageStack = 0;
     }
 
     addDeath(unit) {
@@ -55,7 +59,7 @@ class SimResult {
         }
     }
 
-    addExperienceGain(unit, type, experience) {
+    addExperienceGain(unit, experience) {
         if (!unit.isPlayer) {
             return;
         }
@@ -65,15 +69,51 @@ class SimResult {
                 stamina: 0,
                 intelligence: 0,
                 attack: 0,
-                power: 0,
+                melee: 0,
                 defense: 0,
                 ranged: 0,
                 magic: 0,
-                kill: 0,
             };
         }
 
-        this.experienceGained[unit.hrid][type] += experience * (1 + unit.combatDetails.combatStats.combatExperience);
+        let experienceGainedRate = {
+            "stamina": 0,
+            "intelligence": 0,
+            "attack": 0,
+            "melee": 0,
+            "defense": 0,
+            "ranged": 0,
+            "magic": 0,
+        };
+
+        const primaryTraining = unit.combatDetails.combatStats.primaryTraining;
+        experienceGainedRate[primaryTraining.split("/")[2]] = .3;
+
+        const skillExpMap = combatStyleDetailMap[unit.combatDetails.combatStats.combatStyleHrid].skillExpMap;
+        const skillExpMapLength = Object.keys(skillExpMap).length;
+
+        const focusTraining = unit.combatDetails.combatStats.focusTraining;
+        if (focusTraining && skillExpMap[focusTraining]) {
+            experienceGainedRate[focusTraining.split("/")[2]] += .7;
+        } else {
+            Object.keys(skillExpMap).forEach(skillHrid => {
+                experienceGainedRate[skillHrid.split("/")[2]] += .7 / skillExpMapLength;
+            });
+        }
+
+        for (const [type, rate] of Object.entries(experienceGainedRate)) {
+            if (rate <= 0) continue;
+
+            const skillExperience = rate * (1 + unit.combatDetails.combatStats[type + "Experience"]);
+
+            this.experienceGained[unit.hrid][type] += (
+                experience
+                * (1 + unit.combatDetails.combatStats.combatExperience)
+                * skillExperience
+                * (1 + unit.debuffOnLevelGap)
+
+            );
+        }
     }
 
     addEncounterEnd() {
@@ -136,10 +176,16 @@ class SimResult {
             this.dropRateMultiplier[unit.hrid] = {};
         }
         this.dropRateMultiplier[unit.hrid] = 1 + unit.combatDetails.combatStats.combatDropRate;
+
         if (!this.rareFindMultiplier[unit.hrid]) {
             this.rareFindMultiplier[unit.hrid] = {};
         }
         this.rareFindMultiplier[unit.hrid] = 1 + unit.combatDetails.combatStats.combatRareFind;
+
+        if (!this.debuffOnLevelGap[unit.hrid]) {
+            this.debuffOnLevelGap[unit.hrid] = {};
+        }
+        this.debuffOnLevelGap[unit.hrid] = unit.debuffOnLevelGap;
     }
 
     setManaUsed(unit) {
@@ -160,7 +206,7 @@ class SimResult {
         this.hitpointsSpent[unit.hrid][source] += amount;
     }
 
-    addRanOutOfManaCount(unit, isRunOutOfMana){
+    addRanOutOfManaCount(unit, isRunOutOfMana) {
         if (!this.playerRanOutOfManaTime[unit.hrid]) {
             this.playerRanOutOfManaTime[unit.hrid] = [0, 0];
         }

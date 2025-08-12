@@ -37,11 +37,11 @@ let currentSimResults = {};
 
 let currentPlayerTabId = '1';
 let playerDataMap = {
-    "1": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"powerLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
-    "2": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"powerLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
-    "3": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"powerLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
-    "4": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"powerLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
-    "5": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"powerLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}"
+    "1": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"meleeLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
+    "2": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"meleeLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
+    "3": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"meleeLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
+    "4": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"meleeLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}",
+    "5": "{\"player\":{\"attackLevel\":1,\"magicLevel\":1,\"meleeLevel\":1,\"rangedLevel\":1,\"defenseLevel\":1,\"staminaLevel\":1,\"intelligenceLevel\":1,\"equipment\":[]},\"food\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"drinks\":{\"/action_types/combat\":[{\"itemHrid\":\"\"},{\"itemHrid\":\"\"},{\"itemHrid\":\"\"}]},\"abilities\":[{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"},{\"abilityHrid\":\"\",\"level\":\"1\"}],\"triggerMap\":{},\"zone\":\"/actions/combat/fly\",\"simulationTime\":\"100\",\"houseRooms\":{\"/house_rooms/dairy_barn\":0,\"/house_rooms/garden\":0,\"/house_rooms/log_shed\":0,\"/house_rooms/forge\":0,\"/house_rooms/workshop\":0,\"/house_rooms/sewing_parlor\":0,\"/house_rooms/kitchen\":0,\"/house_rooms/brewery\":0,\"/house_rooms/laboratory\":0,\"/house_rooms/dining_room\":0,\"/house_rooms/library\":0,\"/house_rooms/dojo\":0,\"/house_rooms/gym\":0,\"/house_rooms/armory\":0,\"/house_rooms/archery_range\":0,\"/house_rooms/mystical_study\":0,\"/house_rooms/observatory\":0}}"
 };
 window.revenue = 0;
 window.noRngRevenue = 0;
@@ -99,7 +99,7 @@ multiWorker.onmessage = function (event) {
 // #region Equipment
 
 function initEquipmentSection() {
-    ["head", "body", "legs", "feet", "hands", "main_hand", "two_hand", "off_hand", "pouch", "neck", "earrings", "ring", "back"].forEach((type) => {
+    ["head", "body", "legs", "feet", "hands", "main_hand", "two_hand", "off_hand", "pouch", "neck", "earrings", "ring", "back", "charm"].forEach((type) => {
         initEquipmentSelect(type);
         initEnhancementLevelInput(type);
     });
@@ -224,7 +224,7 @@ function enhancementLevelInputHandler() {
 }
 
 function updateEquipmentState() {
-    ["head", "body", "legs", "feet", "hands", "main_hand", "two_hand", "off_hand", "pouch", "neck", "earrings", "ring", "back"].forEach((type) => {
+    ["head", "body", "legs", "feet", "hands", "main_hand", "two_hand", "off_hand", "pouch", "neck", "earrings", "ring", "back", "charm"].forEach((type) => {
         let equipmentType = "/equipment_types/" + type;
         let selectType = type;
         if (type == "main_hand" || type == "two_hand") {
@@ -327,6 +327,20 @@ function updateCombatStatsUI() {
     let attackIntervalElement = document.getElementById("combatStat_attackInterval");
     attackIntervalElement.innerHTML = (player.combatDetails.combatStats.attackInterval / 1e9).toLocaleString() + "s";
 
+    let primaryTrainingElement = document.getElementById("combatStat_primaryTraining");
+    let primaryTraining = player.combatDetails.combatStats.primaryTraining;
+    primaryTrainingElement.setAttribute("data-i18n", "skillNames." + primaryTraining);
+    primaryTrainingElement.innerHTML = primaryTraining;
+
+    let focusTrainingElement = document.getElementById("combatStat_focusTraining");
+    let focusTraining = player.combatDetails.combatStats.focusTraining;
+    if (focusTraining) {
+        focusTrainingElement.setAttribute("data-i18n", "skillNames." + focusTraining);
+    } else {
+        focusTrainingElement.setAttribute("data-i18n", "characterSelectPage.slots.empty");
+    }
+    focusTrainingElement.innerHTML = focusTraining;
+
     [
         "maxHitpoints",
         "maxManapoints",
@@ -340,6 +354,7 @@ function updateCombatStatsUI() {
         "rangedMaxDamage",
         "magicAccuracyRating",
         "magicMaxDamage",
+        "defensiveMaxDamage",
         "stabEvasionRating",
         "slashEvasionRating",
         "smashEvasionRating",
@@ -357,7 +372,7 @@ function updateCombatStatsUI() {
 
     [
         "abilityHaste",
-        "tenacity",
+        "tenacity"
     ].forEach((stat) => {
         let element = document.getElementById("combatStat_" + stat);
         element.innerHTML = Math.floor(player.combatDetails.combatStats[stat]);
@@ -395,9 +410,17 @@ function updateCombatStatsUI() {
         "blaze",
         "attackSpeed",
         "autoAttackDamage",
+        "abilityDamage",
         "drinkConcentration",
         "foodHaste",
-        "abilityDamage"
+        "staminaExperience",
+        "intelligenceExperience",
+        "attackExperience",
+        "defenseExperience",
+        "meleeExperience",
+        "rangedExperience",
+        "magicExperience"
+
     ].forEach((stat) => {
         let element = document.getElementById("combatStat_" + stat);
         let value = (100 * player.combatDetails.combatStats[stat]).toLocaleString([], {
@@ -413,7 +436,7 @@ function updateCombatStatsUI() {
 // #region Level
 
 function initLevelSection() {
-    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
+    ["stamina", "intelligence", "attack", "melee", "defense", "ranged", "magic"].forEach((skill) => {
         let levelInput = document.getElementById("inputLevel_" + skill);
         levelInput.value = 1;
         levelInput.addEventListener("change", levelInputHandler);
@@ -426,10 +449,281 @@ function levelInputHandler() {
 }
 
 function updateLevels() {
-    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
+    ["stamina", "intelligence", "attack", "melee", "defense", "ranged", "magic"].forEach((skill) => {
         let levelInput = document.getElementById("inputLevel_" + skill);
         player[skill + "Level"] = Number(levelInput.value);
     });
+    updateReAttackLevel();
+    updateCombatLevel();
+}
+
+function calcAttackLevel(attackLevel, rangedLevel, magicLevel) {
+    const expTable = {
+        1: 0
+        , 2: 33
+        , 3: 76
+        , 4: 132
+        , 5: 202
+        , 6: 286
+        , 7: 386
+        , 8: 503
+        , 9: 637
+        , 10: 791
+        , 11: 964
+        , 12: 1159
+        , 13: 1377
+        , 14: 1620
+        , 15: 1891
+        , 16: 2192
+        , 17: 2525
+        , 18: 2893
+        , 19: 3300
+        , 20: 3750
+        , 21: 4247
+        , 22: 4795
+        , 23: 5400
+        , 24: 6068
+        , 25: 6805
+        , 26: 7618
+        , 27: 8517
+        , 28: 9508
+        , 29: 10604
+        , 30: 11814
+        , 31: 13151
+        , 32: 14629
+        , 33: 16262
+        , 34: 18068
+        , 35: 20064
+        , 36: 22271
+        , 37: 24712
+        , 38: 27411
+        , 39: 30396
+        , 40: 33697
+        , 41: 37346
+        , 42: 41381
+        , 43: 45842
+        , 44: 50773
+        , 45: 56222
+        , 46: 62243
+        , 47: 68895
+        , 48: 76242
+        , 49: 84355
+        , 50: 93311
+        , 51: 103195
+        , 52: 114100
+        , 53: 126127
+        , 54: 139390
+        , 55: 154009
+        , 56: 170118
+        , 57: 187863
+        , 58: 207403
+        , 59: 228914
+        , 60: 252584
+        , 61: 278623
+        , 62: 307256
+        , 63: 338731
+        , 64: 373318
+        , 65: 411311
+        , 66: 453030
+        , 67: 498824
+        , 68: 549074
+        , 69: 604193
+        , 70: 664632
+        , 71: 730881
+        , 72: 803472
+        , 73: 882985
+        , 74: 970050
+        , 75: 1065351
+        , 76: 1169633
+        , 77: 1283701
+        , 78: 1408433
+        , 79: 1544780
+        , 80: 1693774
+        , 81: 1856536
+        , 82: 2034279
+        , 83: 2228321
+        , 84: 2440088
+        , 85: 2671127
+        , 86: 2923113
+        , 87: 3197861
+        , 88: 3497335
+        , 89: 3823663
+        , 90: 4179145
+        , 91: 4566274
+        , 92: 4987741
+        , 93: 5446463
+        , 94: 5945587
+        , 95: 6488521
+        , 96: 7078945
+        , 97: 7720834
+        , 98: 8418485
+        , 99: 9176537
+        , 100: 10000000
+        , 101: 11404976
+        , 102: 12904567
+        , 103: 14514400
+        , 104: 16242080
+        , 105: 18095702
+        , 106: 20083886
+        , 107: 22215808
+        , 108: 24501230
+        , 109: 26950540
+        , 110: 29574787
+        , 111: 32385721
+        , 112: 35395838
+        , 113: 38618420
+        , 114: 42067584
+        , 115: 45758332
+        , 116: 49706603
+        , 117: 53929328
+        , 118: 58444489
+        , 119: 63271179
+        , 120: 68429670
+        , 121: 73941479
+        , 122: 79829440
+        , 123: 86117783
+        , 124: 92832214
+        , 125: 100000000
+        , 126: 114406130
+        , 127: 130118394
+        , 128: 147319656
+        , 129: 166147618
+        , 130: 186752428
+        , 131: 209297771
+        , 132: 233962072
+        , 133: 260939787
+        , 134: 290442814
+        , 135: 322702028
+        , 136: 357968938
+        , 137: 396517495
+        , 138: 438646053
+        , 139: 484679494
+        , 140: 534971538
+        , 141: 589907252
+        , 142: 649905763
+        , 143: 715423218
+        , 144: 786955977
+        , 145: 865044093
+        , 146: 950275074
+        , 147: 1043287971
+        , 148: 1144777804
+        , 149: 1255500373
+        , 150: 1376277458
+        , 151: 1508002470
+        , 152: 1651646566
+        , 153: 1808265285
+        , 154: 1979005730
+        , 155: 2165114358
+        , 156: 2367945418
+        , 157: 2588970089
+        , 158: 2829786381
+        , 159: 3092129857
+        , 160: 3377885250
+        , 161: 3689099031
+        , 162: 4027993033
+        , 163: 4396979184
+        , 164: 4798675471
+        , 165: 5235923207
+        , 166: 5711805728
+        , 167: 6229668624
+        , 168: 6793141628
+        , 169: 7406162301
+        , 170: 8073001662
+        , 171: 8798291902
+        , 172: 9587056372
+        , 173: 10444742007
+        , 174: 11377254401
+        , 175: 12390995728
+        , 176: 13492905745
+        , 177: 14690506120
+        , 178: 15991948361
+        , 179: 17406065609
+        , 180: 18942428633
+        , 181: 20611406335
+        , 182: 22424231139
+        , 183: 24393069640
+        , 184: 26531098945
+        , 185: 28852589138
+        , 186: 31372992363
+        , 187: 34109039054
+        , 188: 37078841860
+        , 189: 40302007875
+        , 190: 43799759843
+        , 191: 47595067021
+        , 192: 51712786465
+        , 193: 56179815564
+        , 194: 61025256696
+        , 195: 66280594953
+        , 196: 71979889960
+        , 197: 78159982881
+        , 198: 84860719814
+        , 199: 92125192822
+        , 200: 100000000000
+    };
+
+    let attackExp = (expTable[attackLevel] + expTable[attackLevel + 1]) / 2;
+
+    if (rangedLevel > 1) {
+        attackExp += (expTable[rangedLevel] + expTable[rangedLevel + 1]) / 2 * 0.1;
+    }
+
+    if (magicLevel > 1) {
+        attackExp += (expTable[magicLevel] + expTable[magicLevel + 1]) / 2 * 0.1;
+    }
+
+    let reAttackLevel = attackLevel;
+    for (const [key, value] of Object.entries(expTable)) {
+        if (attackExp >= value) {
+            reAttackLevel = Number(key);
+        }
+    }
+
+    return reAttackLevel;
+}
+
+function updateReAttackLevel() {
+    let attackLevel = Number(document.getElementById("inputLevel_attack").value);
+    let rangedLevel = Number(document.getElementById("inputLevel_ranged").value);
+    let magicLevel = Number(document.getElementById("inputLevel_magic").value);
+
+    let reAttackLevel = calcAttackLevel(attackLevel, rangedLevel, magicLevel);
+
+    let spanReAttackLevel = document.getElementById("reLevel_attack");
+    spanReAttackLevel.innerHTML = reAttackLevel;
+}
+
+function calcCombatLevel(staminaLevel, intelligenceLevel, defenseLevel, attackLevel, meleeLevel, rangedLevel, magicLevel) {
+    return Math.floor(
+        0.15 * (staminaLevel + intelligenceLevel + attackLevel + defenseLevel + Math.max(meleeLevel, rangedLevel, magicLevel))
+        + 0.25 * Math.max(attackLevel, defenseLevel, meleeLevel, rangedLevel, magicLevel)
+    );
+}
+
+
+function updateCombatLevel() {
+    let staminaLevel = player["staminaLevel"];
+    let intelligenceLevel = player["intelligenceLevel"];
+    let defenseLevel = player["defenseLevel"];
+    let attackLevel = player["attackLevel"];
+    let meleeLevel = player["meleeLevel"];
+    let rangedLevel = player["rangedLevel"];
+    let magicLevel = player["magicLevel"];
+
+    //old one
+    let combatLevel = Math.floor(
+        0.2 * (staminaLevel + intelligenceLevel + defenseLevel)
+        + 0.4 * Math.max(0.5 * (meleeLevel + attackLevel), rangedLevel, magicLevel)
+    );
+
+    let reAttackLevel = calcAttackLevel(attackLevel, rangedLevel, magicLevel);
+    let reCombatLevel = calcCombatLevel(staminaLevel, intelligenceLevel, defenseLevel, reAttackLevel, meleeLevel, rangedLevel, magicLevel);
+
+
+    let levelInput = document.getElementById("inputLevel_combat");
+    levelInput.value = combatLevel;
+
+    let spanCombatLevel = document.getElementById("reLevel_combat");
+    spanCombatLevel.innerHTML = reCombatLevel;
 }
 
 // #endregion
@@ -864,6 +1158,36 @@ function initZones() {
         opt.setAttribute("data-i18n", "actionNames." + zone.hrid);
         zoneSelect.add(opt);
     }
+
+
+    let zoneCheckBox = document.getElementById("zoneCheckBox");
+
+    let simAllZonesToggle = document.getElementById("simAllToggle");
+    simAllZonesToggle.addEventListener("change", (event) => {
+        if (simAllZonesToggle.checked) {
+            zoneCheckBox.classList.remove("d-none");
+            zoneCheckBox.querySelectorAll(".zone-checkbox").forEach(checkbox => checkbox.checked = true);
+        } else {
+            zoneCheckBox.classList.add("d-none");
+        }
+    });
+
+    let zoneHrids = Object.values(actionDetailMap)
+        .filter((action) => action.type == "/action_types/combat" && action.category != "/action_categories/combat/dungeons" && action.combatZoneInfo.fightInfo.randomSpawnInfo.maxSpawnCount > 1)
+        .sort((a, b) => a.sortIndex - b.sortIndex)
+        .flat();
+
+    for (const zoneHrid of zoneHrids) {
+        const newZone = document.createElement('div');
+        newZone.classList.add('form-check');
+        newZone.innerHTML = `
+            <input class="form-check-input zone-checkbox" type="checkbox" id="${zoneHrid.hrid}">
+            <label class="form-check-label" for="${zoneHrid.hrid}" data-i18n="actionNames.${zoneHrid.hrid}">
+                ${zoneHrid.name}
+            </label>
+        `;
+        zoneCheckBox.append(newZone);
+    }
 }
 
 function initDungeons() {
@@ -1024,6 +1348,7 @@ function manipulateSimResultsDataForDisplay(simResults) {
             let simResult = simResults[i];
             let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
             let zoneName = simResult.zoneName;
+            let difficultyTier = simResult.difficultyTier;
             let encountersPerHour = (simResult.encounters / hoursSimulated).toFixed(1);
             let playerDeaths = simResult.deaths[playerToDisplay] ?? 0;
             let deathsPerHour = (playerDeaths / hoursSimulated).toFixed(2);
@@ -1032,7 +1357,7 @@ function manipulateSimResultsDataForDisplay(simResults) {
             let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
 
             let experiencePerHour = {};
-            const skills = ["Stamina", "Intelligence", "Attack", "Power", "Defense", "Ranged", "Magic"];
+            const skills = ["Stamina", "Intelligence", "Attack", "Melee", "Defense", "Ranged", "Magic"];
             skills.forEach((skill) => {
                 const skillLower = skill.toLowerCase();
                 let experience = simResult.experienceGained[playerToDisplay][skillLower] ?? 0;
@@ -1048,11 +1373,11 @@ function manipulateSimResultsDataForDisplay(simResults) {
             let expenses = simResult["expenses"];
 
             let displaySimRow = {
-                "ZoneName": zoneName, "Player": playerToDisplay, "Encounters": encountersPerHour, "Deaths": deathsPerHour,
+                "ZoneName": zoneName, "DifficultyTier": difficultyTier, "Player": playerToDisplay, "Encounters": encountersPerHour, "Deaths": deathsPerHour,
                 "TotalExperience": totalExperiencePerHour, "Stamina": experiencePerHour["Stamina"],
                 "Intelligence": experiencePerHour["Intelligence"], "Attack": experiencePerHour["Attack"],
                 "Magic": experiencePerHour["Magic"], "Ranged": experiencePerHour["Ranged"],
-                "Power": experiencePerHour["Power"], "Defense": experiencePerHour["Defense"],
+                "Melee": experiencePerHour["Melee"], "Defense": experiencePerHour["Defense"],
                 "noRngRevenue": noRngRevenue,
                 "expenses": expenses,
                 "noRngProfit": noRngProfit
@@ -1063,9 +1388,11 @@ function manipulateSimResultsDataForDisplay(simResults) {
     return displaySimResults;
 }
 
-function getDropProfit(simResult, playerToDisplay) {
+function calcDropMaps(simResult, playerToDisplay) {
     let dropRateMultiplier = simResult.dropRateMultiplier[playerToDisplay];
     let rareFindMultiplier = simResult.rareFindMultiplier[playerToDisplay];
+    let debuffOnLevelGap = simResult.debuffOnLevelGap[playerToDisplay];
+
     let numberOfPlayers = simResult.numberOfPlayers;
     let monsters = Object.keys(simResult.deaths)
         .filter(enemy => enemy !== "player1" && enemy !== "player2" && enemy !== "player3" && enemy !== "player4" && enemy !== "player5")
@@ -1078,47 +1405,52 @@ function getDropProfit(simResult, playerToDisplay) {
         const rareDropMap = new Map();
         if (combatMonsterDetailMap[monster].dropTable) {
             for (const drop of combatMonsterDetailMap[monster].dropTable) {
-                if (drop.minDifficultyTier < simResult.difficultyTier) {
+                if (drop.minDifficultyTier > simResult.difficultyTier) {
                     continue;
                 }
-                dropMap.set(drop.itemHrid, { "dropRate": Math.min(1, drop.dropRate * dropRateMultiplier), "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
+
+                let multiplier = 1.0 + 0.1 * simResult.difficultyTier;
+                let dropRate = Math.min(1.0, multiplier * (drop.dropRate + (drop.dropRatePerDifficultyTier ?? 0) * simResult.difficultyTier));
+                if (dropRate <= 0) continue;
+
+                dropMap.set(drop.itemHrid, { "dropRate": Math.min(1.0, dropRate * dropRateMultiplier), "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
             }
             if (combatMonsterDetailMap[monster].rareDropTable)
                 for (const drop of combatMonsterDetailMap[monster].rareDropTable) {
-                    if (drop.minDifficultyTier < simResult.difficultyTier) {
+                    if (drop.minDifficultyTier > simResult.difficultyTier) {
                         continue;
                     }
                     rareDropMap.set(drop.itemHrid, { "dropRate": drop.dropRate * rareFindMultiplier, "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
                 }
 
             for (let dropObject of dropMap.values()) {
-                dropObject.noRngDropAmount += simResult.deaths[monster] * dropObject.dropRate * ((dropObject.dropMax + dropObject.dropMin) / 2) / numberOfPlayers;
+                dropObject.noRngDropAmount += simResult.deaths[monster] * dropObject.dropRate * ((dropObject.dropMax + dropObject.dropMin) / 2) * (1 + debuffOnLevelGap) / numberOfPlayers;
             }
             for (let dropObject of rareDropMap.values()) {
-                dropObject.noRngDropAmount += simResult.deaths[monster] * dropObject.dropRate * ((dropObject.dropMax + dropObject.dropMin) / 2) / numberOfPlayers;
+                dropObject.noRngDropAmount += simResult.deaths[monster] * dropObject.dropRate * ((dropObject.dropMax + dropObject.dropMin) / 2) * (1 + debuffOnLevelGap) / numberOfPlayers;
             }
 
             for (let i = 0; i < simResult.deaths[monster]; i++) {
                 for (let dropObject of dropMap.values()) {
                     let chance = Math.random();
-                    if (chance <= dropObject.dropRate) {
-                        let amount = Math.floor(Math.random() * (dropObject.dropMax - dropObject.dropMin + 1) + dropObject.dropMin)
+                    if (chance <= dropObject.dropRate / numberOfPlayers) {
+                        let amount = Math.floor(Math.random() * (dropObject.dropMax - dropObject.dropMin + 1) + dropObject.dropMin) * (1 + debuffOnLevelGap);
                         dropObject.number = dropObject.number + amount;
                     }
                 }
                 for (let dropObject of rareDropMap.values()) {
                     let chance = Math.random();
-                    if (chance <= dropObject.dropRate) {
-                        let amount = Math.floor(Math.random() * (dropObject.dropMax - dropObject.dropMin + 1) + dropObject.dropMin)
+                    if (chance <= dropObject.dropRate / numberOfPlayers) {
+                        let amount = Math.floor(Math.random() * (dropObject.dropMax - dropObject.dropMin + 1) + dropObject.dropMin) * (1 + debuffOnLevelGap);
                         dropObject.number = dropObject.number + amount;
                     }
                 }
             }
             for (let [name, dropObject] of dropMap.entries()) {
                 if (totalDropMap.has(name)) {
-                    totalDropMap.set(name, Math.round((totalDropMap.get(name) + dropObject.number) / numberOfPlayers));
+                    totalDropMap.set(name, totalDropMap.get(name) + dropObject.number);
                 } else {
-                    totalDropMap.set(name, Math.round(dropObject.number / numberOfPlayers));
+                    totalDropMap.set(name, dropObject.number);
                 }
                 if (noRngTotalDropMap.has(name)) {
                     noRngTotalDropMap.set(name, noRngTotalDropMap.get(name) + dropObject.noRngDropAmount);
@@ -1140,6 +1472,12 @@ function getDropProfit(simResult, playerToDisplay) {
             }
         }
     }
+
+    return { totalDropMap, noRngTotalDropMap };
+}
+
+function getDropProfit(simResult, playerToDisplay) {
+    let { totalDropMap, noRngTotalDropMap } = calcDropMaps(simResult, playerToDisplay);
 
     let noRngTotal = 0;
     for (let [name, dropAmount] of noRngTotalDropMap.entries()) {
@@ -1233,7 +1571,7 @@ function updateAllSimsModal(data) {
     const numCols = rows[0].cells.length;
 
     // 遍历每一列
-    for (let col = 4; col < numCols; col++) {
+    for (let col = 5; col < numCols; col++) {
         let max = -Infinity;
         let maxCell = null;
 
@@ -1264,8 +1602,8 @@ function sortTable(tableId, columnIndex, direction) {
     const rows = Array.from(tbody.querySelectorAll('tr'));
 
     const sortedRows = rows.sort((rowA, rowB) => {
-        const cellA = rowA.children[columnIndex].textContent.trim();
-        const cellB = rowB.children[columnIndex].textContent.trim();
+        const cellA = rowA.children[columnIndex].textContent.trim().replace(/[\s,]/g, '');
+        const cellB = rowB.children[columnIndex].textContent.trim().replace(/[\s,]/g, '');
 
         const valueA = parseFloat(cellA.replace(/,/g, ''));
         const valueB = parseFloat(cellB.replace(/,/g, ''));
@@ -1290,6 +1628,7 @@ function updateSortIndicators(tableId, columnIndex, direction) {
 document.querySelectorAll('#allZonesData th').forEach((header, index) => {
     if (index === 0) return;
     if (index === 1) return;
+    if (index === 2) return;
 
     header.addEventListener('click', () => {
         if (currentSortColumn === index) {
@@ -1336,12 +1675,8 @@ function showKills(simResult, playerToDisplay) {
     let newChildren = [];
     let newDropChildren = [];
     let newNoRngDropChildren = [];
-    let dropRateMultiplier = simResult.dropRateMultiplier[playerToDisplay];
-    let rareFindMultiplier = simResult.rareFindMultiplier[playerToDisplay];
-    let numberOfPlayers = simResult.numberOfPlayers;
 
     let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
-    let playerDeaths = simResult.deaths[playerToDisplay] ?? 0;
     let encountersPerHour = 0;
     let encountersRow = null;
     if (simResult.isDungeon) {
@@ -1366,88 +1701,34 @@ function showKills(simResult, playerToDisplay) {
         encountersRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.encounters");
     }
 
+    if (simResult.maxEnrageStack > 0) {
+        let enrageRow = createRow(["col-md-6", "col-md-6 text-end"], ["Max Enrage Stack", simResult.maxEnrageStack]);
+        enrageRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.maxEnrageStack");
+        newChildren.push(enrageRow);
+    }
+
+    if (simResult.debuffOnLevelGap[playerToDisplay] != 0) {
+        let debuffOnLevelGapRow = createRow(["col-md-6", "col-md-6 text-end"], ["Debuff on Level Gap", simResult.debuffOnLevelGap[playerToDisplay]*100+"%"]);
+        debuffOnLevelGapRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.debuffOnLevelGap");
+        newChildren.push(debuffOnLevelGapRow);
+    }
+
     newChildren.push(encountersRow);
 
-    let monsters = Object.keys(simResult.deaths)
+    Object.keys(simResult.deaths)
         .filter(enemy => enemy !== "player1" && enemy !== "player2" && enemy !== "player3" && enemy !== "player4" && enemy !== "player5")
-        .sort();
+        .sort()
+        .forEach(monster => {
+            let killsPerHour = (simResult.deaths[monster] / hoursSimulated).toFixed(1);
+            let monsterRow = createRow(
+                ["col-md-6", "col-md-6 text-end"],
+                [combatMonsterDetailMap[monster].name, killsPerHour]
+            );
+            monsterRow.firstElementChild.setAttribute("data-i18n", "monsterNames." + monster);
+            newChildren.push(monsterRow);
+        });
 
-    const totalDropMap = new Map();
-    const noRngTotalDropMap = new Map();
-    for (const monster of monsters) {
-        let killsPerHour = (simResult.deaths[monster] / hoursSimulated).toFixed(1);
-        let monsterRow = createRow(
-            ["col-md-6", "col-md-6 text-end"],
-            [combatMonsterDetailMap[monster].name, killsPerHour]
-        );
-        monsterRow.firstElementChild.setAttribute("data-i18n", "monsterNames." + monster);
-        newChildren.push(monsterRow);
-
-        const dropMap = new Map();
-        const rareDropMap = new Map();
-        if (combatMonsterDetailMap[monster].dropTable)
-            for (const drop of combatMonsterDetailMap[monster].dropTable) {
-                if (drop.minDifficultyTier < simResult.difficultyTier) {
-                    continue;
-                }
-                dropMap.set(drop.itemHrid, { "dropRate": Math.min(1, drop.dropRate * dropRateMultiplier), "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
-            }
-        if (combatMonsterDetailMap[monster].rareDropTable)
-            for (const drop of combatMonsterDetailMap[monster].rareDropTable) {
-                if (drop.minDifficultyTier < simResult.difficultyTier) {
-                    continue;
-                }
-                rareDropMap.set(drop.itemHrid, { "dropRate": drop.dropRate * rareFindMultiplier, "number": 0, "dropMin": drop.minCount, "dropMax": drop.maxCount, "noRngDropAmount": 0 });
-            }
-
-        for (let dropObject of dropMap.values()) {
-            dropObject.noRngDropAmount += simResult.deaths[monster] * dropObject.dropRate * ((dropObject.dropMax + dropObject.dropMin) / 2) / numberOfPlayers;
-        }
-        for (let dropObject of rareDropMap.values()) {
-            dropObject.noRngDropAmount += simResult.deaths[monster] * dropObject.dropRate * ((dropObject.dropMax + dropObject.dropMin) / 2) / numberOfPlayers;
-        }
-
-        for (let i = 0; i < simResult.deaths[monster]; i++) {
-            for (let dropObject of dropMap.values()) {
-                let chance = Math.random();
-                if (chance <= dropObject.dropRate) {
-                    let amount = Math.floor(Math.random() * (dropObject.dropMax - dropObject.dropMin + 1) + dropObject.dropMin)
-                    dropObject.number = dropObject.number + amount;
-                }
-            }
-            for (let dropObject of rareDropMap.values()) {
-                let chance = Math.random();
-                if (chance <= dropObject.dropRate) {
-                    let amount = Math.floor(Math.random() * (dropObject.dropMax - dropObject.dropMin + 1) + dropObject.dropMin)
-                    dropObject.number = dropObject.number + amount;
-                }
-            }
-        }
-        for (let [name, dropObject] of dropMap.entries()) {
-            if (totalDropMap.has(name)) {
-                totalDropMap.set(name, Math.round((totalDropMap.get(name) + dropObject.number) / numberOfPlayers));
-            } else {
-                totalDropMap.set(name, Math.round(dropObject.number / numberOfPlayers));
-            }
-            if (noRngTotalDropMap.has(name)) {
-                noRngTotalDropMap.set(name, noRngTotalDropMap.get(name) + dropObject.noRngDropAmount);
-            } else {
-                noRngTotalDropMap.set(name, dropObject.noRngDropAmount);
-            }
-        }
-        for (let [name, dropObject] of rareDropMap.entries()) {
-            if (totalDropMap.has(name)) {
-                totalDropMap.set(name, totalDropMap.get(name) + dropObject.number);
-            } else {
-                totalDropMap.set(name, dropObject.number);
-            }
-            if (noRngTotalDropMap.has(name)) {
-                noRngTotalDropMap.set(name, noRngTotalDropMap.get(name) + dropObject.noRngDropAmount);
-            } else {
-                noRngTotalDropMap.set(name, dropObject.noRngDropAmount);
-            }
-        }
-    }
+    let { totalDropMap, noRngTotalDropMap } = calcDropMaps(simResult, playerToDisplay);
 
     let revenueModalTable = document.querySelector("#revenueTable > tbody");
     let total = 0;
@@ -1574,15 +1855,13 @@ function showExperienceGained(simResult, playerToDisplay) {
 
     let hoursSimulated = simResult.simulatedTime / ONE_HOUR;
 
-    let totalExperience = Object.entries(simResult.experienceGained[playerToDisplay])
-        .filter(([key]) => key !== "kill")
-        .reduce((prev, [, cur]) => prev + cur, 0);
+    let totalExperience = Object.values(simResult.experienceGained[playerToDisplay]).reduce((prev, cur) => prev + cur, 0);
     let totalExperiencePerHour = (totalExperience / hoursSimulated).toFixed(0);
     let totalRow = createRow(["col-md-6", "col-md-6 text-end"], ["Total", totalExperiencePerHour]);
     totalRow.firstElementChild.setAttribute("data-i18n", "common:total");
     newChildren.push(totalRow);
 
-    ["Stamina", "Intelligence", "Attack", "Power", "Defense", "Ranged", "Magic"].forEach((skill) => {
+    ["Stamina", "Intelligence", "Attack", "Melee", "Defense", "Ranged", "Magic"].forEach((skill) => {
         let experience = simResult.experienceGained[playerToDisplay][skill.toLowerCase()] ?? 0;
         if (experience == 0) {
             return;
@@ -1592,14 +1871,6 @@ function showExperienceGained(simResult, playerToDisplay) {
         experienceRow.firstElementChild.setAttribute("data-i18n", "leaderboardCategoryNames." + skill.toLowerCase());
         newChildren.push(experienceRow);
     });
-
-    newChildren.push(document.createElement("br"));
-
-    let killExp = simResult.experienceGained[playerToDisplay]["kill"] ?? 0;
-    let killExpPerHour = (killExp / hoursSimulated).toFixed(0);
-    let killExpRow = createRow(["col-md-6", "col-md-6 text-end"], ["Total Kill Exp Hour", killExpPerHour]);
-    killExpRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.killExpPerHour");
-    newChildren.push(killExpRow);
 
     resultDiv.replaceChildren(...newChildren);
 }
@@ -1633,6 +1904,7 @@ function showConsumablesUsed(simResult, playerToDisplay) {
 
     if (!simResult.consumablesUsed[playerToDisplay]) {
         resultDiv.replaceChildren(...newChildren);
+        window.expenses = 0;
         return;
     }
 
@@ -1825,6 +2097,10 @@ function showManapointsGained(simResult, playerToDisplay) {
                 sourceText = "Mana Leech";
                 sourceFullHrid = "combatStats.manaLeech";
                 break;
+            case "ripple":
+                sourceText = "Ripple";
+                sourceFullHrid = "combatStats.ripple";
+                break;
             default:
                 sourceText = itemDetailMap[source].name;
                 sourceFullHrid = "itemNames." + source;
@@ -1846,14 +2122,14 @@ function showManapointsGained(simResult, playerToDisplay) {
     ranOutOfManaRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.ranOutOfMana");
     ranOutOfManaRow.lastElementChild.setAttribute("data-i18n", "common:simulationResults." + ranOutOfManaText);
     newChildren.push(ranOutOfManaRow);
-    
+
     if (simResult.playerRanOutOfMana[playerToDisplay]) {
         let ranOutOfManaStat = simResult.playerRanOutOfManaTime[playerToDisplay];
         let ranOutOfManaStatRow = createRow(
             ["col-md-6", "col-md-6 text-end"],
             [
                 "Run Out Ratio",
-                (ranOutOfManaStat[0]/(ranOutOfManaStat[1]+ranOutOfManaStat[0]) * 100).toFixed(2) + "%"
+                (ranOutOfManaStat[0] / (ranOutOfManaStat[1] + ranOutOfManaStat[0]) * 100).toFixed(2) + "%"
             ]
         );
         ranOutOfManaStatRow.firstElementChild.setAttribute("data-i18n", "common:simulationResults.ranOutOfManaRatio");
@@ -2052,6 +2328,10 @@ function createDamageTable(resultDiv, damageDone, secondsSimulated) {
                 abilityText = "Auto Attack";
                 abilityFullHrid = "combatUnit.autoAttack";
                 break;
+            case "parry":
+                abilityText = "Parry Attack";
+                abilityFullHrid = "common:simulationResults.parryAttack";
+                break;
             case "damageOverTime":
                 abilityText = "Damage Over Time";
                 abilityFullHrid = "common:simulationResults.damageOverTime";
@@ -2063,6 +2343,10 @@ function createDamageTable(resultDiv, damageDone, secondsSimulated) {
             case "elementalThorns":
                 abilityText = "Elemental Thorns";
                 abilityFullHrid = "combatStats.elementalThorns";
+                break;
+            case "retaliation":
+                abilityText = "Retaliation";
+                abilityFullHrid = "combatStats.retaliation";
                 break;
             case 'blaze':
                 abilityText = "Blaze";
@@ -2114,7 +2398,7 @@ function createElement(tagName, className, innerHTML = "", id = "") {
 
 document.addEventListener('DOMContentLoaded', function () {
     const simDungeonToggle = document.getElementById('simDungeonToggle');
-    const playerContainer = document.querySelector('.outlined-box');
+    const playerContainer = document.getElementById('playerCheckBox');
 
     function addPlayers() {
         const player4 = document.createElement('div');
@@ -2161,13 +2445,26 @@ document.addEventListener('DOMContentLoaded', function () {
         boxes.forEach((checkBox) => { checkBox.checked = isCheck });
     }
 
+    function updateDifficultySelect(isCheck) {
+        const difficultySelect = document.getElementById('selectDifficulty');
+        // disable last four option
+        if (isCheck && Number(difficultySelect.value) >= 3) {
+            difficultySelect.value = 0;
+        }
+        for (let i = 3; i < difficultySelect.options.length; i++) {
+            difficultySelect.options[i].disabled = isCheck;
+        }
+    }
+
     simDungeonToggle.addEventListener('change', function () {
         if (simDungeonToggle.checked) {
             addPlayers();
             updatePlayersCheckbox(true);
+            updateDifficultySelect(true);
         } else {
             removePlayers();
             updatePlayersCheckbox(false);
+            updateDifficultySelect(false);
         }
         updatePlayerNames();
     });
@@ -2266,37 +2563,78 @@ function startSimulation(selectedPlayers) {
     updateNextPlayer(currentPlayerTabId);
     updateState();
     updateUI();
+
+    let useAttackInRework = document.getElementById("attackRework");
+    if (useAttackInRework.checked) {
+        for (let player of playersToSim) {
+            let attackBefore = player.attackLevel;
+            player.attackLevel = calcAttackLevel(attackBefore, player.rangedLevel, player.magicLevel);
+            console.log("player " + player.hrid + " attack level before: " + attackBefore + " after: " + player.attackLevel);
+        }
+    }
+
+    let maxPlayerCombatLevel = 1;
+    for (let player of playersToSim) {
+        player.combatLevel = calcCombatLevel(player.staminaLevel, player.intelligenceLevel, player.defenseLevel, player.attackLevel, player.meleeLevel, player.rangedLevel, player.magicLevel);
+        maxPlayerCombatLevel = Math.max(maxPlayerCombatLevel, player.combatLevel);
+    }
+
+    for (let player of playersToSim) {
+        if ((maxPlayerCombatLevel / player.combatLevel) > 1.2 ) {
+            const maxDebuffOnLevelGap = 0.9;
+            player.debuffOnLevelGap = -1 * Math.min(maxDebuffOnLevelGap, 3 * ( (maxPlayerCombatLevel / player.combatLevel) - 1.2));
+
+            console.log("player " + player.hrid + " debuff on level gap: " + player.debuffOnLevelGap*100 + "% for " + (maxPlayerCombatLevel / player.combatLevel));
+        }
+        else {
+            player.debuffOnLevelGap = 0;
+        }
+    }
+
+
     let simAllZonesToggle = document.getElementById("simAllToggle");
     let simDungeonToggle = document.getElementById("simDungeonToggle");
     let zoneSelect = document.getElementById("selectZone");
     let dungeonSelect = document.getElementById("selectDungeon");
+    let difficultySelect = document.getElementById("selectDifficulty");
     let simulationTimeInput = document.getElementById("inputSimulationTime");
     let simulationTimeLimit = Number(simulationTimeInput.value) * ONE_HOUR;
-    let difficultyTier = Number(document.getElementById("selectDifficultyTier").value);
     if (!simAllZonesToggle.checked) {
         let zoneHrid = zoneSelect.value;
+        let difficultyTier = Number(difficultySelect.value);
         if (simDungeonToggle.checked) {
             zoneHrid = dungeonSelect.value;
         }
         let workerMessage = {
             type: "start_simulation",
             players: playersToSim,
-            zoneHrid: zoneHrid,
+            zone: { zoneHrid: zoneHrid, difficultyTier: difficultyTier },
             simulationTimeLimit: simulationTimeLimit,
-            difficultyTier: difficultyTier,
         };
         worker.postMessage(workerMessage);
     } else {
         let zoneHrids = Object.values(actionDetailMap)
-            .filter((action) => action.type == "/action_types/combat" && action.category != "/action_categories/combat/dungeons" && action.combatZoneInfo.fightInfo.randomSpawnInfo.maxSpawnCount > 1)
+            .filter((action) =>
+                action.type == "/action_types/combat" &&
+                action.category != "/action_categories/combat/dungeons" &&
+                action.combatZoneInfo.fightInfo.randomSpawnInfo.maxSpawnCount > 1 &&
+                document.getElementById(action.hrid).checked
+            )
             .sort((a, b) => a.sortIndex - b.sortIndex)
-            .map(action => action.hrid);
+            .map(action => {
+                let result = [];
+                for (let difficultyTier = 0; difficultyTier <= action.maxDifficulty; difficultyTier++) {
+                    result.push({ zoneHrid: action.hrid, difficultyTier: difficultyTier });
+                }
+                return result;
+            })
+            .flat();
+
         let workerMessage = {
             type: "start_simulation_all_zones",
             players: playersToSim,
             zones: zoneHrids,
             simulationTimeLimit: simulationTimeLimit,
-            difficultyTier: difficultyTier,
         };
         multiWorker.postMessage(workerMessage);
     }
@@ -2441,12 +2779,12 @@ function getEquipmentSetFromUI() {
         houseRooms: {},
     };
 
-    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
+    ["stamina", "intelligence", "attack", "melee", "defense", "ranged", "magic"].forEach((skill) => {
         let levelInput = document.getElementById("inputLevel_" + skill);
         equipmentSet.levels[skill] = Number(levelInput.value);
     });
 
-    ["head", "body", "legs", "feet", "hands", "weapon", "off_hand", "pouch", "neck", "earrings", "ring", "back"].forEach((type) => {
+    ["head", "body", "legs", "feet", "hands", "weapon", "off_hand", "pouch", "neck", "earrings", "ring", "back", "charm"].forEach((type) => {
         let equipmentSelect = document.getElementById("selectEquipment_" + type);
         let enhancementLevelInput = document.getElementById("inputEquipmentEnhancementLevel_" + type);
 
@@ -2482,13 +2820,36 @@ function getEquipmentSetFromUI() {
     return equipmentSet;
 }
 
+function fixTriggerMap(triggerMap) {
+    let delKeys = []
+    for (const key of Object.keys(triggerMap)) {
+        let err = false;
+        for (const trigger of triggerMap[key]) {
+            if (!combatTriggerConditionDetailMap[trigger.conditionHrid]) {
+                err = true;
+                break;
+            }
+        }
+        if (err) {
+            delKeys.push(key);
+        }
+    }
+    for (const key of delKeys) {
+        delete triggerMap[key];
+    }
+}
+
 function loadEquipmentSetIntoUI(equipmentSet) {
-    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
+    ["stamina", "intelligence", "attack", "melee", "defense", "ranged", "magic"].forEach((skill) => {
         let levelInput = document.getElementById("inputLevel_" + skill);
+        if (skill == "melee" && !equipmentSet.levels["meleeLevel"] && equipmentSet.levels["powerLevel"]) {
+            equipmentSet.levels["meleeLevel"] = equipmentSet.levels["powerLevel"];
+        }
         levelInput.value = equipmentSet.levels[skill] ?? 1;
     });
+    updateReAttackLevel();
 
-    ["head", "body", "legs", "feet", "hands", "weapon", "off_hand", "pouch", "neck", "earrings", "ring", "back"].forEach((type) => {
+    ["head", "body", "legs", "feet", "hands", "weapon", "off_hand", "pouch", "neck", "earrings", "ring", "back", "charm"].forEach((type) => {
         let equipmentSelect = document.getElementById("selectEquipment_" + type);
         let enhancementLevelInput = document.getElementById("inputEquipmentEnhancementLevel_" + type);
 
@@ -2509,7 +2870,7 @@ function loadEquipmentSetIntoUI(equipmentSet) {
 
     for (let i = 0; i < 3; i++) {
         let drinkSelect = document.getElementById("selectDrink_" + i);
-        drinkSelect.value = equipmentSet.drinks[i];
+        drinkSelect.value = equipmentSet.drinks[i].replace("power", "melee");
     }
 
     let hasSpecial = false;
@@ -2522,11 +2883,21 @@ function loadEquipmentSetIntoUI(equipmentSet) {
         let abilitySelect = document.getElementById("selectAbility_" + abilitySlot);
         let abilityLevelInput = document.getElementById("inputAbilityLevel_" + abilitySlot);
 
+        if (hasSpecial && i == 0 && (
+            equipmentSet.abilities[i].ability == "/abilities/aqua_aura" ||
+            equipmentSet.abilities[i].ability == "/abilities/flame_aura" ||
+            equipmentSet.abilities[i].ability == "/abilities/sylvan_aura"
+        )
+        ) {
+            equipmentSet.abilities[i].ability = "/abilities/mystic_aura";
+        }
+
         abilitySelect.value = equipmentSet.abilities[i].ability;
         abilityLevelInput.value = equipmentSet.abilities[i].level;
     }
 
     triggerMap = equipmentSet.triggerMap;
+    fixTriggerMap(triggerMap);
 
     if (equipmentSet.houseRooms) {
         for (const room in equipmentSet.houseRooms) {
@@ -2600,6 +2971,8 @@ function resetImportInputs() {
     document.getElementById('inputSetGroupCombatplayer1').value = '';
     document.getElementById('inputSetGroupCombatplayer2').value = '';
     document.getElementById('inputSetGroupCombatplayer3').value = '';
+    document.getElementById('inputSetGroupCombatplayer4').value = '';
+    document.getElementById('inputSetGroupCombatplayer5').value = '';
     document.getElementById('inputSetSolo').value = '';
 }
 
@@ -2627,7 +3000,7 @@ function doSoloExport() {
     let playerArray = {
         "attackLevel": player.attackLevel,
         "magicLevel": player.magicLevel,
-        "powerLevel": player.powerLevel,
+        "meleeLevel": player.meleeLevel,
         "rangedLevel": player.rangedLevel,
         "defenseLevel": player.defenseLevel,
         "staminaLevel": player.staminaLevel,
@@ -2672,32 +3045,43 @@ function setPlayerData(playerId, inputElementId) {
     // Only set the value in the map if it's not null, undefined, or empty
     if (value) {
         playerDataMap[playerId] = value;
+        return true;
     }
+    return false;
 }
 
 function doGroupImport() {
+    let needUpdateCurrentTab = false;
     const value = document.getElementById("inputSetGroupCombatAll")?.value || "";
     if (!value.trim()) {
-        setPlayerData("1", "inputSetGroupCombatplayer1");
-        setPlayerData("2", "inputSetGroupCombatplayer2");
-        setPlayerData("3", "inputSetGroupCombatplayer3");
-        setPlayerData("4", "inputSetGroupCombatplayer4");
-        setPlayerData("5", "inputSetGroupCombatplayer5");
+        for (let i of ['1', '2', '3', '4', '5']) {
+            if (setPlayerData(i, "inputSetGroupCombatplayer" + i) && currentPlayerTabId == i) {
+                needUpdateCurrentTab = true;
+            }
+        }
     } else {
         playerDataMap = JSON.parse(value);
+        needUpdateCurrentTab = true;
     }
-    updateNextPlayer(currentPlayerTabId);
+
+    if (needUpdateCurrentTab) {
+        updateNextPlayer(currentPlayerTabId);
+    }
 }
 
 function doSoloImport() {
     let importSet = document.getElementById("inputSetSolo").value;
     importSet = JSON.parse(importSet);
-    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
+    ["stamina", "intelligence", "attack", "melee", "defense", "ranged", "magic"].forEach((skill) => {
         let levelInput = document.getElementById("inputLevel_" + skill);
+        if (skill == "melee" && !importSet.player["meleeLevel"] && importSet.player["powerLevel"]) {
+            importSet.player["meleeLevel"] = importSet.player["powerLevel"];
+        }
         levelInput.value = importSet.player[skill + "Level"];
     });
+    updateReAttackLevel();
 
-    ["head", "body", "legs", "feet", "hands", "off_hand", "pouch", "neck", "earrings", "ring", "back"].forEach((type) => {
+    ["head", "body", "legs", "feet", "hands", "off_hand", "pouch", "neck", "earrings", "ring", "back", "charm"].forEach((type) => {
         let equipmentSelect = document.getElementById("selectEquipment_" + type);
         let enhancementLevelInput = document.getElementById("inputEquipmentEnhancementLevel_" + type);
         let currentEquipment = importSet.player.equipment.find(item => item.itemLocationHrid === "/item_locations/" + type);
@@ -2730,7 +3114,7 @@ function doSoloImport() {
         let drinkSelect = document.getElementById("selectDrink_" + i);
         let foodSelect = document.getElementById("selectFood_" + i);
         if (importSet.drinks[i] != null) {
-            drinkSelect.value = importSet.drinks[i].itemHrid;
+            drinkSelect.value = importSet.drinks[i].itemHrid.replace('power', 'melee');
         } else {
             drinkSelect.value = "";
         }
@@ -2750,6 +3134,16 @@ function doSoloImport() {
         let abilitySlot = hasSpecial ? i : (i + 1);
         let abilitySelect = document.getElementById("selectAbility_" + abilitySlot);
         let abilityLevelInput = document.getElementById("inputAbilityLevel_" + abilitySlot);
+
+        if (hasSpecial && i == 0 && (
+            importSet.abilities[i].abilityHrid == "/abilities/aqua_aura" ||
+            importSet.abilities[i].abilityHrid == "/abilities/flame_aura" ||
+            importSet.abilities[i].abilityHrid == "/abilities/sylvan_aura"
+        )
+        ) {
+            importSet.abilities[i].abilityHrid = "/abilities/mystic_aura";
+        }
+
         if (importSet.abilities[i] != null) {
             abilitySelect.value = importSet.abilities[i].abilityHrid;
             abilityLevelInput.value = String(importSet.abilities[i].level);
@@ -2761,6 +3155,7 @@ function doSoloImport() {
 
     if (importSet.triggerMap) {
         triggerMap = importSet.triggerMap;
+        fixTriggerMap(triggerMap);
     }
 
     if (importSet.houseRooms) {
@@ -2809,7 +3204,7 @@ function savePreviousPlayer(playerId) {
     let playerArray = {
         "attackLevel": player.attackLevel,
         "magicLevel": player.magicLevel,
-        "powerLevel": player.powerLevel,
+        "meleeLevel": player.meleeLevel,
         "rangedLevel": player.rangedLevel,
         "defenseLevel": player.defenseLevel,
         "staminaLevel": player.staminaLevel,
@@ -2850,12 +3245,17 @@ function savePreviousPlayer(playerId) {
 function updateNextPlayer(currentPlayerNumber) {
     let playerImportData = playerDataMap[currentPlayerNumber];
     let importSet = JSON.parse(playerImportData);
-    ["stamina", "intelligence", "attack", "power", "defense", "ranged", "magic"].forEach((skill) => {
+    ["stamina", "intelligence", "attack", "melee", "defense", "ranged", "magic"].forEach((skill) => {
         let levelInput = document.getElementById("inputLevel_" + skill);
+        if (skill == "melee" && !importSet.player["meleeLevel"] && importSet.player["powerLevel"]) {
+            importSet.player["meleeLevel"] = importSet.player["powerLevel"];
+        }
         levelInput.value = importSet.player[skill + "Level"];
     });
+    updateReAttackLevel();
 
-    ["head", "body", "legs", "feet", "hands", "off_hand", "pouch", "neck", "earrings", "ring", "back"].forEach((type) => {
+    ["head", "body", "legs", "feet", "hands", "off_hand", "pouch", "neck", "earrings", "ring", "back", "charm"].forEach((type) => {
+
         let equipmentSelect = document.getElementById("selectEquipment_" + type);
         let enhancementLevelInput = document.getElementById("inputEquipmentEnhancementLevel_" + type);
         let currentEquipment = importSet.player.equipment.find(item => item.itemLocationHrid === "/item_locations/" + type);
@@ -2888,7 +3288,7 @@ function updateNextPlayer(currentPlayerNumber) {
         let drinkSelect = document.getElementById("selectDrink_" + i);
         let foodSelect = document.getElementById("selectFood_" + i);
         if (importSet.drinks[i] != null) {
-            drinkSelect.value = importSet.drinks[i].itemHrid;
+            drinkSelect.value = importSet.drinks[i].itemHrid.replace('power', 'melee');
         } else {
             drinkSelect.value = "";
         }
@@ -2908,6 +3308,17 @@ function updateNextPlayer(currentPlayerNumber) {
         let abilitySlot = hasSpecial ? i : (i + 1);
         let abilitySelect = document.getElementById("selectAbility_" + abilitySlot);
         let abilityLevelInput = document.getElementById("inputAbilityLevel_" + abilitySlot);
+
+        if (hasSpecial && i == 0 && (
+            importSet.abilities[i].abilityHrid == "/abilities/aqua_aura" ||
+            importSet.abilities[i].abilityHrid == "/abilities/flame_aura" ||
+            importSet.abilities[i].abilityHrid == "/abilities/sylvan_aura"
+        )
+        ) {
+            importSet.abilities[i].abilityHrid = "/abilities/mystic_aura";
+        }
+
+
         if (importSet.abilities[i] != null) {
             abilitySelect.value = importSet.abilities[i].abilityHrid;
             abilityLevelInput.value = String(importSet.abilities[i].level);
@@ -2919,8 +3330,17 @@ function updateNextPlayer(currentPlayerNumber) {
 
     if (importSet.triggerMap) {
         triggerMap = importSet.triggerMap;
+        fixTriggerMap(triggerMap);
     }
 
+    { // reset all houseRooms
+        let houseRooms = Object.values(houseRoomDetailMap);
+        for (const room of Object.values(houseRooms)) {
+            const field = document.querySelector('[data-house-hrid="' + room.hrid + '"]');
+            field.value = '';
+            player.houseRooms[room.hrid] = 0;
+        }
+    }
     if (importSet.houseRooms) {
         for (const room in importSet.houseRooms) {
             const field = document.querySelector('[data-house-hrid="' + room + '"]');
@@ -2931,13 +3351,6 @@ function updateNextPlayer(currentPlayerNumber) {
             }
         }
         player.houseRooms = importSet.houseRooms;
-    } else {
-        let houseRooms = Object.values(houseRoomDetailMap);
-        for (const room of Object.values(houseRooms)) {
-            const field = document.querySelector('[data-house-hrid="' + room.hrid + '"]');
-            field.value = '';
-            player.houseRooms[room.hrid] = 0;
-        }
     }
 }
 
@@ -2973,7 +3386,7 @@ window.prices;
 
 async function fetchPrices() {
     try {
-        const response = await fetch('https://ghproxy.net/https://raw.githubusercontent.com/holychikenz/MWIApi/refs/heads/main/milkyapi.json'
+        const response = await fetch('https://www.milkywayidle.com/game_data/marketplace.json'
             , {
                 mode: 'cors'
             }
@@ -2988,11 +3401,16 @@ async function fetchPrices() {
 
         const pricesJson = await response.json();
 
-        const priceTmp = pricesJson['market'];
+        const priceTmp = pricesJson['marketData'];
         window.prices = {};
         for (const item in itemDetailMap) {
-            if (itemDetailMap[item].name in priceTmp) {
-                window.prices[itemDetailMap[item].hrid] = priceTmp[itemDetailMap[item].name];
+            const hrid = itemDetailMap[item].hrid;
+            if (hrid in priceTmp) {
+                window.prices[hrid] = { "ask": -1, "bid": -1, "vendor": itemDetailMap[item].sellPrice };
+                if (priceTmp[hrid]['0']) {
+                    window.prices[hrid].ask = priceTmp[hrid]['0'].a;
+                    window.prices[hrid].bid = priceTmp[hrid]['0'].b;
+                }
             }
         }
 
@@ -3065,6 +3483,7 @@ document.addEventListener("input", (e) => {
                 noRngRevenueDifference = updateTable('noRngRevenueTable', item, newPrice);
             }
             if (window.prices) {
+                if (!window.prices[item]) window.prices[item] = { "ask": -1, "bid": -1, "vendor": itemDetailMap[item].sellPrice };
                 if (expensesSetting == 'bid') {
                     window.prices[item]['bid'] = newPrice;
                 } else {
@@ -3078,6 +3497,7 @@ document.addEventListener("input", (e) => {
                 expensesDifference = updateTable('expensesTable', item, newPrice);
             }
             if (window.prices) {
+                if (!window.prices[item]) window.prices[item] = { "ask": -1, "bid": -1, "vendor": itemDetailMap[item].sellPrice };
                 if (revenueSetting == 'bid') {
                     window.prices[item]['bid'] = newPrice;
                 } else {

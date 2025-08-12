@@ -31,10 +31,11 @@ class Player extends CombatUnit {
         player.staminaLevel = dto.staminaLevel;
         player.intelligenceLevel = dto.intelligenceLevel;
         player.attackLevel = dto.attackLevel;
-        player.powerLevel = dto.powerLevel;
+        player.meleeLevel = dto.meleeLevel;
         player.defenseLevel = dto.defenseLevel;
         player.rangedLevel = dto.rangedLevel;
         player.magicLevel = dto.magicLevel;
+
         player.hrid = dto.hrid;
 
         for (const [key, value] of Object.entries(dto.equipment)) {
@@ -50,6 +51,8 @@ class Player extends CombatUnit {
             }
         });
 
+        player.debuffOnLevelGap = dto.debuffOnLevelGap;
+
         return player;
     }
 
@@ -60,16 +63,27 @@ class Player extends CombatUnit {
             this.combatDetails.combatStats.damageType = this.equipment["/equipment_types/main_hand"].getDamageType();
             this.combatDetails.combatStats.attackInterval =
                 this.equipment["/equipment_types/main_hand"].getCombatStat("attackInterval");
+            this.combatDetails.combatStats.primaryTraining = 
+                this.equipment["/equipment_types/main_hand"].getPrimaryTraining();
         } else if (this.equipment["/equipment_types/two_hand"]) {
             this.combatDetails.combatStats.combatStyleHrid =
                 this.equipment["/equipment_types/two_hand"].getCombatStyle();
             this.combatDetails.combatStats.damageType = this.equipment["/equipment_types/two_hand"].getDamageType();
             this.combatDetails.combatStats.attackInterval =
                 this.equipment["/equipment_types/two_hand"].getCombatStat("attackInterval");
+            this.combatDetails.combatStats.primaryTraining = 
+                this.equipment["/equipment_types/two_hand"].getPrimaryTraining();
         } else {
             this.combatDetails.combatStats.combatStyleHrid = "/combat_styles/smash";
             this.combatDetails.combatStats.damageType = "/damage_types/physical";
             this.combatDetails.combatStats.attackInterval = 3000000000;
+            this.combatDetails.combatStats.primaryTraining = "/skills/melee";
+        }
+
+        if (this.equipment["/equipment_types/charm"]) {
+            this.combatDetails.combatStats.focusTraining = this.equipment["/equipment_types/charm"].getFocusTraining();
+        } else {
+            this.combatDetails.combatStats.focusTraining = "";
         }
 
         [
@@ -83,6 +97,7 @@ class Player extends CombatUnit {
             "smashDamage",
             "rangedDamage",
             "magicDamage",
+            "defensiveDamage",
             "taskDamage",
             "physicalAmplify",
             "waterAmplify",
@@ -116,7 +131,6 @@ class Player extends CombatUnit {
             "naturePenetration",
             "firePenetration",
             "abilityHaste",
-            "abilityDamage",
             "tenacity",
             "manaLeech",
             "castSpeed",
@@ -133,7 +147,16 @@ class Player extends CombatUnit {
             "attackSpeed",
             "foodHaste",
             "drinkConcentration",
-            "autoAttackDamage"
+            "autoAttackDamage",
+            "abilityDamage",
+            "staminaExperience",
+            "intelligenceExperience",
+            "attackExperience",
+            "defenseExperience",
+            "meleeExperience",
+            "rangedExperience",
+            "magicExperience",
+            "retaliation"
         ].forEach((stat) => {
             this.combatDetails.combatStats[stat] = Object.values(this.equipment)
                 .filter((equipment) => equipment != null)
