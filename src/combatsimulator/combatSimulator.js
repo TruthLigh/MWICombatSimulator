@@ -1292,7 +1292,9 @@ class CombatSimulator extends EventTarget {
                     target = cumulativeRanges.find(range => randomValueHit >= range.rangeStart && randomValueHit < range.rangeEnd).player;
                     avoidTarget.push(target.hrid);
                 }
-
+                if (targets.length <= 0) {
+                    break;
+                }
                 let attackResult = CombatUtilities.processAttack(source, target, abilityEffect);
                 //保存玩家受到技能攻击的日志
                 if (this.zone.isDungeon && target.isPlayer && attackResult.didHit && attackResult.damageDone > 0) {

@@ -664,11 +664,11 @@ function calcAttackLevel(attackLevel, rangedLevel, magicLevel) {
     let attackExp = (expTable[attackLevel] + expTable[attackLevel + 1]) / 2;
 
     if (rangedLevel > 1) {
-        attackExp += (expTable[rangedLevel] + expTable[rangedLevel + 1]) / 2 * 0.1;
+        attackExp += (expTable[rangedLevel] + expTable[rangedLevel + 1]) / 2 * 0.15;
     }
 
     if (magicLevel > 1) {
-        attackExp += (expTable[magicLevel] + expTable[magicLevel + 1]) / 2 * 0.1;
+        attackExp += (expTable[magicLevel] + expTable[magicLevel + 1]) / 2 * 0.12;
     }
 
     let reAttackLevel = attackLevel;
