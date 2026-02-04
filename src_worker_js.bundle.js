@@ -1653,6 +1653,9 @@ class CombatSimulator extends EventTarget {
             return;
         }
 
+        // Maze timeout: used to trigger instant-kill behavior for maze encounters
+        const mazeTimeoutActive = this.zone && this.zone.isMaze && (this.simulationTime - this.enrageBeginTime >= 120 * ONE_SECOND);
+
         let avoidTarget = [];
 
         let isSkipParry = false;
