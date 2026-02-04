@@ -1054,7 +1054,20 @@ class CombatSimulator extends EventTarget {
             !this.players.some((player) => player.combatDetails.currentHitpoints > 0)
         ) {
             if (this.zone.isDungeon) {
-                console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: " + this.enemies.map(enemy => (enemy.hrid+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
+                // 安全日志，避免 this.enemies 为 null 时触发异常
+                {
+                    let enemiesDesc = 'none';
+                    if (this.enemies && this.enemies.length > 0) {
+                        enemiesDesc = this.enemies.map(enemy => {
+                            if (!enemy) return 'UNKNOWN';
+                            const hp = enemy.combatDetails?.currentHitpoints ?? 0;
+                            const max = enemy.combatDetails?.maxHitpoints ?? 1;
+                            const pct = ((hp * 100) / (max || 1)).toFixed(2);
+                            return `${enemy.hrid}(${pct}%)`;
+                        }).join(', ');
+                    }
+                    console.log(`All Players died at wave #${this.zone.encountersKilled - 1} with enemies: ${enemiesDesc}`);
+                }
 
                 this.saveWipeLogsToSimResult(this.zone.encountersKilled - 1);
                 // console.log(this.simResult)
