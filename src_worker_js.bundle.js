@@ -1607,7 +1607,8 @@ class CombatSimulator extends EventTarget {
 
     processAbilityBuffEffect(source, ability, abilityEffect) {
         if (abilityEffect.targetType == "allAllies") {
-            let targets = source.isPlayer ? this.players : this.enemies;
+            // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+            let targets = source.isPlayer ? this.players : (this.enemies || []);
             for (const target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
                 for (const buff of abilityEffect.buffs) {
                     if (ability.isSpecialAbility && buff.multiplierForSkillHrid && buff.multiplierPerSkillLevel > 0) {
@@ -1949,7 +1950,8 @@ class CombatSimulator extends EventTarget {
     processAbilityHealEffect(source, ability, abilityEffect) {
 
         if (abilityEffect.targetType == "allAllies") {
-            let targets = source.isPlayer ? this.players : this.enemies;
+            // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+            let targets = source.isPlayer ? this.players : (this.enemies || []);
             for (const target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
                 let amountHealed = _combatUtilities__WEBPACK_IMPORTED_MODULE_0__["default"].processHeal(source, abilityEffect, target);
 
@@ -1959,7 +1961,8 @@ class CombatSimulator extends EventTarget {
         }
 
         if (abilityEffect.targetType == "lowestHpAlly") {
-            let targets = source.isPlayer ? this.players : this.enemies;
+            // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+            let targets = source.isPlayer ? this.players : (this.enemies || []);
             let healTarget;
             for (const target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
                 if (!healTarget) {
@@ -1996,7 +1999,8 @@ class CombatSimulator extends EventTarget {
             throw new Error("Unsupported target type for revive ability effect: " + ability.hrid);
         }
 
-        let targets = source.isPlayer ? this.players : this.enemies;
+        // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+        let targets = source.isPlayer ? this.players : (this.enemies || []);
         let reviveTarget = targets.find((unit) => unit && unit.combatDetails.currentHitpoints <= 0);
 
         if (reviveTarget) {
