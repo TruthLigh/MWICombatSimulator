@@ -1,0 +1,35 @@
+{
+    "name": "mwicombatsimulator",
+    "version": "1.0.1",
+    "description": "### How to run locally for development purposes",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "webpack",
+        "watch": "webpack --watch",
+        "start": "webpack serve --mode development --open",
+        "deploy": "gh-pages -d dist"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TruthLigh/MWICombatSimulator_tl.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TruthLigh/MWICombatSimulator_tl/issues"
+    },
+    "homepage": "https://github.com/TruthLigh/MWICombatSimulator_tl#readme",
+    "devDependencies": {
+        "copy-webpack-plugin": "^12.0.2",
+        "gh-pages": "^6.3.0",
+        "webpack": "^5.93.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.0.4"
+    },
+    "dependencies": {
+        "heap-js": "^2.2.0",
+        "mwicombatsimulator": "file:"
+    }
+}
