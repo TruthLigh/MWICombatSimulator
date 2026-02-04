@@ -3888,17 +3888,15 @@ class Monster extends _combatUnit__WEBPACK_IMPORTED_MODULE_1__["default"] {
 
         this.enrageTime = gameMonster.enrageTime;
 
-        // Ability level scaling for maze encounters:
-        // newLevel = originalLevel * (Math.floor(mazeDifficulty / 10) / 10)
-        // e.g. mazeDifficulty=100 -> scale=1.0, mazeDifficulty=95 -> scale=0.9
-        const abilityLevelScale = this.isMaze ? (Math.floor(this.mazeDifficulty / 10) / 10) : 1;
+        // Ability level for maze encounters: direct assignment based on maze difficulty
+        // newLevel = Math.max(1, Math.floor(this.mazeDifficulty / 2)) when isMaze, otherwise use original level
         for (let i = 0; i < gameMonster.abilities.length; i++) {
             if (gameMonster.abilities[i].minDifficultyTier > this.difficultyTier) {
                 continue;
             }
             const baseLevel = gameMonster.abilities[i].level || 1;
-            const scaledLevel = Math.max(1, Math.floor(baseLevel * abilityLevelScale));
-            this.abilities[i] = new _ability__WEBPACK_IMPORTED_MODULE_0__["default"](gameMonster.abilities[i].abilityHrid, scaledLevel);
+            const newLevel = this.isMaze ? Math.max(1, Math.floor(this.mazeDifficulty / 2)) : baseLevel;
+            this.abilities[i] = new _ability__WEBPACK_IMPORTED_MODULE_0__["default"](gameMonster.abilities[i].abilityHrid, newLevel);
         }
         if(gameMonster.dropTable)
         for (let i = 0; i < gameMonster.dropTable.length; i++) {
