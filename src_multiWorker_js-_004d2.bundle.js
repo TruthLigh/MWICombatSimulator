@@ -64,7 +64,7 @@
 /******/ 		// object to store loaded chunks
 /******/ 		// "1" means "already loaded"
 /******/ 		var installedChunks = {
-/******/ 			"src_multiWorker_js": 1
+/******/ 			"src_multiWorker_js-_004d2": 1
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk install function needed
@@ -100,13 +100,14 @@ onmessage = async function (event) {
                         const zoneIndex = zoneHrids.length - taskQueue.length;
                         const currentZone = taskQueue.shift();
 
-                        const simulationWorker = new Worker(new URL(/* worker import */ __webpack_require__.p + __webpack_require__.u(1), __webpack_require__.b));
+                        const simulationWorker = new Worker(new URL(/* worker import */ __webpack_require__.p + __webpack_require__.u(4), __webpack_require__.b));
 
                         // Do simulation
                         let workerMessage = {
                             type: "start_simulation",
                             players: event.data.players,
                             zone: currentZone,
+                            extra: event.data.extra,
                             simulationTimeLimit: event.data.simulationTimeLimit,
                         };
                         simulationWorker.postMessage(workerMessage);
@@ -148,4 +149,4 @@ onmessage = async function (event) {
 };
 /******/ })()
 ;
-//# sourceMappingURL=src_multiWorker_js.bundle.js.map
+//# sourceMappingURL=src_multiWorker_js-_004d2.bundle.js.map
