@@ -712,7 +712,20 @@ class CombatSimulator extends EventTarget {
             !this.players.some((player) => player.combatDetails.currentHitpoints > 0)
         ) {
             if (this.zone.isDungeon) {
-                console.log("All Players died at wave #" + (this.zone.encountersKilled - 1) + " with ememies: " + this.enemies.map(enemy => (enemy.hrid+"("+(enemy.combatDetails.currentHitpoints*100/enemy.combatDetails.maxHitpoints).toFixed(2)+"%)")).join(", "));
+                // 安全日志，避免 this.enemies 为 null 时触发异常
+                {
+                    let enemiesDesc = 'none';
+                    if (this.enemies && this.enemies.length > 0) {
+                        enemiesDesc = this.enemies.map(enemy => {
+                            if (!enemy) return 'UNKNOWN';
+                            const hp = enemy.combatDetails?.currentHitpoints ?? 0;
+                            const max = enemy.combatDetails?.maxHitpoints ?? 1;
+                            const pct = ((hp * 100) / (max || 1)).toFixed(2);
+                            return `${enemy.hrid}(${pct}%)`;
+                        }).join(', ');
+                    }
+                    console.log(`All Players died at wave #${this.zone.encountersKilled - 1} with enemies: ${enemiesDesc}`);
+                }
 
                 this.saveWipeLogsToSimResult(this.zone.encountersKilled - 1);
                 // console.log(this.simResult)
@@ -1252,7 +1265,8 @@ class CombatSimulator extends EventTarget {
 
     processAbilityBuffEffect(source, ability, abilityEffect) {
         if (abilityEffect.targetType == "allAllies") {
-            let targets = source.isPlayer ? this.players : this.enemies;
+            // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+            let targets = source.isPlayer ? this.players : (this.enemies || []);
             for (const target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
                 for (const buff of abilityEffect.buffs) {
                     if (ability.isSpecialAbility && buff.multiplierForSkillHrid && buff.multiplierPerSkillLevel > 0) {
@@ -1297,6 +1311,9 @@ class CombatSimulator extends EventTarget {
         if (!targets) {
             return;
         }
+
+        // Maze timeout: used to trigger instant-kill behavior for maze encounters
+        const mazeTimeoutActive = this.zone && this.zone.isMaze && (this.simulationTime - this.enrageBeginTime >= 120 * ONE_SECOND);
 
         let avoidTarget = [];
 
@@ -1591,7 +1608,8 @@ class CombatSimulator extends EventTarget {
     processAbilityHealEffect(source, ability, abilityEffect) {
 
         if (abilityEffect.targetType == "allAllies") {
-            let targets = source.isPlayer ? this.players : this.enemies;
+            // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+            let targets = source.isPlayer ? this.players : (this.enemies || []);
             for (const target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
                 let amountHealed = CombatUtilities.processHeal(source, abilityEffect, target);
 
@@ -1601,7 +1619,8 @@ class CombatSimulator extends EventTarget {
         }
 
         if (abilityEffect.targetType == "lowestHpAlly") {
-            let targets = source.isPlayer ? this.players : this.enemies;
+            // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+            let targets = source.isPlayer ? this.players : (this.enemies || []);
             let healTarget;
             for (const target of targets.filter((unit) => unit && unit.combatDetails.currentHitpoints > 0)) {
                 if (!healTarget) {
@@ -1638,7 +1657,8 @@ class CombatSimulator extends EventTarget {
             throw new Error("Unsupported target type for revive ability effect: " + ability.hrid);
         }
 
-        let targets = source.isPlayer ? this.players : this.enemies;
+        // targets may be null when there are no enemies; use empty array fallback to avoid exceptions
+        let targets = source.isPlayer ? this.players : (this.enemies || []);
         let reviveTarget = targets.find((unit) => unit && unit.combatDetails.currentHitpoints <= 0);
 
         if (reviveTarget) {

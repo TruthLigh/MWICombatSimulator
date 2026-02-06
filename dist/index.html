@@ -1405,6 +1405,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row mb-1">
+                            <label for="inputMazeDifficulty" class="col-md-3 col-form-label" data-i18n="common:mazedifficulty">Maze difficulty</label>
+                            <div class="col-md">
+                                <div class="input-group">
+                                    <input type="number" id="inputMazeDifficulty" class="form-control" value="100" min="1" step="1" required onchange="this.value = Math.max(1, Math.floor(Number(this.value) || 0));" />
+                                    <span class="input-group-text">level</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6 pt-1">
                                 <div id="playerCheckBox" class="outlined-box">

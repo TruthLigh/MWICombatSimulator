@@ -22,11 +22,15 @@ class Monster extends CombatUnit {
 
         this.enrageTime = gameMonster.enrageTime;
 
+        // Ability level for maze encounters: direct assignment based on maze difficulty
+        // newLevel = Math.max(1, Math.floor(this.mazeDifficulty / 2)) when isMaze, otherwise use original level
         for (let i = 0; i < gameMonster.abilities.length; i++) {
             if (gameMonster.abilities[i].minDifficultyTier > this.difficultyTier) {
                 continue;
             }
-            this.abilities[i] = new Ability(gameMonster.abilities[i].abilityHrid, gameMonster.abilities[i].level);
+            const baseLevel = gameMonster.abilities[i].level || 1;
+            const newLevel = this.isMaze ? Math.max(1, baseLevel * Math.floor(this.mazeDifficulty / 100)) : baseLevel;
+            this.abilities[i] = new Ability(gameMonster.abilities[i].abilityHrid, newLevel);
         }
         if(gameMonster.dropTable)
         for (let i = 0; i < gameMonster.dropTable.length; i++) {

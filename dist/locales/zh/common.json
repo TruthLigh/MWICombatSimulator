@@ -114,5 +114,6 @@
         "mpOverTime" : "MP 随时间变化",
         "timeInSeconds" : "时间 (秒)",
         "waitingForData" : "等待模拟数据..."
-    }
+    },
+    "mazedifficulty" : "迷宫难度"
 }
