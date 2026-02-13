@@ -712,10 +712,11 @@ class CombatSimulator extends EventTarget {
             !this.players.some((player) => player.combatDetails.currentHitpoints > 0)
         ) {
             if (this.zone.isDungeon) {
-                // 安全日志，避免 this.enemies 为 null 时触发异常
                 {
                     let enemiesDesc = 'none';
                     if (this.enemies && this.enemies.length > 0) {
+                        //输出击杀怪物日志
+                        console.log(this.enemies)
                         enemiesDesc = this.enemies.map(enemy => {
                             if (!enemy) return 'UNKNOWN';
                             const hp = enemy.combatDetails?.currentHitpoints ?? 0;
