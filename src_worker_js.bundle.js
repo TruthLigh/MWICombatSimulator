@@ -381,6 +381,7 @@ class CombatSimulator extends EventTarget {
         this.eventQueue = new _events_eventQueue__WEBPACK_IMPORTED_MODULE_8__["default"]();
         this.simResult = new _simResult__WEBPACK_IMPORTED_MODULE_18__["default"](zone, players.length);
         this.allPlayersDead = false;
+        this.mazeTimeoutTriggered = false;
         this.enableHpMpVisualization = options.enableHpMpVisualization || false;
 
         this.wipeLogs = {
@@ -599,6 +600,7 @@ class CombatSimulator extends EventTarget {
         this.simulationTime = 0;
         this.eventQueue.clear();
         this.simResult = new _simResult__WEBPACK_IMPORTED_MODULE_18__["default"](this.zone, this.players.length);
+        this.mazeTimeoutTriggered = false;
     }
 
     async processEvent(event) {
@@ -705,6 +707,8 @@ class CombatSimulator extends EventTarget {
             this.allPlayersDead = false;
             this.zone.failWave();
         }
+        // clear timeout flag when new wave begins
+        this.mazeTimeoutTriggered = false;
 
         if (!this.zone.isDungeon) {
             this.enemies = this.zone.getRandomEncounter();
@@ -990,6 +994,18 @@ class CombatSimulator extends EventTarget {
     }
 
     checkEncounterEnd() {
+        // if a maze run has gone past 2 minutes, mark players dead once per wave
+        const mazeTimeoutActive = this.zone && this.zone.isMaze && (this.simulationTime - this.enrageBeginTime >= 120 * ONE_SECOND);
+        if (mazeTimeoutActive && !this.mazeTimeoutTriggered) {
+            this.mazeTimeoutTriggered = true;
+            this.players.forEach(player => {
+                if (player.combatDetails.currentHitpoints > 0) {
+                    player.combatDetails.currentHitpoints = 0;
+                    this.simResult.addDeath(player);
+                }
+            });
+        }
+
         if (this.enemies) {
             let deadEnemies = this.enemies.filter((enemy) => enemy.combatDetails.currentHitpoints <= 0 && enemy.experienceRate == 0);
             if (deadEnemies.length > 0) {
